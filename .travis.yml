@@ -1,0 +1,8 @@
+language: dart
+
+before_install:
+  - npm install -g firebase-tools --no-optional
+  - pub global activate linkcheck
+
+script:
+  - ./tool/check_links.sh
