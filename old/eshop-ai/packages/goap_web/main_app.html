@@ -1,0 +1,74 @@
+<!--
+  Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<!-- import polymer-element's definition -->
+<link rel="import" href="../../packages/polymer/polymer.html">
+
+<link rel="import" href="../../packages/paper_elements/paper_checkbox.html">
+<link rel="import" href="../../packages/paper_elements/paper_shadow.html">
+
+<polymer-element name="main-app">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        -webkit-transition: height 0.8s;
+        -moz-transition: height 0.8s;
+        transition: height 0.8s;
+      }
+
+      .column {
+        width: 20rem;
+      }
+
+      paper-checkbox {
+        display: block;
+        margin-bottom: 0.2em;
+      }
+
+      .module {
+        padding: 0.5em 1em;
+        margin-bottom: 1em;
+        width: 80%;
+      }
+    </style>
+
+    <div class="column" on-change="{{recalculate}}">
+      <h2>Setup</h2>
+      <div>
+        <h3>Customer</h3>
+        <paper-checkbox label="Will login" checked="{{ userWillLogin }}"></paper-checkbox>
+        <paper-checkbox label="Has payment info saved in account" checked="{{ userHasPaymentInfoSaved }}"></paper-checkbox>
+        <paper-checkbox label="Customer in US" checked="{{ isUs }}"></paper-checkbox>
+        <paper-checkbox label="Invoice address same as shipping address" checked="{{ invoiceSameAsShipping }}"></paper-checkbox>
+      </div>
+
+      <div>
+        <h3>Order</h3>
+        <paper-checkbox label="No cost" checked="{{ orderIsFree }}"></paper-checkbox>
+        <paper-checkbox label="Physical goods" checked="{{ needsShippingAddress }}"></paper-checkbox>
+        <paper-checkbox label="Ships to US only" checked="{{ shipsToUsOnly }}"></paper-checkbox>
+      </div>
+
+    </div>
+
+    <div class="column">
+      <h2>Plan</h2>
+      <template repeat="{{ module in modules }}">
+        <paper-shadow class="module" z="1">
+          <span>{{ module.name }}</span> <!--({{ module.description }})-->
+        </paper-shadow>
+      </template>
+
+      <p><small>Planning took {{ computationDuration }} milliseconds.</small></p>
+    </div>
+  </template>
+  <script type="application/dart" src="main_app.dart"></script>
+</polymer-element>
