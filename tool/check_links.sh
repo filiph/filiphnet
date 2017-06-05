@@ -5,7 +5,7 @@ export CHECK_EXIT_CODE=0
 TMP=$HOME
 
 set -x
-firebase serve --port $PORT --token "$FIREBASE_TOKEN" # > /dev/null &
+firebase serve --port $PORT --token "$FIREBASE_TOKEN" & # > /dev/null &
 FBS_PID=$!
 
 sleep 4
