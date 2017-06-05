@@ -6,4 +6,5 @@ before_install:
   - chmod +x ./tool/check_links.sh
 
 script:
+  - make build
   - ./tool/check_links.sh
