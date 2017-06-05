@@ -3,6 +3,27 @@
     "public": "build/web",
     "ignore": [
       "**/packages/**"
-    ]
+    ],
+    "redirects": [ {
+      "source": "/avi",
+      "destination": "https://www.youtube.com/user/filiphracek/videos",
+      "type": 301
+    }, {
+      "source": "/dj",
+      "destination": "http://www.philipage.com/",
+      "type": 301
+    }, {
+      "source": "/mp3",
+      "destination": "http://www.philipage.com/",
+      "type": 301
+    }, {
+      "source": "/mobfriendly",
+      "destination": "https://stav-mobilniho-webu.appspot.com/",
+      "type": 301
+    }, {
+      "source": "/tztime",
+      "destination": "http://www.tmzns.com/",
+      "type": 301
+    } ]
   }
 }
