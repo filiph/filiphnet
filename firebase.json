@@ -4,6 +4,21 @@
     "ignore": [
       "**/packages/**"
     ],
+    "headers": [ {
+      "source": "/",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=300"
+      } ]
+    }, {
+      "source": "**/*.@(jpg|jpeg|gif|png|ico)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=7200"
+        }
+      ]
+    } ],
     "redirects": [ {
       "source": "/avi",
       "destination": "https://www.youtube.com/user/filiphracek/videos",
