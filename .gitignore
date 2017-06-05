@@ -8,4 +8,8 @@ pubspec.lock
 # Directory created by dartdoc
 doc/api/
 
+# Packages files are not needed and there's a bunch of them.
 **/packages/**
+
+# This file is auto-generated from src/index.template.html.
+web/index.html
