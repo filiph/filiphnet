@@ -1,0 +1,167 @@
+﻿
+body {
+	font: 14px Trebuchet Ms, Arial; 
+	text-align: justify;
+}
+
+div#blankSpace {
+	height: 700px;
+	overflow: hidden;
+}
+
+h1 {
+	padding-top: 10px;
+	margin-bottom: 0;
+	margin-right: 10px;
+	color: #333;
+	font-size: 18px;
+	float: left;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #2D9C3E;
+	border: none;
+}
+
+a:hover, a:active, a:focus {
+	color: #fff;
+	background: #2D9C3E;
+}	
+
+a#titleReload:hover, a#titleReload:active, a#titleReload:focus {
+	background: none;
+}
+	
+img {
+	border: none;
+}
+
+em {
+	color: #A60F1E;
+	font-style: normal;
+}
+
+.button {
+	font-size: 14px;
+	margin: 5px;
+	width: 100px;
+	float: left;
+	padding-left: 5px;
+	background: #E8E6D3;		
+}
+
+a.nav:link, a.nav:visited {
+	text-decoration: none;
+	color: #555;
+}
+
+a.nav:hover, a.nav:active, a.nav:focus {
+	color: #000;
+	background: none;
+}
+
+
+#infoButton, #blogButton, #audioButton, #videoButton {
+	margin: 5px;
+	width: 100px;
+	float: left;
+	padding-left: 5px;
+}
+
+#infoButton {
+	background: #E8E6D3;
+	clear: left;
+}
+
+#blogButton {
+	background: #D3E6E8;
+}
+
+#audioButton {
+	background: #E6D3E8;
+}
+
+#videoButton {
+	background: #E3E1D8;
+}
+
+#info, #blog, #audio, #video {
+	clear: left;
+	margin: 5px;	
+}
+
+.divider {
+	height: 5px;
+	overflow: hidden;
+	margin: 5px;
+	background: #E8E6D3;
+}
+
+#infoDivider, #blogDivider, #audioDivider, #videoDivider {
+	height: 5px;
+	overflow: hidden;
+	margin: 5px;
+}
+
+#infoDivider {
+	background: #E8E6D3;
+}
+		
+#blogDivider {
+	background: #D3E6E8;
+}
+
+#audioDivider {
+	background: #E6D3E8;
+}
+
+#videoDivider {
+	background: #E3E1D8;
+}	
+
+div.leftpane {
+	width: 30%;
+  	float: left;
+ 	text-align: justify;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+div.mainpane {
+	padding-left: 31%; 
+	margin-top: 15px;
+}
+	
+#footnote {
+	font-size: 10px;
+	color: #d0d0d0;
+	margin: 10px;
+}
+
+a.footnote:link, a.footnote:visited {
+	color: #76AD7E;
+}
+
+a.footnote:hover, a.footnote:active, a.footnote:focus {
+	color: #fff;
+	background: #76AD7E
+}	
+
+p {
+	margin: 5px;
+	overflow: hidden;
+}
+
+p#text, p#text2 {
+	margin: 0;
+	padding: 5px;
+	height: 200px;
+	overflow: hidden;
+}
+
+p.info {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}

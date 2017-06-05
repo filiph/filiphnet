@@ -1,0 +1,172 @@
+Dopad BFU na vyhledávání Googlu
+===============================
+
+----
+
+Co je BFU?
+----------
+
+* BFU = Bloody Fucking User
+* BFU = Brain Free User
+* BFU = Bezny Franta Uzivatel
+* Wikipedia: In Internet slang, a BFU / luser is a painfully annoying, stupid, or irritating computer user.
+
+----
+
+<object width="560" height="349"><param name="movie" value="http://www.youtube.com/v/fa9DLxDtPtc?fs=1&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/fa9DLxDtPtc?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+// kdo z vás někdy sledoval své rodiče používat počítač? Kolik z vás to frustrovalo? ... V Googlu jsou lidi, kteří nedělají nic jiného.
+
+----
+
+![Phishing](src/phishing.png)
+
+----
+
+![Condescending Lolcat](src/condescending-lolcat.jpeg)
+
+// žijeme v technokratické době. 
+
+----
+
+![Evolution Of Language](src/evolution-of-language.gif)
+
+// A používáme slova, kterým nikdo jiný nerozumí. Ale co kdyby to bylo jinak?
+
+----
+
+![Sci Fi Post Apocalyptic](src/Sci-Fi-Post-Apocalyptic-33746.jpg)
+
+[Source](http://s587.photobucket.com/albums/ss317/USAFPilot_2009/?action=view&amp;current=Sci-Fi-Post-Apocalyptic-33746.jpg&amp;newest=1 "Pictures by USAFPilot_2009 - Photobucket")
+
+// Představte si, že zítra přijde apokalypsa, a všichni půjdeme zpátky ke kořenům. Žádná donáška pizzy a banány z Ekvádoru. Žádný farmville. Ale pěkně: na pole a orat. Kdo z vás si věří, že si dokáže obstarat jídlo vlastními silami. 
+
+// já třeba bych si nevypěstoval ani pažitku na chleba. A představuju si, že jdu za nějakým farmářem, abych se zeptal, a...
+
+----
+
+![Condescending farmer](src/AmericanFarmer.jpeg)
+
+// farmář by na mě koukal takhle a házel by na mě slova jako: siláž, plucha, pleva, sněť, prašník, rozor, předradlice.
+
+----
+
+![Napoleon Dynamite](src/napoleon-dynamite.png)
+
+// jinými slovy, pokud s námi po příchodu apokalypsy budou farmáři mít stejnou trpělivost, jakou máme dnes my s uživateli, tak to s námi nedopadne dobře - [Source](http://www.helloquizzy.com/quizzy/results?quizzyid=12503071563467861173&amp;resultid=310256030 "HelloQuizzy.com: Online Dating Quiz, Personality Quiz, Personality Test, IQ Test, Free IQ Test, Psychology Test")
+
+----
+
+Milujte své BFU
+---------------
+
+----
+
+Everything is **OUR** problem.
+
+// je jednoduché vše svést na uživatele
+
+----
+
+Uživatel nezná rozdíl search bar vs. address bar
+
+----
+
+![Seznam](src/seznam.png)
+
+----
+
+Uživatel nezná funkci uvozovek v hledání
+
+----
+
+![Chybejici Uvozovky](src/chybejici-uvozovky.png)
+
+----
+
+![Prebyvajici Uvozovky](src/prebyvajici-uvozovky.png)
+
+----
+
+Uživatel píše moc pomalu
+
+* autocomplete
+* voice search
+
+----
+
+Uživatel má problémy skrolovat
+
+----
+
+![Skrolovani](src/skrolovani.png)
+
+----
+
+Uživatel neví, jak se to píše
+
+----
+
+Uživatel neví o pokročilých možnostech hledání 
+
+----
+
+![Make A Better FM](src/rtfm-make-a-better-fm.jpeg)
+
+// [source](http://www.oraclenerd.com/2009/12/rtfm-minimalism.html "ORACLENERD: RTFM Minimalism")
+
+----
+
+... nebo ještě lépe: udělejte web tak, aby nápovědu nepotřeboval.
+
+----
+
+(Uživatel neví, jaké slovo použít)
+
+----
+
+Uživatel neumí cizí jazyk
+
+----
+
+Na webu není dostatek relevantního obsahu
+
+* books, translate, machine transcription
+
+// občas něco hledáte a najdete jenom hrozný hovadiny. Problém je v tom, že když ty hovadiny odeberete, dostanete ještě větší hovadiny.
+
+----
+
+Uživatel chce spáchat sebevraždu
+
+----
+
+Web je příliš pomalý
+
+* náhledy
+
+// člověk musí kliknout na jeden odkaz, počkat až se načte, pak jde zpět, klikne na další...
+
+----
+
+Uživatel chce používat webové vyhledávání na vše, jen ne na hledání na webu
+
+* time in new york
+* af84
+* 100 czk in armenian money
+* počasí ostrava
+
+----
+
+Uživatel neví, jak se tvoří vyhledávací dotaz
+
+* synonyma (př.: apple)
+* vlastnosti nedefinovatelné slovy
+	* obrázek (similar image, Goggles)
+	* čerstvost (QDF)
+* sémantické dotazy
+	* nedostatek semantickeho obsahu - nas problem
+
+----
+
+

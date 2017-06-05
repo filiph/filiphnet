@@ -1,0 +1,42 @@
+/* dj.filiph.net CSS file */
+
+body {
+    font-family: /*Fixedsys,*/ monospace;
+    font-size: 12px;
+    background: #000000;
+    color: #ffffff;
+    margin: 10%;
+}
+
+h1, p {
+    font-size: 12px;
+    display: inline;
+}
+
+p.darker {
+	color: #cccccc;
+}
+
+a {
+	color: #00FF00;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000000;
+	background: #00FF00;
+}
+
+span.blink {
+	text-decoration: blink
+}
+
+h1 {
+    color: red;
+}
+
+div.language {
+    float: left;
+    width: 30%;
+    padding: 10px;
+}

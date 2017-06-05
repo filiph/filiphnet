@@ -1,0 +1,1922 @@
+<html>
+<head>
+<title>Nine Point Five Earthquake Visualization</title>
+<script src="static/pregl.js"></script>
+<script src="static/common.js"></script>
+<script src="static/nine5.js"></script>
+<script src="static/jquery-1.4.2.min.js"></script>
+<script src="static/jquery-ui-1.8.5.custom.min.js"></script>
+<script>
+
+var kMonthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+
+// Convert from a string of STUFF LIKE THIS, to Stuff Like This.
+function headingRecapitalize(str) {
+  return str.replace(/\b([A-Z])([A-Z]+)/g, function(a, c1, c2) {
+    return c1 + c2.toLowerCase();
+  });
+}
+
+function modPI(x) {
+  // TODO(deanm): Care about numerical stability.
+  while (x > PreGL.kPI) x -= PreGL.k2PI;
+  while (x < -PreGL.kPI) x += PreGL.k2PI;
+  return x;
+}
+
+function latLongToScreenXY(gl, lat, lon, persp, look, w, h) {
+  var theta = (lat / 180.0 - 0.5) * PreGL.kPI;
+  var phi = (lon - 90.0) / 180.0 * PreGL.kPI;
+  var wavePos = new PreGL.Vec4(Math.sin(theta) * Math.sin(phi),
+                               Math.cos(theta),
+                               Math.sin(theta) * Math.cos(phi),
+                               1);
+  wavePos = persp.multVec4(look.multVec4(wavePos));
+  wavePos.x /= wavePos.w;
+  wavePos.y /= wavePos.w;
+  wavePos.z /= wavePos.w;
+
+  wavePos.x /= wavePos.z;
+  wavePos.y /= -wavePos.z;
+
+  wavePos.x = (wavePos.x * 0.5) + 0.5;
+  wavePos.y = (wavePos.y * 0.5) + 0.5;
+  var text = Math.floor(w * wavePos.x * 100)/100 + ", " +
+    Math.floor(h * wavePos.y * 100)/100;
+  return {
+    x: w * wavePos.x,
+    y: h * wavePos.y,
+    text: text
+  }
+}
+
+function goGoGadget() {
+  var resources_to_load = [
+    'earth_negx', 'static/assets/earth_negx_sm.jpg',
+    'earth_negy', 'static/assets/earth_negy_sm.jpg',
+    'earth_negz', 'static/assets/earth_negz_sm.jpg',
+    'earth_posx', 'static/assets/earth_posx_sm.jpg',
+    'earth_posy', 'static/assets/earth_posy_sm.jpg',
+    'earth_posz', 'static/assets/earth_posz_sm.jpg',
+    'earth_norm_negx', 'static/assets/normal_negx512.jpg',
+    'earth_norm_negy', 'static/assets/normal_negy512.jpg',
+    'earth_norm_negz', 'static/assets/normal_negz512.jpg',
+    'earth_norm_posx', 'static/assets/normal_posx512.jpg',
+    'earth_norm_posy', 'static/assets/normal_posy512.jpg',
+    'earth_norm_posz', 'static/assets/normal_posz512.jpg',
+      // 'earth_norm_negx', 'static/assets/earth_nm_negx.png',
+      //  'earth_norm_negy', 'static/assets/earth_nm_negy.png',
+      //  'earth_norm_negz', 'static/assets/earth_nm_negz.png',
+      //  'earth_norm_posx', 'static/assets/earth_nm_posx.png',
+      //  'earth_norm_posy', 'static/assets/earth_nm_posy.png',
+      //  'earth_norm_posz', 'static/assets/earth_nm_posz.png',
+    'night_negx', 'static/assets/night_negx512.jpg',
+    'night_negy', 'static/assets/night_negy512.jpg',
+    'night_negz', 'static/assets/night_negz512.jpg',
+    'night_posx', 'static/assets/night_posx512.jpg',
+    'night_posy', 'static/assets/night_posy512.jpg',
+    'night_posz', 'static/assets/night_posz512.jpg',
+    'bathymetry_negx', 'static/assets/bathymetry_negx.jpg',
+    'bathymetry_negy', 'static/assets/bathymetry_negy.jpg',
+    'bathymetry_negz', 'static/assets/bathymetry_negz.jpg',
+    'bathymetry_posx', 'static/assets/bathymetry_posx.jpg',
+    'bathymetry_posy', 'static/assets/bathymetry_posy.jpg',
+    'bathymetry_posz', 'static/assets/bathymetry_posz.jpg'
+  ];
+
+  var resources = { };
+  var num_resources_loaded = 0;
+  function resource_loaded(name, res) {
+    ++num_resources_loaded
+    resources[name] = res;
+    // All resources have been loaded.
+    if (num_resources_loaded == resources_to_load.length / 2) {
+      start3d(resources);
+    }
+  }
+
+  for (var i = 0, il = resources_to_load.length; i < il; i += 2) {
+    var name = resources_to_load[i];
+    var img = document.createElement('img');
+    img.onload = (function(name, img) {  // Closure frame for copies of locals.
+      return function() { resource_loaded(name, img); };
+    })(name, img);
+    img.src = resources_to_load[i+1];
+  }
+}
+
+
+
+function start3d(resources) {
+  var gl = null;
+  try {
+    gl = initWebGL("canvas3d");
+  } catch(e) {
+    gl = null;
+  }
+
+  if (gl === null) {
+    document.getElementById('errordiv').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('totaldiv').style.display = 'block';
+
+  var lastError = 0;
+
+  checkErrors(gl, "start3d");
+
+  var tour_mode = false;
+
+  //remove for now until we find out how they match layout
+  //var stats = new Stats();
+  //$(stats.domElement).css({'z-index': 10, position: 'absolute',
+  //                         top: 0, left: 0});
+  //document.body.appendChild(stats.domElement);
+  //document.getElementById("ui").appendChild(stats.domElement);
+
+  function makeSphere() {
+    var kEp = 0.000001;  // Create holes at the poles.
+    var buffer = gl.createBuffer();
+    var data = PreGL.Tess.makeTristripGrid2D(kEp, PreGL.kPI-kEp, 72,
+                                               0,    PreGL.k2PI, 72);
+    // Bind in and load our data.
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    return {buffer: buffer, num: data.length / 2};
+  }
+
+  function drawSphere(sphere, shader) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, sphere.buffer);
+    var a_theta_phi = shader.getAttribute("a_theta_phi").location;
+    gl.vertexAttribPointer(a_theta_phi,
+                           2,
+                           gl.FLOAT,
+                           false, 0, 0);
+    gl.enableVertexAttribArray(a_theta_phi);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, sphere.num);
+  }
+
+  var json_manager = new Nine5.JSONManager(gl);
+  var timeline = new Nine5.Timeline(document.getElementById('timeline'));
+
+  var earthDiffuseMap = Nine5.buildCubeMapFromResources(gl, resources, "earth");
+  var earthNormalMap = Nine5.buildCubeMapFromResources(gl, resources, "earth_norm");
+  var earthNightMap = Nine5.buildCubeMapFromResources(gl, resources, "night");
+  var bathymetryMap = Nine5.buildCubeMapFromResources(gl, resources, "bathymetry");
+  var atmosphereRamp = loadTexture(gl, "static/assets/atmosphere.png");
+  var earthShader = new Shader(gl, "earth_vert", "earth_frag");
+  var earthDemoShader = new Shader(gl, "earth_vert", "earth_tour_frag");
+  var earthQuakePointsShader = new Shader(gl, "points_vert", "points_frag");
+  var earthQuakeLinesShader = new Shader(gl, "lines_vert", "lines_frag");
+  var pointSpritesShader =
+      new Shader(gl, "pointsprites_vert", "pointsprites_frag");
+  var superquadShader =
+      parseProgram(gl, "superquad_vert", "superquad_frag");
+  var sphere = makeSphere();
+
+  var time = 0;
+  var aspect = gl.canvas.width / gl.canvas.height;
+  var kDefaultSpeed = 0;  // 1/100;
+  var rotation_speed = 1/7.8;  // Initial speed.  The trick is to land on USA.
+  var rotation_speed_high_score = 800;
+  var rotation_speed_high_score_timer = null;
+  var mouse_acceleration = 0;
+  var mouse_dx = 0;
+  var mouse_rotation_x = 0;
+  var mouse_rotation_y = -0.5;  // Initial orient over northern hemisphere.
+  var animating_camera = false;
+  var animating_camera_t = 0;
+  var animation_rotation_x = 0;  // Destination of animation.
+  var animation_rotation_y = 0;
+  var animation_zoom = 0;
+
+  var mouse_catcher = new PreGL.MouseCatcher(gl.canvas);
+  mouse_catcher.setDragFilter(function(x, y) {
+    return !animating_camera;
+  });
+  mouse_catcher.setDragHandler(function(dx, dy) {
+    mouse_rotation_y = PreGL.clamp(mouse_rotation_y - dy/300, -1, 0.9);
+  });
+  function scrollWheelHandler(e) {
+    // http://www.switchonthecode.com/tutorials/javascript-tutorial-the-scroll-wheel
+    var amount = e.detail ? -e.detail : e.wheelDeltaY/40;
+    // TODO(deanm): Is zoom exponential?  Need to compensate?
+    ui_zoom = PreGL.clamp(ui_zoom - amount/10, 1, 6);
+    if (e.wheelDeltaX !== undefined) {
+      rotation_speed -= e.wheelDeltaX/30000;
+    }
+    e.stopPropagation();
+    e.preventDefault();
+    return false;
+  }
+  // Register on both mousewheel and DOMMouseScroll.  Hopefully a browser
+  // only fires on one and not both.
+  gl.canvas.addEventListener('DOMMouseScroll', scrollWheelHandler, false);
+  gl.canvas.addEventListener('mousewheel', scrollWheelHandler, false);
+
+  function switchDataDisplay(points, lines, circles) {
+    ui_points = points;
+    ui_lines = lines;
+    ui_circles = circles;
+    $("#ui_points").fadeTo(200, ui_points ? 1 : 0.5);
+    $("#ui_lines").fadeTo(200, ui_lines ? 1 : 0.5);
+    $("#ui_circles").fadeTo(200, ui_circles ? 1 : 0.5);
+  }
+
+  $("#sigcmt").fadeOut();
+  $("#sigback").fadeOut();
+  $("#sigback a").click(function() {
+    $("#sigback").fadeOut(300);
+    $("#sigcmt").fadeOut(300, function() {
+      $("#sig").fadeIn(300);
+    });
+  });
+
+  var dom_sig = document.getElementById('sig');
+  var dom_sigheader = document.getElementById('sigheader');
+
+  var ui_day_night = 0.45;
+  var ui_points = true;
+  var ui_lines = false;
+  var ui_circles = false;
+  var ui_super = true;
+
+  var ui_zoom = 4;
+  var ui_cur_zoom = 8;  // Bounce in.
+  var ui_magnitude = 0;
+
+  // Note: Marcin loves #B29980.
+  var mag_slider = new Nine5.Slider(
+      document.getElementById('ui_mag_slider'),
+      {color1: '#B29980', color2: null});
+  mag_slider.setUpdateHandler(function(v) {
+    ui_magnitude = (1 - v) * 10;
+  });
+  mag_slider.setValue(1);
+  var day_slider = new Nine5.Slider(
+      document.getElementById('ui_day_slider'),
+      {color1: '#B29980', color2: null});
+  day_slider.setValue(ui_day_night);
+  day_slider.setUpdateHandler(function(v) {
+    ui_day_night = v;
+  });
+
+  $("#ui_points").fadeTo(0, 1.0);
+  $("#ui_lines").fadeTo(0, 0.5);
+  $("#ui_circles").fadeTo(0, 0.5);
+  $("#ui_tourmode").fadeTo(0, 0.5);
+  $("#ui_super").fadeTo(0, 1);
+
+  $("#ui_super").click(function() {
+    ui_super = !ui_super;
+    $(this).fadeTo(200, ui_super ? 1 : 0.5);
+  })
+
+  $("#ui_points").click(function() {
+   switchDataDisplay(true, false, false);
+  });
+
+  $("#ui_lines").click(function() {
+    switchDataDisplay(false, true, false);
+  });
+
+  $("#ui_circles").click(function() {
+    switchDataDisplay(false, false, true);
+  });
+
+  $("#ui_tourmode").click(function() {
+    startDemoMode();
+  })
+
+  var mouse_state_prev0 = mouse_catcher.getState();
+  var mouse_state_prev1 = mouse_catcher.getState();
+
+  // Store the month index (number of months since 1977) of all the months
+  // currently displayed, leaving null if the data hasn't loaded yet.
+  var current_months_and_loaded = [null, null, null, null, null, null,
+                                   null, null, null, null, null, null];
+
+  var wave_data = {lat:90, lon:0.0, time:100.0};  // Start time after the wave.
+  var sigs = [ ];
+
+  function nineFivePass(w, h, pointsize) {
+    gl.clearColor(0, 0, 0, 0.0);
+    gl.cullFace(gl.BACK);
+    gl.enable(gl.CULL_FACE);
+    gl.disable(gl.BLEND);
+    gl.viewport(0, 0, w, h);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.CULL_FACE);
+    gl.enable(gl.DEPTH_TEST);
+    gl.depthFunc(gl.LEQUAL);
+
+    ui_cur_zoom = PreGL.lerp(ui_cur_zoom, ui_zoom, 0.1);
+    var persp = (new PreGL.Mat4()).perspective(
+      ui_cur_zoom * 15, aspect, 0.01, 1000);
+    var mouse_state = mouse_catcher.getState();
+    if (animating_camera === true) {
+      mouse_state.down = false;  // Ignore input while animating camera.
+    }
+    var speed = kDefaultSpeed;
+    if (mouse_state.down && mouse_state_prev1.down) {
+      // Compute the speed based on two states ago.
+      speed = (mouse_state.x - mouse_state_prev1.x) / 500;
+      speed *= (ui_zoom / 4) / 2 + 0.5;
+      // (x + 1)^3 - 1 and (x - 1)^3 + 1
+      var ds = speed > 0 ? 1 : -1;
+      speed += ds; speed *= speed * speed; speed -= ds;
+      rotation_speed = PreGL.lerp(speed, rotation_speed, 0.9);
+    }
+
+    // TODO(deanm): abs(), or only do it in one direction?
+    var abs_rotation_speed = (Math.abs(rotation_speed) * 1000) >> 0;
+    if (abs_rotation_speed > rotation_speed_high_score) {
+      if (rotation_speed_high_score_timer !== null)
+        clearTimeout(rotation_speed_high_score_timer);
+      rotation_speed_high_score = abs_rotation_speed;
+      $('#highscorespeed').html(abs_rotation_speed);
+      $('#highscore').css("display", "block");
+      rotation_speed_high_score_timer = setTimeout(function() {
+        $('#highscore').fadeOut(500);
+        rotation_speed_high_score_timer = null;
+      }, 2000);
+    }
+
+    rotation_speed -= rotation_speed * 0.02;  // Dampening.
+    if (animating_camera) {
+      if (animating_camera_t < 20) {
+        // Hard dampening.
+        rotation_speed -= rotation_speed * animating_camera_t / 20;
+      } else if (animating_camera_t < 150) {
+        var factor = 900;
+        rotation_speed = 0;
+        mouse_rotation_x =
+            PreGL.lerp(mouse_rotation_x,
+                       animation_rotation_x,
+                       (animating_camera_t - 20) / factor);
+        mouse_rotation_y =
+            PreGL.lerp(mouse_rotation_y,
+                       animation_rotation_y,
+                       (animating_camera_t - 20) / factor);
+        ui_cur_zoom =
+            PreGL.lerp(ui_cur_zoom,
+                       animation_zoom,
+                       (animating_camera_t - 20) / factor);
+        ui_zoom = ui_cur_zoom;
+      } else {
+        mouse_rotation_x = animation_rotation_x;
+        mouse_rotation_y = animation_rotation_y;
+        animating_camera = false;
+        wave_data.time = 0;  // Fire!
+      }
+      ++animating_camera_t;
+    }
+    // Hard clamp to prevent lines crawling at slow speeds.
+    if (rotation_speed < 0.0001 && rotation_speed > -0.0001) rotation_speed = 0;
+    mouse_state_prev1 = mouse_state_prev0; mouse_state_prev0 = mouse_state;
+
+    time += 10/1000;
+
+    wave_data.time += 10/1000;
+
+    //if mouse is down then we drag the globe
+    //otherwise we first rotate it with inertia based on the speed of last drag
+    //and when this ends we slowly speed up to achieve steady, slow rotation
+    mouse_rotation_x = modPI(mouse_rotation_x + rotation_speed);
+
+    var dist = 3.75;
+    var look = new PreGL.Mat4();
+    look.translate(0, 0, -dist);
+    look.rotate(-mouse_rotation_y, 1, 0, 0);
+    look.rotate(mouse_rotation_x, 0, 1, 0);
+
+    var theta = (wave_data.lat / 180.0 - 0.5) * PreGL.kPI;
+    var phi = (wave_data.lon - 90.0) / 180.0 * PreGL.kPI;
+    var wavePos = new PreGL.Vec4(Math.sin(theta) * Math.sin(phi),
+                                 Math.cos(theta),
+                                 Math.sin(theta) * Math.cos(phi),
+                                 1);
+    wavePos = persp.multVec4(look.multVec4(wavePos));
+    wavePos.x /= wavePos.w;
+    wavePos.y /= wavePos.w;
+    wavePos.z /= wavePos.w;
+
+    //console.log(wavePos.x + ", " + wavePos.y);
+    wavePos.x = (wavePos.x * 0.5) + 0.5;
+    wavePos.y = (wavePos.y * 0.5) + 0.5;
+    //wavePos.x += 0.5;
+    //wavePos.y += 0.5;
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, earthDiffuseMap);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, earthNormalMap);
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, earthNightMap);
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, bathymetryMap);
+    gl.activeTexture(gl.TEXTURE4);
+    gl.bindTexture(gl.TEXTURE_2D, atmosphereRamp);
+
+    earthShader.use(gl);
+    earthShader.set("u_perspective", persp.toFloat32Array());
+    earthShader.set("u_modelView", look.toFloat32Array());
+    earthShader.set("u_diffuseMap", 0);
+    earthShader.set("u_normalMap", 1);
+    earthShader.set("u_nightMap", 2);
+    earthShader.set("u_bathymetryMap", 3);
+    earthShader.set("u_atmosphereColor", 4);
+    earthShader.set("u_lightPos", calcSunPosition(ui_day_night));
+    earthShader.set("u_wave", [wave_data.lat, wave_data.lon, wave_data.time]);
+    drawSphere(sphere, earthShader);
+
+
+    if (ui_lines || ui_points || ui_circles) {
+      var dataShader = ui_circles ? pointSpritesShader :
+          ui_points ? earthQuakePointsShader : earthQuakeLinesShader;
+      dataShader.use(gl);
+      dataShader.set("u_p", persp.toFloat32Array());
+      dataShader.set("u_mv", look.toFloat32Array());
+      dataShader.set("u_lightPos", [10, 4, ui_day_night]);
+      dataShader.set("u_t", time);
+      dataShader.set("u_min_m", ui_magnitude);
+      dataShader.set("u_min_depth", 0);
+      dataShader.set("u_pointsize", pointsize);
+
+     if (ui_circles) {
+        dataShader.set("u_canvas_size", [w, h]);
+        gl.enable(gl.BLEND);
+        gl.disable(gl.DEPTH_TEST);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+        dataShader.set("u_pointsize", pointsize/ui_cur_zoom);
+
+      }
+
+      var month_base = timeline.getCurrentMonthOffset();
+      var last_frame_months = current_months_and_loaded.join(',');
+      var any_missing_data = false;
+      for (var m = 0; m < 12; ++m) {
+        var cur_year = 1977 + (((month_base + m) / 12) >> 0);
+        var cur_month = (month_base + m) % 12;
+        var lines = json_manager.getVBOForMonth(cur_year, cur_month);
+        if (lines.buffer === null) {  // Data not yet loaded.
+          current_months_and_loaded[m] = null;
+          any_missing_data = true;
+          continue;
+        }
+        current_months_and_loaded[m] = month_base + m;
+        if (lines.num === 0) {  // Nothing to draw.
+          continue;
+        }
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, lines.buffer);
+        gl.vertexAttribPointer(
+          dataShader.getAttribute("a_lat_long_m").location,
+                               4,
+                               gl.FLOAT,
+                               false, 0, 0);
+        gl.enableVertexAttribArray(
+          earthQuakeLinesShader.getAttribute("a_lat_long_m").location);
+        if (ui_points) gl.drawArrays(gl.POINTS, 0, lines.num);
+        if (ui_lines) gl.drawArrays(gl.LINES, 0, lines.num);
+        if (ui_circles) gl.drawArrays(gl.POINTS, 0, lines.num);
+
+      }
+
+      if (ui_circles) {
+        gl.enable(gl.DEPTH_TEST);
+        gl.disable(gl.BLEND);
+      }
+      // We loaded all of the months, just at this frame, update the HTML.
+      if (current_months_and_loaded.join(',') != last_frame_months) {
+        sigs = [ ];
+        dom_sig.innerHTML = '';  // Clear whenever we moved in the timeline.
+        if (!any_missing_data) {  // We have all the data.
+          window.console.log('Got all months, loading significant entries.');
+          var firstMonth, lastMonth;
+          for (var m = 0; m < 12; ++m) {
+            var cur_year = 1977 + (((month_base + m) / 12) >> 0);
+            var cur_month = (month_base + m) % 12;
+            var sig = json_manager.getVBOForMonth(cur_year, cur_month).sig;
+            if (m === 0) firstMonth = kMonthNames[cur_month] + ' ' + cur_year;
+            if (m === 11) lastMonth = kMonthNames[cur_month] + ' ' + cur_year;
+            for (var i = 0, il = sig.length; i < il; i += 7) {
+              sigs.push(sig.slice(i, i+7));
+            }
+          }
+          dom_sig.appendChild(dom_sigheader);  // Put the header back on.
+          document.getElementById('sigheaderdate').innerHTML =
+            firstMonth + ' &mdash; ' + lastMonth;
+          // Sort by largest magnitude first.
+          sigs.sort(function(a, b) { return b[3] - a[3]; });
+          sigs = sigs.slice(0, 40);  // Only take the top 40.
+
+          //startDemoMode(); //TODO(marcin): remove this
+
+          for (var i = 0, il = sigs.length; i < il; ++i) {
+            var div = document.createElement('div');
+            var loc = headingRecapitalize(sigs[i][5]);
+            var date = (new Date(sigs[i][2] * 1000)).toLocaleDateString();
+            var mag = sigs[i][3] / 10;
+            var depth = sigs[i][4] / 10;
+            var cmt = sigs[i][6];
+            var lat = sigs[i][0];
+            var long = sigs[i][1];
+            // Try to skip over the super technical magnitude text at the
+            // beginning of the comments.  Look for something english-ish.
+            var cmt_split = cmt.search(/\. +[A-Z][a-z0-9, ]{5}/);
+            if (cmt_split > 1) cmt = cmt.substr(cmt_split + 2);
+            cmt = loc + '<br />' +
+                mag + ' Magnitude ' + depth + 'km Deep<br />' +
+                date + '<br />' +
+                '<br />' + cmt;
+            var alink = document.createElement('a');
+            alink.href = 'javascript:void(0)';
+            alink.addEventListener('click', (function(cmt, lat, long) {
+              return function(e) {
+                animation_rotation_x =
+                    -(long / 1000.0 + 90.0) / 180.0 * PreGL.kPI;
+                // Look at it from a bit of an angle.
+                animation_rotation_x = modPI(animation_rotation_x + 0.4);
+                animation_rotation_y = (-lat / 1000 / 180.0) * PreGL.kPI;
+                animation_zoom = 2.5;
+                //rotation_speed = 0;
+                animating_camera_t = 0;
+                animating_camera = true;
+                wave_data.lat = lat/1000;
+                wave_data.lon = long/1000;
+                // wave_data.time is set to 0 at end of camera animation.
+                $("#sigcmt").html(cmt);
+                $("#sig").fadeOut(300, function() {
+                  setTimeout(function() {
+                    $("#sigback").fadeIn(1000);
+                    $("#sigcmt").fadeIn(1000);
+                  }, 4500);
+                });
+                e.preventDefault();
+                return false;
+              };
+            })(cmt, lat, long), false);
+
+            alink.appendChild(document.createTextNode(
+                mag.toFixed(1) + ' ' + loc));
+                //mag + ' ' + date + ' ' + ' ' + loc));
+            div.appendChild(alink);
+            dom_sig.appendChild(div);
+          }
+        }
+      }
+    }
+  }
+
+
+  //0 - full day
+  //1 - full night
+  //the sun rises / sets in the east north
+  function calcSunPosition(t) {
+    var r = 10;
+    var theta = PreGL.kPI2 - PreGL.kPI4 * Math.sin(t*PreGL.kPI);
+    var phi = PreGL.kPI*t;
+    return [
+      10*Math.sin(theta) * Math.sin(phi),
+      10*Math.cos(theta),
+      10*Math.sin(theta) * Math.cos(phi)
+    ];
+  }
+
+  var d_distY;
+  var d_sunPos;
+  var d_timer;
+  var d_camPos
+  var d_camTarget;
+  var d_sunsetDuration = 30; //TODO(marcin)
+  var d_rotation;
+  var d_targetRotation;
+  var d_darkness;
+  var d_delayBetweenTargets = 20;
+  var d_delay = 0;
+  var d_delta_zoom = 0;
+  var d_sigsIndex;
+  var d_fired;
+  var d_tooltip;
+  var d_tooltipCanvas;
+  var g_showTooltip;
+  var d_exitfullscreenBtn;
+  var d_viewport_resized;
+  function startDemoMode() {
+    var blackout = $('<div>');
+    blackout.css({position: 'absolute', top: 0, left: 0,
+                  width: window.innerWidth, height: window.innerHeight,
+                  backgroundColor: 'black', opacity: 1, 'z-index': 10});
+    $('body').append(blackout);
+    blackout.fadeOut(0);
+    var keep_totaldiv = $("#totaldiv").get(0);
+
+    blackout.fadeIn(1000, function() {
+      var esc_handler = function(e) {
+        if (e.keyCode !== 27)
+          return;
+        exitFullscreen(e);
+      };
+
+      function exitFullscreen(e) {
+        document.removeEventListener('keydown', esc_handler, false);
+        e.preventDefault();
+        blackout.css({width: window.innerWidth, height: window.innerHeight});
+        $('body').append(blackout);
+        blackout.fadeOut(0);
+        if (g_showTooltip) {
+          g_showTooltip = false;
+          d_tooltip.fadeOut(1000, function() {
+            d_tooltip.remove();
+          });
+        }
+        blackout.fadeIn(1000, function() {
+          $("body").removeClass("tourmode");
+          $("#totaldiv").css({display: 'block'});
+          $("#canvas3ddiv").append($("#canvas3d"));
+          gl.canvas.width = gl.canvas.height = 512;
+          gl.canvas.style.marginLeft = 25;
+          tour_mode = false;
+          blackout.fadeOut(1000, function() {
+            blackout.remove();
+          });
+        });
+        d_tooltip.remove();
+        d_exitfullscreenBtn.remove();
+      }
+
+      document.addEventListener('keydown', esc_handler, false);
+      tour_mode = true;
+      d_time = 0;
+      d_timer = new Nine5.Timer();
+      d_distY = 0;
+      d_sunPosition = 0;
+      d_rotation = {x:0, y:0};
+      d_targetRotation = {x:0, y:0};
+      d_sigsIndex = 0;
+
+      d_long = -180;
+      d_lat = 30;
+      d_targetLat = 0;
+      d_targetLong = 0;
+
+      d_delta_zoom = 0;
+      d_viewport_resized = false;
+
+      var canvas3d = $("#canvas3d");
+      $("#totaldiv").css({display: 'none'});
+      $("body").append(canvas3d).addClass("tourmode");
+
+      gl.canvas.width = window.innerWidth;
+      gl.canvas.height = window.innerHeight;
+      blackout.remove();
+
+      d_tooltip = $('<canvas width="400px" height="32px"></canvas>');
+      d_tooltip.css({position:"absolute", left:0});
+      $('body').append(d_tooltip);
+      d_tooltip.fadeOut(0);
+      d_tooltipCanvas = d_tooltip.get(0).getContext('2d');
+
+      var img =  $('<img alt="Exit fullscreen mode" width="24px" height="24px"/>');
+      img.get(0).src = "static/assets/ico_exitfullscreen.png";;
+      d_exitfullscreenBtn = $('<a href="javascript:void(0);"></a>').append(img);
+      d_exitfullscreenBtn.append(img);
+      $('body').append(d_exitfullscreenBtn);
+      d_exitfullscreenBtn.css({position:"absolute", right:10, top:10});
+      d_exitfullscreenBtn.click(function(e) {
+        exitFullscreen(e);
+      });
+    });
+  }
+
+  function easeInExpo(t) {
+    return (t==0) ? 0 : Math.pow(2, 10 * (t - 1));
+  }
+
+  function easeOutExpo(t) {
+    return (t==1) ? 1 : (-Math.pow(2, -10 * t) + 1);
+  }
+
+  function easeInOutExpo(t) {
+      if (t==0) return 0;
+      if (t==1) return 1;
+      if ((t/=0.5) < 1) return 0.5 * Math.pow(2, 10 * (t - 1));
+      return 1/2 * (-Math.pow(2, -10 * --t) + 2);
+  }
+
+  function easeJumpExpo(t) {
+    if (t < 0.5) return easeOutExpo(2*t);
+    else return 1.0 - easeInOutExpo((t-0.5)*2.0);
+  }
+
+  function easeJumpLinear(t) {
+    if (t < 0.5) return t/0.5;
+    else return 1.0 - (t-0.5)/0.5;
+  }
+
+  function easeJumpMix(t) {
+    if (t < 0.25) return t/0.25;
+    else return 1.0 - easeInOutExpo((t-0.25)/0.75);
+  }
+
+  var d_time = 0;
+
+  function tourPass(w, h) {
+    d_timer.update();
+    var time = d_timer.getTotalTime();
+    var deltaTime = d_timer.getDeltaTime();
+
+    var persp = (new PreGL.Mat4()).perspective(45, w / h, 0.01, 1000);
+    var look = new PreGL.Mat4();
+
+    if (time < d_sunsetDuration) {
+      var t = time/d_sunsetDuration;
+      d_sunPos = 1.0 - 0.75 * t;
+      var angle = 2.0 - 1.4*t;// -> 0.75
+      d_camPos = {
+         x: (1 + 2.45*t)*Math.cos(angle * PreGL.kPI),
+         y: (0.75 + t * 1.25),
+         z: (1 + 2.45*t)*Math.sin(angle * PreGL.kPI)
+      };
+      d_camTarget = {x: 0, y: 1-t, z: 0};
+      d_distY = -1.3 * (1.0-t);
+      d_distY = 0;
+      var lat = 30;
+      var lon = 275;
+
+      d_rotation.x = -(lon + 90.0) / 180.0 * PreGL.kPI;
+      d_rotation.x = modPI(d_rotation.x + 0.4);
+      d_rotation.y = (-lat / 180.0) * PreGL.kPI;
+
+      d_darkness = 0.2 + 0.5 * t;
+
+      look.lookAt(
+        d_camPos.x, d_camPos.y, d_camPos.z,
+        d_camTarget.x, d_camTarget.y, d_camTarget.z,
+        0, 1, 0
+      );
+
+      d_delay = 0;
+    } else {
+      w = h;
+      if (d_viewport_resized === false) {
+        d_viewport_resized = true;
+        gl.canvas.style.marginLeft = (window.innerWidth - w) / 2;
+        gl.canvas.width = w;
+      }
+
+      d_delay -= deltaTime;
+
+      if (d_delay <= 0) {  // Transition to a new target.
+       d_delay = d_delayBetweenTargets;
+       if (sigs.length > 0) {
+         wave_data.lat = sigs[d_sigsIndex][0]/1000;
+         wave_data.lon = sigs[d_sigsIndex][1]/1000;
+         wave_data.text = sigs[d_sigsIndex][5];
+         wave_data.magnitude = sigs[d_sigsIndex][3];
+
+         d_targetRotation.x = -(wave_data.lon + 90.0) / 180.0 * PreGL.kPI;
+         d_targetRotation.x = modPI(d_targetRotation.x + 0.4);
+         d_targetRotation.y = (-wave_data.lat / 180.0) * PreGL.kPI;
+
+         d_sigsIndex = (d_sigsIndex + 1) % sigs.length;
+         d_fired = false;
+       }
+      }
+
+      wave_data.time += 0.5*deltaTime;
+
+      //time between jump to next sigs from 0..1
+      var t = 1.0 - d_delay/d_delayBetweenTargets;
+      var damp = 5 * Math.max(t, 0.2);
+
+      d_rotation.x = PreGL.lerp(d_rotation.x, d_targetRotation.x, 0.01);
+      d_rotation.y = PreGL.lerp(d_rotation.y, d_targetRotation.y, 0.01);
+
+      if (t < 0.11) {
+        d_delta_zoom = -1.2 * Math.sin(t/0.2 * PreGL.kPI);
+      }
+      d_delta_zoom *= 0.99;  // Fall.
+
+      look.translate(0, d_distY, -4 + d_delta_zoom);
+      look.rotate(-d_rotation.y, 1, 0, 0);
+      look.rotate(d_rotation.x, 0, 1, 0);
+
+      if (t > 0.45 && !d_fired) {
+          wave_data.time = 0;
+          d_fired = true;
+      }
+      if (t > 0.6 && t < 0.9 && !g_showTooltip) {
+        var screenPos = latLongToScreenXY(
+            gl, wave_data.lat, wave_data.lon, persp, look, w, h);
+        screenPos.x += gl.canvas.offsetLeft;
+        d_tooltip.css({left: screenPos.x + "px",
+                       top: screenPos.y - 25 + "px"});
+        $('body').append(d_tooltip);
+        drawTooltip(d_tooltip.get(0), d_tooltipCanvas, wave_data);
+        d_tooltip.fadeIn(1000);
+        g_showTooltip = true;
+      }
+      if (t > 0.9 && g_showTooltip) {
+        g_showTooltip = false;
+        d_tooltip.fadeOut(1000, function() {
+          d_tooltip.remove();
+        });
+      }
+    }
+
+    gl.clearColor(0, 0, 0, 1.0);
+    gl.disable(gl.DEPTH_TEST);
+    gl.enable(gl.CULL_FACE);
+    gl.cullFace(gl.BACK);
+    gl.disable(gl.BLEND);
+
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.CULL_FACE);
+    gl.enable(gl.DEPTH_TEST);
+    gl.depthFunc(gl.LEQUAL);
+
+    gl.viewport(0, 0, w, h);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, earthDiffuseMap);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, earthNormalMap);
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, earthNightMap);
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, bathymetryMap);
+    gl.activeTexture(gl.TEXTURE4);
+    gl.bindTexture(gl.TEXTURE_2D, atmosphereRamp);
+
+    earthDemoShader.use(gl);
+    earthDemoShader.set("u_perspective", persp.toFloat32Array());
+    earthDemoShader.set("u_modelView", look.toFloat32Array());
+    earthDemoShader.set("u_diffuseMap", 0);
+    earthDemoShader.set("u_normalMap", 1);
+    earthDemoShader.set("u_nightMap", 2);
+    earthDemoShader.set("u_bathymetryMap", 3);
+    earthDemoShader.set("u_atmosphereColor", 4);
+    earthDemoShader.set("u_darkness", d_darkness);
+    earthDemoShader.set("u_time", time);
+    earthDemoShader.set("u_sunsetDuration", d_sunsetDuration);
+
+    earthDemoShader.set("u_lightPos", calcSunPosition(d_sunPos));
+    earthDemoShader.set(
+        "u_wave", [wave_data.lat, wave_data.lon, wave_data.time]);
+    drawSphere(sphere, earthDemoShader);
+  }
+
+  function drawTooltip(canvas, c, data) {
+    c.font = 'normal 12px arial, sans-serif';
+    var textMetrics = c.measureText(data.text);
+
+    c.font = 'bold 12px arial black, sans-serif';
+    var magnitudeMetrics = c.measureText(""+data.magnitude);
+    var textWidth = magnitudeMetrics.width + textMetrics.width + 30;
+    var h = 18;
+    var x = 5;
+    var y = 0;
+    canvas.width = Math.max(canvas.width, textWidth);
+
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    c.fillStyle    = '#000000';
+    c.fillRect(x, y, textWidth, h);
+    c.beginPath();
+    c.moveTo(x, y - 5 + h);
+    c.lineTo(x - 3, y + 6 + h);
+    c.lineTo(x + 5, y + h);
+    c.fill();
+    c.fillStyle    = '#FFFFFF';
+    c.textBaseline = 'top';
+    c.font         = 'bold 12px arial black, sans-serif';
+    c.fillText(data.magnitude/10, x + 5, y + 0.5);
+    c.font         = 'normal 12px arial, sans-serif';
+    c.fillText(data.text, x + magnitudeMetrics.width + 15, y + 3);
+  }
+
+  // Supersampling initialization
+  var super_width = gl.canvas.width * 2;
+  var super_height = gl.canvas.height * 2;
+  var fbo = gl.createFramebuffer();
+  var rbo = gl.createRenderbuffer();
+  var off_tex = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE0);  // TODO(deanm): Enough texture units?
+  gl.bindTexture(gl.TEXTURE_2D, off_tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA,  // TODO(deanm): Need alpha?
+                super_width, super_height, 0,
+                gl.RGBA, gl.UNSIGNED_BYTE, null);
+  // Bilinear texture filtering.
+  // By default the mag filter is already LINEAR.
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  // By detault the min filter is NEAREST_MIPMAP_LINEAR, we want it linear.
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  // Wrapping is important since we're working on theta and phi which has
+  // a jump from PI or 2PI to 0 at the seams.
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+  gl.bindRenderbuffer(gl.RENDERBUFFER, rbo);
+  gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16,
+                         super_width, super_height);
+  gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT,
+                             gl.RENDERBUFFER, rbo);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
+                          gl.TEXTURE_2D, off_tex, 0);
+  if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) {
+    throw "Incomplete frame buffer object.";
+  }
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+  function makeQuad() {
+    var buffer = gl.createBuffer();
+    var data = [-1, -1, 1, -1, 1, 1, -1, 1];
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+    return {buffer: buffer, num: data.length / 2};
+  }
+  var quad = makeQuad();
+
+  function downsamplePass() {
+    gl.clearColor(0, 0, 0, 0.0);
+    gl.disable(gl.DEPTH_TEST);
+    gl.cullFace(gl.BACK);
+    gl.enable(gl.CULL_FACE);
+    gl.disable(gl.BLEND);
+
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+    gl.useProgram(superquadShader);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, off_tex);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad.buffer);
+    var a_xy = gl.getAttribLocation(superquadShader, 'a_xy');
+    gl.vertexAttribPointer(a_xy,
+                           2,
+                           gl.FLOAT,
+                           false, 0, 0);
+    gl.enableVertexAttribArray(a_xy);
+    gl.uniform1i(gl.getUniformLocation(superquadShader, 'u_sampler'), 0);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLE_FAN, 0, quad.num);
+  }
+
+  function draw() {
+    if (tour_mode) {
+      tourPass(gl.canvas.width, gl.canvas.height);
+    } else if (ui_super) {  // Supersample.
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      nineFivePass(super_width, super_height, 3);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      downsamplePass();
+    } else {  // Hope for MSAA.
+      nineFivePass(gl.canvas.width, gl.canvas.height, 1);
+    }
+  }
+
+  setInterval(function() {
+    draw();
+    //stats.update();
+  }, 1000/60);
+
+  //startDemoMode();
+}
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-20023304-1']);
+_gaq.push(['_trackPageview']);
+
+window.addEventListener('load', function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(ga, s);
+  goGoGadget();
+}, false);
+</script>
+<script type="shader" id="points_vert">
+uniform mat4 u_p;  // Projection.
+uniform mat4 u_mv;  // Model view.
+uniform float u_t;  // Time.
+uniform float u_min_m;  // Minimum magnitude to display.
+uniform float u_min_depth;  // Minimum depth to display.
+uniform float u_pointsize;
+uniform vec3 u_lightPos;
+varying vec3 v_n;
+varying vec3 v_l;
+varying float v_mag;
+varying float v_r;
+attribute vec4 a_lat_long_m;
+
+const float kPI = 3.14159265358979;
+
+void main() {
+  // Map +90..-90 to 0..PI
+  float theta = (a_lat_long_m.x / 1000.0 / 180.0 - 0.5) * kPI;
+  float phi = (a_lat_long_m.y / 1000.0 - 90.0) / 180.0 * kPI;
+  float m = a_lat_long_m.z;  // Encoded * 10 + 1.
+  float r = 0.0;  // Hide the second point inside the earth.
+  float depth = a_lat_long_m.w / 10.0;
+
+  if (m < 0.0) {
+    m = (-m - 1.0) / 10.0;  // Remove the +1 bias and * 10 encoding.
+    v_r = 0.0;
+  } else {
+    m = (m - 1.0) / 10.0;  // Remove the +1 bias and * 10 encoding.
+    r = (m+1.0)*(m+1.0)/80.0 + 1.0;  // The other end of the line.
+    v_r = 1.0;
+  }
+
+  v_mag = m;
+
+  gl_PointSize = u_pointsize;
+
+  v_n = vec3(0.0);
+  if (m < u_min_m || depth < u_min_depth) {
+    gl_Position = vec4(0.0, 0.0, 10.0, 1.0);  // To be clipped.
+  } else {
+    vec4 pos = vec4(r * sin(theta) * sin(phi),  // Math-Y
+                    r * cos(theta),  // Math-Z
+                    r * sin(theta) * cos(phi),  // Math-X
+                    1.0);
+    gl_Position = u_p * u_mv * pos;
+    mat3 normalMat = mat3(u_mv[0].xyz, u_mv[1].xyz, u_mv[2].xyz);
+    v_n = normalize(normalMat * (pos.xyz));
+    v_l = u_lightPos;
+  }
+}
+</script>
+<script type="shader" id="points_frag">
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
+
+varying vec3 v_n;
+varying vec3 v_l;
+varying float v_mag;
+varying float v_r;
+
+vec3 hsv2rgb(vec3 hsv) {
+  // We basically just make the ramp curves using builtins, see:
+  //   http://en.wikipedia.org/wiki/File:HSV-RGB-comparison.svg
+  float h6 = hsv.x * 6.0;
+  float r = clamp(h6 - 4.0, 0.0, 1.0) - clamp(h6 - 1.0, 0.0, 1.0) + 1.0;
+  float g = clamp(h6, 0.0, 1.0) - clamp(h6 - 3.0, 0.0, 1.0);
+  float b = clamp(h6 - 2.0, 0.0, 1.0) - clamp(h6 - 5.0, 0.0, 1.0);
+  // Map from 0 .. 1 to v(1-s) .. v.
+  // rgb * (v - (v*(1-s)) + (v*(1-s)) becomes rgb / (v*s) + (v*(1-s)).
+  return vec3(r, g, b) * hsv.z * hsv.y + (hsv.z * (1.0 - hsv.y));
+}
+
+void main() {
+  float NdotL = max(0.3, dot(normalize(v_n), normalize(v_l)));
+  float m = mix(224.0/360.0, 0.0, clamp(v_mag / 8.0, 0.0, 1.0));
+  gl_FragColor.rgb = hsv2rgb(vec3(m, 0.6666667, 0.75)) * NdotL;
+  gl_FragColor.a = 1.0;
+}
+</script>
+<script type="shader" id="lines_vert">
+uniform mat4 u_p;  // Projection.
+uniform mat4 u_mv;  // Model view.
+uniform float u_t;  // Time.
+uniform float u_min_m;  // Minimum magnitude to display.
+uniform float u_min_depth;  // Minimum depth to display.
+uniform float u_pointsize;
+uniform vec3 u_lightPos;
+varying vec3 v_n;
+varying vec3 v_l;
+varying float v_mag;
+varying float v_r;
+attribute vec4 a_lat_long_m;
+
+const float kPI = 3.14159265358979;
+
+void main() {
+  // Map +90..-90 to 0..PI
+  float theta = (a_lat_long_m.x / 1000.0 / 180.0 - 0.5) * kPI;
+  float phi = (a_lat_long_m.y / 1000.0 - 90.0) / 180.0 * kPI;
+  float m = a_lat_long_m.z;  // Encoded * 10 + 1.
+  float r = 1.0;  // Start lines on the surface of the earth.
+  float depth = a_lat_long_m.w / 10.0;
+
+  if (m < 0.0) {
+    m = (-m - 1.0) / 10.0;  // Remove the +1 bias and * 10 encoding.
+    v_r = 0.0;
+  } else {
+    m = (m - 1.0) / 10.0;  // Remove the +1 bias and * 10 encoding.
+    r = (m+1.0)*(m+1.0)/80.0 + 1.0;  // The other end of the line.
+    v_r = 1.0;
+  }
+
+  v_mag = m;
+
+  gl_PointSize = u_pointsize;
+
+  if (m < u_min_m || depth < u_min_depth) {
+    gl_Position = vec4(0.0, 0.0, 10.0, 1.0);  // To be clipped.
+  } else {
+    vec4 pos = vec4(r * sin(theta) * sin(phi),  // Math-Y
+                    r * cos(theta),  // Math-Z
+                    r * sin(theta) * cos(phi),  // Math-X
+                    1.0);
+    gl_Position = u_p * u_mv * pos;
+    v_l = u_lightPos;
+    v_n = normalize(pos.xyz);
+  }
+}
+</script>
+<script type="shader" id="lines_frag">
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
+
+varying vec3 v_n;
+varying vec3 v_l;
+varying float v_mag;
+varying float v_r;
+
+vec3 hsv2rgb(vec3 hsv) {
+  // We basically just make the ramp curves using builtins, see:
+  //   http://en.wikipedia.org/wiki/File:HSV-RGB-comparison.svg
+  float h6 = hsv.x * 6.0;
+  float r = clamp(h6 - 4.0, 0.0, 1.0) - clamp(h6 - 1.0, 0.0, 1.0) + 1.0;
+  float g = clamp(h6, 0.0, 1.0) - clamp(h6 - 3.0, 0.0, 1.0);
+  float b = clamp(h6 - 2.0, 0.0, 1.0) - clamp(h6 - 5.0, 0.0, 1.0);
+  // Map from 0 .. 1 to v(1-s) .. v.
+  // rgb * (v - (v*(1-s)) + (v*(1-s)) becomes rgb / (v*s) + (v*(1-s)).
+  return vec3(r, g, b) * hsv.z * hsv.y + (hsv.z * (1.0 - hsv.y));
+}
+
+vec3 hsl2rgb(vec3 hsl) {
+  float l = hsl.z * 2.0;
+  float s = hsl.y * (clamp(l, 0.0, 1.0) - clamp(l - 1.0, 0.0, 1.0));
+  return hsv2rgb(vec3(hsl.x, (2.0 * s) / (l + s), (l + s) * 0.5));
+}
+
+void main() {
+  float m = mix(324.0/360.0, 0.0, clamp(v_mag / 8.0, 0.0, 1.0));
+  gl_FragColor.rgb = hsl2rgb(vec3(m, v_mag / 10.0, v_mag / 20.0));
+  gl_FragColor.a = 1.0;
+}
+</script>
+<script type="shader" id="pointsprites_vert">
+uniform mat4 u_p;  // Projection.
+uniform mat4 u_mv;  // Model view.
+uniform float u_t;  // Time.
+uniform float u_min_m;  // Minimum magnitude to display.
+uniform float u_min_depth;  // Minimum depth to display.
+uniform float u_start_r;  // Where to start the line (1.0 is on the surface).
+uniform float u_pointsize;
+uniform vec3 u_lightPos;
+varying vec3 v_n;
+varying vec3 v_l;
+varying float v_mag;
+varying float v_r;
+varying vec2 vPosition;
+varying float vPointSize;
+attribute vec4 a_lat_long_m;
+
+const float kPI = 3.14159265358979;
+
+void main() {
+  // Map +90..-90 to 0..PI
+  float theta = (a_lat_long_m.x / 1000.0 / 180.0 - 0.5) * kPI;
+  float phi = (a_lat_long_m.y / 1000.0 - 90.0) / 180.0 * kPI;
+  float m = a_lat_long_m.z;  // Encoded * 10 + 1.
+  float r = u_start_r;
+  float depth = a_lat_long_m.w / 10.0;
+
+  if (m < 0.0) {
+    m = (-m - 1.0) / 10.0;  // Remove the +1 bias and * 10 encoding.
+    v_r = 0.0;
+  } else {
+    m = (m - 1.0) / 10.0;  // Remove the +1 bias and * 10 encoding.
+    //r = (m+1.0)*(m+1.0)/80.0 + 1.0;  // The other end of the line.
+    v_r = 1.0;
+  }
+
+  r = 1.0;
+
+  float s = pow(1.75, m);
+  gl_PointSize = 3.0 + s * (0.25 + 0.75 * u_pointsize);
+  vPointSize = gl_PointSize;
+  //gl_PointSize = m * .0;
+  //gl_PointSize = 5.0;
+
+  v_mag = m;
+
+  vPosition = vec2(0.0, 0.0);
+
+  v_n = vec3(0.0);
+  if (m < u_min_m || depth < u_min_depth) {
+    gl_Position = vec4(0.0, 0.0, 10.0, 1.0);  // To be clipped.
+  } else {
+    vec4 pos = vec4(r * sin(theta) * sin(phi),  // Math-Y
+                    r * cos(theta),  // Math-Z
+                    r * sin(theta) * cos(phi),  // Math-X
+                    1.0);
+      gl_Position = u_p * u_mv * pos;
+      vPosition = (u_p * u_mv * pos).xy;
+      vPosition.x /= gl_Position.w;
+      vPosition.y /= gl_Position.w;
+
+      mat3 normalMat = mat3(u_mv[0].xyz, u_mv[1].xyz, u_mv[2].xyz);
+
+    v_n = normalize(normalMat * (pos.xyz));
+
+    if (dot(v_n, vec3(0.0,0.0,1.0)) < 0.0) {
+      gl_Position = vec4(0.0, 0.0, 100.0, 1.0);
+    }
+
+    v_l = u_lightPos;
+  }
+}
+</script>
+<script type="shader" id="pointsprites_frag">
+#ifdef GL_ES
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
+#endif
+
+uniform vec2 u_canvas_size;
+
+varying vec3 v_n;
+varying vec3 v_l;
+varying float v_mag;
+varying float v_r;
+varying float vPointSize;
+varying vec2 vPosition;
+
+void main() {
+  float NdotL = min(1.0, max(0.73, dot(normalize(v_n), normalize(v_l))));
+  float NdotE = min(1.0, max(0.0, dot(normalize(v_n), normalize(vec3(0, 0, 1.0)))));
+
+  float screenX = (gl_FragCoord.x/u_canvas_size.x-0.5)*2.0;
+  float screenY = (gl_FragCoord.y/u_canvas_size.y-0.5)*2.0;
+  vec2 pointCoord = vec2(
+    (screenX-vPosition.x)/(vPointSize/u_canvas_size.x),
+    (screenY-vPosition.y)/(vPointSize/u_canvas_size.y)
+  );
+  pointCoord += vec2(1);
+  pointCoord /= 2.0;
+
+  float k = v_mag / 10.0;   
+  
+  gl_FragColor = vec4(1.0*k, 0.8*(1.0-k), 0.0, 0.0);
+  float alpha = 2.0*length(pointCoord.xy - vec2(0.5, 0.5));
+  gl_FragColor.a = NdotE * NdotE * k * k * smoothstep(0.7, 0.8, alpha) * (1.0 - smoothstep(0.9, 1.0, alpha));  
+}
+</script>
+<script type="shader" id="earth_vert">
+
+attribute vec2 a_theta_phi;  // Two angles defining point on a sphere  ()
+
+uniform mat4 u_perspective;  // Projection.
+uniform mat4 u_modelView;    // Model view.
+uniform vec3 u_lightPos;
+uniform vec3 u_wave;          // x,y - wave point lat, long, z - wave time
+
+varying vec3 v_cubeTexCoord; // Texture coordinate to sample earth cube maps
+varying vec3 tbnDirToEye;
+varying vec3 tbnL;
+varying vec3 v_ecN;          // Surface normal in eye cordinates
+varying vec3 v_ecL;          // Light position in eye cordinates
+varying vec3 debug;
+varying vec3 v_lcPos;          //point position in local model coordinates
+varying vec3 v_wavePos;
+
+const float kPI = 3.14159265358979;
+const float k2PI = 6.28318530717959;
+
+// The mathy defintion is based on +Z pointing "up", but the graphicsy
+// definition would be +Y (and our texure maps follow this).  Keep a right
+// handed coordinate system and map XYZ -> YZX
+vec3 evalSphere(float theta, float phi) {
+  return vec3(
+    sin(theta) * sin(phi),  // Math-Y
+    cos(theta),             // Math-Z
+    sin(theta) * cos(phi)   // Math-X
+  );
+}
+
+float waveRadius(vec3 point, vec3 wave_point) {
+  float dist = length(wave_point - point);
+  float rist = max(0.0, dist - u_wave.z) / 2.0;
+  float step = smoothstep(0.0, 0.1, rist) * (1.0 - smoothstep(0.1, 0.2, rist));
+  float height = 1.0 - min(0.95, dist+dist);
+  return (step * height / 15.0 + 1.0);
+}
+
+
+void main() {
+  float theta = a_theta_phi.x; //PI
+  float phi = a_theta_phi.y; //2 PI
+  float r = 1.0;
+
+  float waveTheta = (u_wave.x / 180.0 - 0.5) * kPI;
+  float wavePhi = (u_wave.y - 90.0) / 180.0 * kPI;
+  v_wavePos = r * evalSphere(waveTheta, wavePhi);
+
+  //we are goint to compute two neighbour points on the sphere
+  //along u and v texture coordinates
+  //p1--p3
+  //| /
+  //p2
+
+  //these are texture coordinate deltas from p1 to p2 and p3
+  //I use 30 because I know that we create sphere from 30 rings/segments so the
+  //next point is pi/30.0 away from me but any number > 0 would do
+  float du = 1.0/300.0;
+  float dv = 1.0/300.0;
+
+  //points on the sphere
+  vec3 p1 = evalSphere(theta, phi);
+  p1 *= waveRadius(p1, v_wavePos) * r;
+  vec3 p2 = r * evalSphere(theta + kPI * dv, phi);
+  p2 *= waveRadius(p2, v_wavePos) * r;
+  vec3 p3 = r * evalSphere(theta, phi + k2PI * du);
+  p3 *= waveRadius(p3, v_wavePos) * r;
+
+  v_lcPos = p1;
+
+  //tangent
+  //quicker version would be
+  //T = vec3(sin(theta) * cos(phi), 0, -sin(theta) * sin(phi));
+  vec3 T = normalize((p3 - p1));
+
+  //binormal
+  vec3 B = normalize(p2 - p1);
+
+  //normal
+  vec3 N = normalize(-cross(T, B));
+
+  //gl_normalMatrix replica, the 3x3 top left part of modelview matrix
+  mat3 normalMat = mat3(u_modelView[0].xyz, u_modelView[1].xyz, u_modelView[2].xyz);
+
+  //transform T, B, N from object space into eye coordinates
+  vec3 ecT = normalMat * T;
+  vec3 ecB = normalMat * B;
+  vec3 ecN = normalMat * N;
+
+  //normalMat doesn't contain translation so we can't use for position
+  vec3 ecPos = vec3(u_modelView * vec4(p1.xyz, 1.0));
+
+  vec3 ecDirToEye = -ecPos;
+  tbnDirToEye.x = dot(ecDirToEye, ecT);
+  tbnDirToEye.y = dot(ecDirToEye, ecB);
+  tbnDirToEye.z = dot(ecDirToEye, ecN);
+
+  vec3 ecDirToLight = u_lightPos;
+  tbnL.x = dot(ecDirToLight, ecT);
+  tbnL.y = dot(ecDirToLight, ecB);
+  tbnL.z = dot(ecDirToLight, ecN);
+
+  v_ecL = u_lightPos;
+
+  //we sample cubemap using normal and all we need to do to get a normal on
+  //a sphere is to normalize vertex position
+  v_cubeTexCoord = normalize(p1);
+
+  //normal in eye coordinates used for atmospheric effects
+  v_ecN = ecN;
+  debug = normalize(T);
+
+
+  gl_Position = u_perspective * u_modelView * vec4(p1, 1.0);
+}
+</script>
+<script type="shader" id="earth_frag">
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
+
+uniform samplerCube u_diffuseMap;
+uniform samplerCube u_normalMap;
+uniform samplerCube u_nightMap;
+uniform samplerCube u_bathymetryMap;
+uniform sampler2D u_atmosphereColor;
+uniform vec3 u_wave;// x,y: wave center lat/long, z: time since the wave started
+
+varying vec3 v_cubeTexCoord; // Texture coordinate to sample earth cube maps
+varying vec3 v_ecN;          // Surface normal in eye cordinates
+varying vec3 v_ecL;          // Light position in eye cordinates
+varying vec3 tbnL;           // Dight direction in texture space
+varying vec3 tbnDirToEye;
+varying vec3 ecPos;
+varying vec3 debug;
+varying vec3 v_lcPos;
+varying vec3 v_wavePos;
+
+const float kPI = 3.14159265358979;
+const float k2PI = 6.28318530717959;
+
+//http://www.mathworks.com/matlabcentral/newsreader/view_thread/278872
+float sphericalDistance(vec3 p1, vec3 p2) {
+  return atan(length(cross(p1,p2)),dot(p1,p2));
+}
+
+vec4 calcWaveColor() {
+  //we draw rings up to 30' from the center
+  const float wave_max_r = kPI/6.0;
+  //it will last 1s
+  const float wave_time = 1.0;
+  //thickness of the wave ring 10'
+  const float wave_ring_width = kPI/180.0;
+
+  //time since the wave started
+  float time = u_wave.z;
+  float r = wave_max_r * time / wave_time;
+  float dist = sphericalDistance(v_wavePos, v_lcPos);
+  float distToRing = abs(r - dist);
+  float fadeOut = 1.0 - smoothstep(wave_max_r - wave_max_r*0.5, wave_max_r, r);
+  if (distToRing < wave_ring_width) {
+   return vec4(fadeOut * 1.0, 0.0, 0.0, 0.0);
+  } else if (dist < r) {
+    return vec4(fadeOut * 0.5, 0.0, 0.0, 0.0);
+  } else {
+   // Anti-alias the edges.
+   //float aa = min(1.0, (rd - ringWidth) * (1.0 / 0.03));
+   //v_waveRingColor = vec4(1.0, aa, aa, 1.0);
+   return vec4(0.0, 0.0, 0.0, 0.0);
+ }
+}
+
+void main() {
+  vec4 nightColor = vec4(textureCube(u_nightMap, v_cubeTexCoord).xyz, 1.0);
+  vec4 dayColor = vec4(textureCube(u_diffuseMap, v_cubeTexCoord).xyz, 1.0) + 0.15;
+  float waterDepth = vec4(textureCube(u_bathymetryMap, v_cubeTexCoord).xyz, 1.0).x;
+  //normal in texture space
+  vec3 N = textureCube(u_normalMap, v_cubeTexCoord).xyz * 2.0 - 1.0;
+  N.xy *= 2.0;
+  N = normalize(N);
+
+  //light dir in texture space
+  vec3 L = normalize(tbnL);
+  float NdotL = max(0.0, dot(N, L));
+
+  //using normals from sphere and not from normal map prevents
+  //black dots that happen when we cample night texture on steep mountains
+  float globalNdotL = dot(normalize(v_ecN), normalize(v_ecL));
+  float nightDayFalloff = smoothstep(-0.2, 0.2, globalNdotL);
+
+  vec4 diffuseColor = mix(nightColor, dayColor, nightDayFalloff);
+
+  //we darken the night texture a bit
+  float darkness = mix(0.9, 1.0, nightDayFalloff);
+
+  //reflection
+  vec3 R = reflect(-L, N);
+  float RDotV = max(0.0, dot(R, normalize(tbnDirToEye)));
+
+  //the bigger specularPower the smaller highlight spot is
+  float specularPower =  8.0;
+  float specular = clamp(0.5 * pow(RDotV, specularPower), 0.0, 1.0);
+  //specular = 0.0;
+  //if (waterDepth > 0.05) {
+  //  specular *= waterDepth;
+  //}
+  vec4 earthColor = diffuseColor + specular;
+  earthColor *= darkness;
+
+  //blue highlights at the edge of globe
+  vec4 atmosphereColor = vec4(0.3, 0.8, 0.99, 1.0);
+  float atmosphere = 1.0 - dot(normalize(v_ecN), vec3(0.0, 0.0, 1.0));
+  atmosphere *= 1.5;
+  //fade it out a bit on the darkside
+  atmosphereColor = texture2D(u_atmosphereColor, vec2(atmosphere, 0.5));
+  atmosphere *= nightDayFalloff;
+
+  gl_FragColor = mix(earthColor, atmosphereColor, atmosphere);
+
+  if (waterDepth > 0.05) {
+    gl_FragColor *= 0.75 + waterDepth/4.0;
+    gl_FragColor.g += 0.1 * nightDayFalloff;
+    gl_FragColor.b += 0.0 * nightDayFalloff;
+  }
+  float waveColorFallof = 0.5 + 0.5*NdotL;
+  gl_FragColor += waveColorFallof * calcWaveColor();
+  gl_FragColor.a = 1.0;
+}
+</script>
+<script type="shader" id="earth_tour_frag">
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
+
+uniform samplerCube u_diffuseMap;
+uniform samplerCube u_normalMap;
+uniform samplerCube u_nightMap;
+uniform samplerCube u_bathymetryMap;
+uniform sampler2D u_atmosphereColor;
+uniform vec3 u_wave;// x,y: wave center lat/long, z: time since the wave started
+uniform float u_darkness;
+uniform float u_saturation;
+uniform float u_time;
+uniform float u_sunsetDuration;
+varying vec3 v_cubeTexCoord; // Texture coordinate to sample earth cube maps
+varying vec3 v_ecN;          // Surface normal in eye cordinates
+varying vec3 v_ecL;          // Light position in eye cordinates
+varying vec3 tbnL;           // Dight direction in texture space
+varying vec3 tbnDirToEye;
+varying vec3 ecPos;
+varying vec3 debug;
+varying vec3 v_lcPos;
+varying vec3 v_wavePos;
+
+const float kPI = 3.14159265358979;
+const float k2PI = 6.28318530717959;
+
+// http://en.wikipedia.org/wiki/YUV
+// NOTE: The mat3 constructor is column major, but laying it out row major
+// is clearer for our purposes.  We then need to pre-multiply.
+const mat3 kRGB2YUV = mat3(     0.299,     0.587,     0.114,
+                             -0.14713,  -0.28886,     0.436,
+                                0.615,  -0.51499,  -0.10001);
+const mat3 kYUV2RGB = mat3(       1.0,       0.0,   1.13983,
+                                  1.0,  -0.39465,   -0.5806,
+                                  1.0,   2.03211,       0.0);
+
+vec3 rgb2yuv(vec3 rgb) {
+  return rgb * kRGB2YUV;  // Pre-multiply (row major).
+}
+
+vec3 yuv2rgb(vec3 yuv) {
+  return yuv * kYUV2RGB;  // Pre-multiply (row major).
+}
+
+float sphericalDistance(vec3 p1, vec3 p2) {
+  return atan(length(cross(p1,p2)),dot(p1,p2));
+}
+
+vec4 calcWaveColor() {
+  //we draw rings up to 30' from the center
+  const float wave_max_r = kPI/6.0;
+  //it will last 1s
+  const float wave_time = 1.0;
+  //thickness of the wave ring 10'
+  const float wave_ring_width = kPI/180.0;
+
+  //time since the wave started
+  float time = u_wave.z;
+  float r = wave_max_r * time / wave_time;
+  float dist = sphericalDistance(v_wavePos, v_lcPos);
+  float distToRing = abs(r - dist);
+  float fadeOut = 1.0 - smoothstep(wave_max_r - wave_max_r*0.5, wave_max_r, r);
+  if (distToRing < wave_ring_width) {
+   return vec4(fadeOut * 1.0, 0.0, 0.0, 0.0);
+  } else if (dist < r) {
+    return vec4(fadeOut * 0.5, 0.0, 0.0, 0.0);
+  } else {
+   // Anti-alias the edges.
+   //float aa = min(1.0, (rd - ringWidth) * (1.0 / 0.03));
+   //v_waveRingColor = vec4(1.0, aa, aa, 1.0);
+   return vec4(0.0, 0.0, 0.0, 0.0);
+ }
+}
+
+void main() {
+  vec4 nightColor = vec4(textureCube(u_nightMap, v_cubeTexCoord).xyz, 1.0);
+  vec4 dayColor = vec4(textureCube(u_diffuseMap, v_cubeTexCoord).xyz, 1.0) + 0.15;
+  float waterDepth = vec4(textureCube(u_bathymetryMap, v_cubeTexCoord).xyz, 1.0).x;
+  //normal in texture space
+  vec3 N = textureCube(u_normalMap, v_cubeTexCoord).xyz * 2.0 - 1.0;
+  N.xy *= 2.0;
+  N = normalize(N);
+
+  //fixing normal orientation
+  //float tmpNx = N.x;
+  //N.x = N.y;
+  //N.y = N.x;
+
+  //light dir in texture space
+  vec3 L = normalize(tbnL);
+  float NdotL = max(0.0, dot(N, L));
+
+  float globalNdotL = dot(normalize(v_ecN), normalize(v_ecL));
+  float nightDayFalloff = smoothstep(-0.2, 0.2, globalNdotL);
+  float nightDayFalloffTex = smoothstep(-0.4, 0.0, globalNdotL);
+
+  vec4 diffuseColor = mix(nightColor*nightColor * 0.5 + 0.5 * dayColor, dayColor, nightDayFalloffTex);
+
+  float darkness = mix(u_darkness*0.5, 1.0, nightDayFalloff);
+
+  //reflection
+  vec3 R = reflect(-L, N);
+  float RDotV = max(0.0, dot(R, normalize(tbnDirToEye)));
+
+  //the bigger specularPower the smaller highlight spot is
+  float specularPower =  8.0;
+  float specular = clamp(0.5 * pow(RDotV, specularPower), 0.0, 0.5);
+  //specular = 0.0;
+  //if (waterDepth > 0.05) {
+  //  specular *= waterDepth;
+  //}
+  float specularLimit = smoothstep(0.00, 0.6, 1.0-waterDepth);
+  //specularLimit = waterDepth;
+  if (waterDepth <= 0.05) {
+    specularLimit = 0.5;
+  }
+  else {
+    specularLimit = 1.0;
+  }
+  //specularLimit = waterDepth;
+  vec4 earthColor = diffuseColor + vec4(0.5, 0.5, 0.7, 1.0)*specular * specularLimit;
+  earthColor *= darkness;
+
+  //blue highlights at the edge of globe
+  // vec4 atmosphereColor = vec4(0.8, 0.9, 0.99, 1.0);;
+  //   float atmosphere = 1.0 - dot(normalize(v_ecN), normalize(vec3(0.0, 0.25, 1.0)));
+  //   atmosphere *= 1.5;
+  //   atmosphere = clamp(atmosphere, 0.0, 0.99);
+  //   //fade it out a bit on the darkside
+  //   atmosphereColor = texture2D(u_atmosphereColor, vec2(atmosphere, 0.5));
+  //
+  //   //atmosphereColor = 0.5 * atmosphereColor;// + 0.5 + vec4(grey);
+  //   atmosphereColor = vec4(grey);
+  //   atmosphere *= 0.25 + 0.75*nightDayFalloff;
+  //   gl_FragColor = mix(earthColor, atmosphereColor, atmosphere);
+  //gl_FragColor = atmosphereColor;
+  //gl_FragColor = vec4(atmosphere) * atmosphereColor;
+
+  vec4 atmosphereColor = vec4(0.7, 0.9, 0.99, 1.0);
+  vec3 suneye = vec3(-0.1, -0.005, 1.0);
+  float t = 0.0;
+  float u_sunsetDuration2 = u_sunsetDuration / 3.0;
+  float normalizedSunriseTime = min(1.0, u_time / u_sunsetDuration);
+  if (u_time < u_sunsetDuration2) {
+    t = u_time / u_sunsetDuration2;
+  }
+  else {
+    t = max(0.0, 1.0 - (u_time - u_sunsetDuration2)/u_sunsetDuration2);
+  }
+  float atmosphereFade =  1.0 - 0.875 * normalizedSunriseTime;
+  float atmosphereSunrise = 1.0 - dot(normalize(v_ecN), normalize(suneye));
+  float atmosphere = 1.0 - dot(normalize(v_ecN), vec3(0.0, 0.10, 1.0));
+
+  atmosphere = mix(atmosphere, atmosphereSunrise, t);
+  atmosphere *= 1.25;
+  //atmosphere += atmosphere;
+  atmosphere = clamp(atmosphere, 0.0, 1.0);
+  atmosphere *= nightDayFalloff;
+  //atmosphere *= atmosphere;
+  //fade it out a bit on the darkside
+  atmosphereColor = texture2D(u_atmosphereColor, vec2(atmosphere, 0.5));
+  //atmosphereColor = ;;
+  float atmosphere2 = atmosphere;
+  atmosphere2 += atmosphere;
+  atmosphere2 *= nightDayFalloff;
+  atmosphere2 *= 0.75;
+
+  float atmosphere3 = atmosphere * 1.25;
+  atmosphere3 += atmosphere3;
+  atmosphere3 = clamp(atmosphere3, 0.0, 1.0);
+
+  float grey = earthColor.r * 0.3 + earthColor.g * 0.59 + earthColor.b * 0.11;
+  vec4 earthGrey = vec4(grey);
+
+  if (waterDepth > 0.05) {
+    earthColor *= 0.75 + waterDepth/4.0;
+    earthColor.g += 0.1 * nightDayFalloff;
+    earthColor.b += 0.0 * nightDayFalloff;
+  }
+
+  //earthColor = mix(earthColor, earthGrey, atmosphere);
+
+  gl_FragColor = mix(earthColor, atmosphereColor, atmosphere);
+  vec3 yuv = rgb2yuv(gl_FragColor.rgb);
+  yuv.y *= 0.5; yuv.z *= 0.5;  // Bring down the saturation.
+  vec4 washedOutColor = vec4(yuv2rgb(yuv), 1.0);
+  gl_FragColor = mix(earthColor, washedOutColor, atmosphere3) * (1.0 - 0.5*atmosphere3);
+  gl_FragColor += vec4(atmosphere*atmosphere) * vec4(145.0/255.0, 221.0/255.0, 255.0/255.0, 1.0) * atmosphereFade;
+  float waveColorFallof = 0.5 + 0.5*NdotL;
+  gl_FragColor += waveColorFallof * calcWaveColor();
+
+  gl_FragColor.a = 1.0;
+}
+</script>
+<script type="shader" id="superquad_vert">
+attribute vec2 a_xy;
+varying vec2 v_uv;
+
+void main() {
+  v_uv = a_xy / 2.0 + 0.5;
+  gl_Position = vec4(a_xy, 0.0, 1.0);
+}
+</script>
+<script type="shader" id="superquad_frag">
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
+
+varying vec2 v_uv;
+uniform sampler2D u_sampler;
+
+void main() {
+  //gl_FragColor = vec4(v_uv, 0.0, 1.0);
+  //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  gl_FragColor = vec4(texture2D(u_sampler, v_uv));
+}
+</script>
+<style>
+body {
+  background: #f1f1f1;
+  font-family: Georgia, serif;
+  margin: 0;
+  margin-top: 6px;
+}
+
+body.tourmode {
+  margin-top: 0px;
+  background: black;
+}
+body.tourmode canvas#canvas3d {
+  margin: 0;
+}
+
+div.centerdiv {
+  margin: 0 auto;
+  width: 562px;
+}
+canvas#canvas3d {
+  margin: 0 25px;
+}
+div#controls {
+  width: 200px;
+}
+div#sigstuff {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+div#highscore {
+  float: left;
+  margin-top: 20px;
+}
+div#sig, div#sigcmt {
+  font-size: 8pt;
+  width: 200px;
+  float: left;
+}
+div#sigback {
+  width: 200px;
+  font-size: 8pt;
+  margin: 0 0 0.5em 0;
+}
+div#canvases {
+  float: left;
+  position: relative;
+}
+a, a:hover, a:visited {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  background-color: #d0c0af;
+}
+a.eyecatcher {
+  border-bottom: 1px dotted black;
+}
+img.imglink {
+  padding-left: 5px;
+}
+#ui {
+  clear: both;
+  margin: 10px 20px 0;
+  overflow: auto;
+}
+div#data_display_modes {
+  margin-top: 3px;
+}
+div#data_display_modes, div.sliders {
+  float: left;
+  margin-right: 10px;
+}
+div#data_display_modes a:hover {
+  background: #f1f1f1;
+}
+
+div.sliders {
+  font-size: 14px;  /* TODO(deanm): Maybe match the 10px timeline font size. */
+  xmargin-top: 8px;
+  color: #444;
+}
+canvas#timeline {
+  margin-top: 6px;
+}
+div.sliders div.magtitle {
+  font-size: 10px;
+  margin: 0 0 0 86px;
+}
+div.sliders div.daytitle {
+  font-size: 10px;
+  margin: 0 0 0 82px;
+}
+div.sliders span {
+  margin-left: 40px;
+}
+div.sliders canvas {
+  margin: 0px 4px;
+}
+div#sigheader {
+  margin-bottom: 10px;
+}
+div#footer {
+  margin-top: 25px;
+}
+div#options img {
+  margin-top: 4px;
+  float: right;
+}
+div#credits {
+  margin-top: 10px;
+  font-size: 10px;
+}
+img#nine5 {
+  float: left;
+  margin-right: 25px;
+}
+</style>
+</head>
+<body>
+<div id="totaldiv" style="min-width: 1000px; display: none">
+  <div id="highscore" style="display: none"><div style="margin-left: 10px">Spin Spin Spin!<br />Max speed: <span id="highscorespeed"></span></div></div>
+  <div id="sigstuff">
+    <div id="sig">
+      <div id="sigheader">
+        <div>Significant Earthquakes</div>
+        <div id="sigheaderdate"></div>
+      </div>
+    </div>
+    <div id="sigback">
+      <a href="javascript:void(0)">&larr; Back</a>
+    </div>
+    <div id="sigcmt"></div>
+  </div>
+  <div class="centerdiv">
+    <div id="canvases">
+      <div id="canvas3ddiv"><canvas id="canvas3d" width="512" height="512"></canvas></div>
+      <div><canvas id="timeline" width="562" height="23"></canvas></div>
+      <div id="ui">
+        <div id="data_display_modes">
+          <a href="javascript:void(0)"><img width="24" height="24" src="static/assets/ico_dots.png" alt="Particles" title="Particles" id="ui_points"/></a
+          ><a href="javascript:void(0)"><img width="24" height="24" src="static/assets/ico_lines.png" alt="Lines" title="Lines" id="ui_lines"/></a
+          ><a href="javascript:void(0)"><img width="24" height="24" src="static/assets/ico_circles.png" alt="Rings" title="Rings" id="ui_circles"/></a
+          ><a href="javascript:void(0)"><img width="24" height="24" src="static/assets/ico_tour.png" alt="Tour" title="Tour" id="ui_tourmode"/></a>
+        </div>
+        <div class="sliders">
+          <div class="magtitle">Magnitude</div>
+          <div>
+            <span>10<canvas width="100" height="10" id="ui_mag_slider"></canvas>0</span>
+          </div>
+        </div>
+        <div class="sliders">
+          <div class="daytitle">Day / Night</div>
+          <div>
+            <span>&nbsp;<img src="static/assets/moon.png" /><canvas width="100" height="10" id="ui_day_slider"></canvas></span>
+          </div>
+        </div>
+        <div id="options">
+          <a href="javascript:void(0)"><img width="24" height="24" src="static/assets/ico_supersampling.png" alt="Supersampling" title="Toggle Supersampling" id="ui_super"/></a>
+        </div>
+        <div style="clear: both"></div>
+        <div id="footer">
+          <img id="nine5" width="80" height="80" alt="Nine Point Five" src="static/assets/95.png" />
+          <div>Nine Point Five is a WebGL visualization exploring earthquakes over
+          the past 30 years.  <a href="about.html">Learn more &#x00bb;</a></span></div>
+          <div id="credits">
+            <div>Created by <a href="http://www.deanmcnamee.com/">Dean McNamee</a> and <a href="http://marcinignac.com/">Marcin Ignac</a>.</div>
+            <div>Earth imagery and data from <a href="http://earthobservatory.nasa.gov/Features/BlueMarble">NASA</a>.
+            Earthquake data from the <a href="http://earthquake.usgs.gov/earthquakes/">U.S. Geological Survey</a>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="errordiv" style="min-width: 1000px; margin-top: 30px; display: none">
+<div class="centerdiv">
+<h3>Your web browser does not support WebGL.</h3>
+<div>We've used this new technology to bring you a more interesting and engaging experience. <a href="about.html#browser" class="eyecatcher">Find out how to run a supported browser.</a></div>
+</div>
+</div>
+</body>
+</html>

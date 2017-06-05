@@ -1,0 +1,51 @@
+div#wrapper {
+	padding: 10pt 30pt 50pt;
+}
+
+body {
+	font-family: "Microsoft Sans Serif", "Helvetica Neue", "Hoefler Text", "Droid Sans", "Droid Sans Mono";
+}
+
+h1 {
+	display: block;
+	font-size: 30pt;
+}
+
+p, table {
+	font-family: "Hoefler Text", Georgia;
+	line-height: 1.5em;
+	font-size: 16pt;
+	text-align: left;
+}
+
+a {
+	text-decoration: none;
+}
+
+em {
+	font-style: normal;
+	color: green;
+	letter-spacing: 0.05em;
+}
+
+p.signature {
+	text-align: right
+}
+
+img.right {
+	float: right;
+	margin: 0 0 20pt 25pt;
+}
+
+table {
+	clear: both;
+}
+
+td.who span, td.twpartner span {
+	font-family: "Microsoft Sans Serif", "Helvetica Neue", "Hoefler Text", "Droid Sans", "Droid Sans Mono";
+	color: blue;
+}
+
+td.rarr {
+	padding: 0 10pt;
+}

@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>About Nine Point Five Earthquake Visualization</title>
+<style>
+body {
+  background: #f1f1f1;
+  font-family: Georgia, serif;
+  margin: 20px;
+}
+
+a {
+  color: black;
+}
+a:hover {
+  background-color: #d0c0af;
+}
+
+div.centerdiv {
+  margin: 0 auto;
+  width: 562px;
+}
+
+div#instructions img {
+  vertical-align: bottom;
+  padding-right: 10px;
+}
+</style>
+</head>
+<body>
+<div class="centerdiv">
+  <h2>Nine Point Five, an earthquake visualization.</h2>
+  <h3>What is it?</h3>
+  <p>Nine Point Five is an interactive visualization of earthquakes over the
+  past 30 years.  It uses the newly developed WebGL technology to create an
+  fluid and interactive in-browser experience, chugging through the data and
+  presenting these events over an interactive Earth.
+  </p>
+  <h3>Why can't I view it?</h3>
+  <p>You'll need to download and setup a browser that supports WebGL.  Currently
+  this means you'll have to <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">follow a few steps</a> to get the latest development build
+  of your favorite browser and enable WebGL support.
+  </p>
+  <h3 id="instructions">What does it look like?</h3>
+  <div id="instructions">
+  <p><img src="static/assets/ninefive.jpg" width="524" height="512" alt="Nine Point Five" title="Screenshot of Nine Point Five" /></p>
+  <h3>How does it work?</h3>
+  <p>Use your mouse and scrollwheel to control our planet Earth.  For a given time range, you will be presented with the most significant earthquakes on the right side panel.  Selecting an earthquake will fly you there, and display more information about that event.</p>
+  <p><img src="static/assets/timeline.jpg" width="100" height="32" alt="Timeline" title="Timeline" />Select the time range of data to display, from 1977 to 2010.</p>
+  <p><img width="24" height="24" src="static/assets/ico_dots.png" alt="Particles" title="Particles" />Earthquakes are displayed as a particle cloud.</p>
+  <p><img width="24" height="24" src="static/assets/ico_lines.png" alt="Lines" title="Lines" />Earthquakes are displayed as lines.</p>
+  <p><img width="24" height="24" src="static/assets/ico_circles.png" alt="Rings" title="Rings" />Rings surround the locations of earthquakes, allowing for high detail while you zoom in.</p>
+  <p><img width="24" height="24" src="static/assets/tour.png" alt="Tour" title="Tour" />A non-interactive mode (think of it like a screensaver), which
+  takes you on a tour of the most significant earthquakes for the current time range.</p>
+  <p><img width="145" height="29" src="static/assets/magslider.jpg" alt="Magnitude Filter" title="Magnitude Filter" />Filter earthquakes by increasing magnitude, generally a magnitude over 6 is considered significant.</p>
+  <p><img width="145" height="29" src="static/assets/dayslider.jpg" alt="Magnitude Filter" title="Magnitude Filter" />Position the sun, shadowing or lighting Earth.</p>
+  <p><img width="24" height="24" src="static/assets/ico_supersampling.png" alt="Supersampling" title="Toggle Supersampling" id="ui_super"/>A techy option to control how anti-aliasing is performed, by default supersampling is enabled.</p>
+  </div>
+  </p>
+  <h3>Where's the tanks and guns?</h3>
+  <p>The increasing power and availability of graphics
+  processors, and the access to them on the web, means more than just games.
+  We can now build beautiful interactive experiences in areas that would have
+  traditionally not have considered 3D.  Nine Point Five tries to explore this
+  new medium with a concentration on the design and integration within the
+  page, and an aesthetic that could feel at home in an encyclopedia or news
+  article.
+  </p>
+  <h3>Whose behind it?</h3>
+  <p><a href="http://www.deanmcnamee.com/">Dean McNamee</a> and <a href="http://marcinignac.com/">Marcin Ignac</a>, two designers working with technology.
+  </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  margin: 1em;
+  line-height: 1.5em;
+}
+
+h1, p {
+  color: #333;
+}
+
+#sample_container_id {
+  width: 200px;
+  margin: 0 auto;
+}
+
+#probability {
+  width: 200px;
+}
+
+#start_button {
+  width: 200px;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+#slot_result {
+  width: 200px;
+  text-align: center;
+  text-transform: uppercase;
+}

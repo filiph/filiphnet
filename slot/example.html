@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Slot machine</title>
+    
+    <script async type="application/dart" src="example.dart"></script>
+    <script async src="packages/browser/dart.js"></script>
+    
+    <link rel="stylesheet" href="example.css">
+  </head>
+  <body>
+    <div id="sample_container_id">
+      <h1>Slot machine</h1>
+      <p>
+        Probability = <span id="probability_span">75%</span> 
+        <input id="probability" type="range" value="75" max="100" step="5">
+      </p>
+      <button id="start_button">Click me!</button>
+      <div id="slot_container"></div>
+      <p id="slot_result"></p>
+      
+      <p>
+        <a href="https://github.com/filiph/slot_machine">See the code</a> or 
+        <a href="https://pub.dartlang.org/packages/slot_machine">add</a> 
+        to your Dart project.
+      </p>
+    </div>
+    
+
+  </body>
+</html>
