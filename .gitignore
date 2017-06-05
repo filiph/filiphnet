@@ -9,7 +9,7 @@ pubspec.lock
 doc/api/
 
 # Packages files are not needed and there's a bunch of them.
-**/packages/**
+**/packages/**/*.dart
 
 # This file is auto-generated from src/index.template.html.
 web/index.html
