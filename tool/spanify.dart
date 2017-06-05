@@ -1,22 +1,42 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:args/args.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:markdown/markdown.dart' as md;
 
-main(args) {
-  var mdSource = new File(args.single).readAsStringSync();
-  var html = md.markdownToHtml(mdSource);
-  var doc = parseFragment(html);
+main(List<String> args) {
+  var argParser = new ArgParser(allowTrailingOptions: true)
+    ..addOption("html", help: "Template HTML.");
+  var options = argParser.parse(args);
+
+  var htmlTemplatePath = options['html'];
+  var markdown = options.rest.single;
+
+  var mdSource = new File(markdown).readAsStringSync();
+  var htmlSource = md.markdownToHtml(mdSource);
+  var doc = parseFragment(htmlSource);
 
   for (var e in doc.children) {
     _recursiveWalk(e);
   }
 
-  print(doc.outerHtml);
+  var html = doc.outerHtml;
+  var css = _buildCss().toString();
 
-  print(_buildCss().toString());
+  if (htmlTemplatePath == null) {
+    // Just output the HTML, followed by
+    print(html);
+    print(css);
+  } else {
+    // Output the template file updated in marked places with output.
+    var template = new File(htmlTemplatePath).readAsStringSync();
+    var output = template
+        .replaceFirst('<!-- GENERATED HTML -->', html)
+        .replaceFirst('/* GENERATED CSS */', css);
+    print(output);
+  }
 }
 
 /// Number of steps in which to build the page.

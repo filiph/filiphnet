@@ -6,6 +6,6 @@ environment:
   sdk: '>=1.23.0 <2.0.0'
 
 dev_dependencies:
-  test: ^0.12.0
-  html: any
-  markdown: any
+  args: ^0.13.7
+  html: ^0.13.2
+  markdown: ^0.11.3

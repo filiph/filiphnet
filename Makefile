@@ -10,8 +10,12 @@ deploy: build
 
 build: pub copy_old
 
-pub:
+pub: spanify
 	pub build
 
 copy_old:
 	cp -R ./old/* ./build/web
+
+spanify:
+	dart -c tool/spanify.dart --html src/index.template.html src/text.md \
+	  > web/index.html
