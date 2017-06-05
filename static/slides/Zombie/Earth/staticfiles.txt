@@ -1,6 +1,0 @@
-http://bodybrowser.googlelabs.com/r3/img/control_bar.png
-http://bodybrowser.googlelabs.com/r3/img/search_icon.png
-http://bodybrowser.googlelabs.com/r3/img/footer2.png
-http://bodybrowser.googlelabs.com/r3/img/all_layers_slider_handle.png
-http://bodybrowser.googlelabs.com/r3/img/one_layer_slider_handle.png
-http://bodybrowser.googlelabs.com/r3/img/nav_ctls.png

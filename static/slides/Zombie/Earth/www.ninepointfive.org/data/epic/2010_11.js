@@ -1,1 +1,0 @@
-month_loaded(2010,11,[]);sig_month_loaded(2010,11,[]);

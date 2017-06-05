@@ -31,6 +31,7 @@ and create silly software experiments.
 * [Lorem ipsumizer](http://filiph.net/lorem/) tool
 * [Alojz.cz](https://alojz.cz/) weather <abbr title="Natural Language Generation">NLG</abbr> system <span class="note"> (in Czech)</span>
 * [Stav mobilního webu](https://stav-mobilniho-webu.appspot.com/) research <span class="note"> (in Czech)</span>
+* [youtubeology.com](http://www.youtubeology.com/) data &amp; research
 * [Github](https://github.com/filiph) &mdash; all other projects
 
 ## Social
