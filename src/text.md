@@ -15,7 +15,7 @@ and create silly software experiments.
 ## Projects
 
 * [egamebook.com](http://egamebook.com/) project
-* [linkcheck](https://github.com/filiph/linkcheck/) link checker
+* [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
 * [@year_progress](https://twitter.com/year_progress) twitter bot
 * [tmzns.com](http://www.tmzns.com/) timezones converter
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
