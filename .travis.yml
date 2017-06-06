@@ -4,12 +4,13 @@ before_install:
   - npm install -g firebase-tools --no-optional
   - pub global activate linkcheck
   - chmod +x ./tool/check_links.sh
+  - chmod +x ./tool/deploy.sh
 
 script:
   - make build
   - ./tool/check_links.sh
 
 deploy:
-  provider: firebase
-  token:
-    secure: "NcBRJNNaP0G1/lVAKejoSahbpqpnkaWcOQwhfB3jUagrgP0U1mhj0vO189lzpBG90XAWLgeJcESt6fsAIPfWDnFUZQCwlSKx0B/Ktvu2hTPKJ4/uzxjbE5fbYMGAaP8DtYCibkNofMfyE+AEqOCHpJbzW+LTgzK781J0ALl8NOvP/S/wXtTz9LblXuW+iTxfBmKQcpMlZ0kn//anmvEq5Iz6ppnHSAyzBW/2tWqyEpxyQpp1Te9M/JlwoI3y08lllIw4rqLUrJToiDnp7ruSq5Luk7YFQbANRGIE2iq5ZmSFZXqCEqhftHB2FT34XiIf8z40ambIu0i7eZuJ+1gjbvEC+0Ly8Is79lXcLTBvd/8RICY0npWkoE0J3i0azhDPTFX26eRLhv68ov9TWGPXkenSa8BPMu7YeQqZZOyJtuwvXk4rftZdGqTYRkzOj2MmsSJIxxw8wHCzGwusGZmZT0pELrWlDOymQ9/QOSKUztu6Bta0W6o8VCac40O5xTutXJTvEmm0U6LKFGAScAIPHFl8lzJzS9k97vzEC8LfOuUpIaUr+1rfSaaDuFXQ1AexexD9FmxkgVWQjxX+/2Z0ifV3VOJGXmuYCanxYx4WYkshBeHsHe9Z8vkiLkBt0ziyo6WMCu8nyW03HsM9hDdHXRIR7jp5Rx1+9lS86F4id6U="
+  - provider: script
+    script: ./scripts/deploy.sh
+    skip_cleanup: true
