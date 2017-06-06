@@ -12,5 +12,5 @@ script:
 
 deploy:
   - provider: script
-    script: ./scripts/deploy.sh
+    script: ./tool/deploy.sh
     skip_cleanup: true
