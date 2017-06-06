@@ -14,7 +14,7 @@ and create silly software experiments.
 
 ## Projects
 
-* [egamebook.com](http://egamebook.com/) project
+* [egamebook.com](http://egamebook.com/) open-world book framework
 * [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
 * [@year_progress](https://twitter.com/year_progress) twitter bot
 * [tmzns.com](http://www.tmzns.com/) timezones converter
