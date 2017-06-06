@@ -28,6 +28,10 @@
       "destination": "http://www.philipage.com/",
       "type": 301
     }, {
+      "source": "/japan",
+      "destination": "https://japan.filiph.net/",
+      "type": 301
+    }, {
       "source": "/mp3",
       "destination": "http://www.philipage.com/",
       "type": 301
