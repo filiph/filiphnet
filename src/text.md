@@ -5,7 +5,7 @@
      srcset="img/filip.jpg 1x, img/filip@2x.jpg 2x, img/filip@3x.jpg 3x, img/filip@4x.jpg 4x" 
      alt="Filip's face">
      
-# Filip Hráček
+# Filip Hrá&shy;ček
 
 Hi, I'm Filip. I'm a programming buff with formal training in journalism. 
 I&nbsp;work at Google in&nbsp;California. 
