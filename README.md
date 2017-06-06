@@ -1,6 +1,6 @@
 # filiph.net
 
-Code for my Filip Hracek's personal homepage.
+Code for Filip Hracek's personal homepage.
 
 Use `make` to build and deploy this. For example:
 
