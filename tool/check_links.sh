@@ -10,7 +10,7 @@ FBS_PID=$!
 
 sleep 4
 
-linkcheck :4001 | tee $TMP/linkcheck-log.txt
+linkcheck :4001 -e | tee $TMP/linkcheck-log.txt
 
 set +x
 
