@@ -9,7 +9,7 @@
 
 Hi, I'm Filip. I'm a programming buff with formal training in journalism. 
 I&nbsp;work at Google in&nbsp;California. 
-In&nbsp;my spare time, I&nbsp;build a procedural, AI-driven book, 
+In&nbsp;my spare time, I'm&nbsp;building a procedural, AI-driven book, 
 and create silly software experiments.
 
 ## Projects
