@@ -3,14 +3,15 @@
      height="233"
      src="img/filip.jpg" 
      srcset="img/filip.jpg 1x, img/filip@2x.jpg 2x, img/filip@3x.jpg 3x, img/filip@4x.jpg 4x" 
-     alt="Filip's face">
+     alt="Filip Hracek’s face">
      
 # Filip Hráček
 
-Hi, I'm Filip. I'm a programming buff with formal training in journalism. 
-I&nbsp;work at Google in&nbsp;California. 
-In&nbsp;my spare time, I'm&nbsp;building a procedural, AI-driven book, 
-and create silly software experiments.
+Hi, I’m Filip. I’m a pro&shy;gram&shy;ming buff with formal training
+in jour&shy;nal&shy;ism. 
+I&nbsp;work at Google in&nbsp;Cal&shy;i&shy;for&shy;nia. 
+In&nbsp;my spare time, I’m&nbsp;building a pro&shy;ce&shy;du&shy;ral,
+AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Projects
 
@@ -79,6 +80,6 @@ and create silly software experiments.
 ## About this page
 
 This page consist of only two resources: the HTML and the picture.
-The 'appearing' effect is achieved using the CSS `keyframes` feature, and it is
+The ‘appearing’ effect is achieved using the CSS `keyframes` feature, and it is
 orchestrated by a compile-time Dart script accessible 
 [here](https://github.com/filiph/filiphnet/blob/master/tool/spanify.dart).
