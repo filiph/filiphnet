@@ -45,11 +45,15 @@ const _keyframesCount = 20;
 /// Mapping from class names to the index of the `keyframes` definition.
 final Map<String, int> _classToKeyframes = {};
 
+final _endsWithWhitespace = new RegExp(r'\s$');
+
 /// Index of the first generated class name, so that we start with something
 /// like `_2s` instead of `_0`.
 int _index = 100;
 
 final Random _rand = new Random();
+
+final _startWithWhitespace = new RegExp(r'^\s');
 
 final _whitespace = new RegExp(r'\s');
 
@@ -97,10 +101,14 @@ void _recursiveWalk(Element e) {
       _recursiveWalk(node);
       nodes.add(node);
     } else if (node is Text) {
-      for (var word in node.text.split(_wordBoundary)) {
+      for (var word in _splitByBoundary(node.text)) {
         if (word.isEmpty) continue;
         if (word == '&nbsps;') {
           nodes.add(new Text('&nbsp;'));
+          continue;
+        }
+        if (word == ' ') {
+          nodes.add(new Text(' '));
           continue;
         }
         if (word.contains('\n') && word.trim().isEmpty) {
@@ -119,4 +127,24 @@ void _recursiveWalk(Element e) {
   }
   e.nodes.clear();
   e.nodes.addAll(nodes);
+}
+
+Iterable<String> _splitByBoundary(String text) {
+  final result = text.split(_wordBoundary);
+
+  for (int i = 0; i < result.length; i++) {
+    var current = result[i];
+    if (current == null) continue;
+    if (_endsWithWhitespace.hasMatch(current)) continue;
+    for (int j = i + 1; j < result.length; j++) {
+      final next = result[j];
+      assert(next != null);
+      if (_startWithWhitespace.hasMatch(next)) break;
+      current = '$current$next';
+      result[j] = null;
+    }
+    result[i] = current;
+  }
+
+  return result.where((s) => s != null);
 }
