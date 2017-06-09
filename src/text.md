@@ -7,10 +7,10 @@
      
 # Filip Hráček
 
-Hi, I’m Filip. I’m a pro&shy;gram&shy;ming buff with formal training
+Hi, I’m Filip. I’m a pro&shy;gram&shy;ming buff with formal train&shy;ing
 in jour&shy;nal&shy;ism. 
 I&nbsp;work at Google in&nbsp;Cal&shy;i&shy;for&shy;nia. 
-In&nbsp;my spare time, I’m&nbsp;building a pro&shy;ce&shy;du&shy;ral,
+In&nbsp;my spare time, I’m&nbsp;build&shy;ing a pro&shy;ce&shy;du&shy;ral,
 AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Projects
