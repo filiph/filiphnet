@@ -20,6 +20,10 @@
       ]
     } ],
     "redirects": [ {
+      "source": "/+",
+      "destination": "https://plus.google.com/u/0/+filiphracek",
+      "type": 301
+    }, {
       "source": "/avi",
       "destination": "https://www.youtube.com/user/filiphracek/videos",
       "type": 301
