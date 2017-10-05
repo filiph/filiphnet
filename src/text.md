@@ -16,7 +16,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 ## Projects
 
 * [egamebook.com](http://egamebook.com/) open-world book framework
-* [Insignificant Little Vermin](http://egamebook.com/vermin) a sword & sorcery adventure
+* [Insignificant Little Vermin](http://egamebook.com/vermin) sword & sorcery adventure
 * [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
 * [@year_progress](https://twitter.com/year_progress) twitter bot
 * [tmzns.com](http://www.tmzns.com/) timezones converter
