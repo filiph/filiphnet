@@ -53,6 +53,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 ## Writing
 
 * [Medium](https://medium.com/@filiph)
+  * [Skyrim rendered in text](https://medium.com/@filiph/skyrim-rendered-in-text-1899548ab2c4)
   * [How Google builds web frameworks](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea)
   * [The ‘Hello Word’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
   * [Why I’m joining the Dart team, of all places](https://medium.com/dartlang/why-i-m-joining-the-dart-team-of-all-places-d0b9f83a3b66)
