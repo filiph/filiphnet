@@ -23,6 +23,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
 * [Alojz.cz](https://alojz.cz/) weather <abbr title="Natural Language Generation">NLG</abbr> system <span class="note"> (in Czech)</span>
 * [tisicknih.cz](http://tisicknih.cz/) book recommendation engine <span class="note"> (in Czech)</span>
+* [conference_darwin](https://github.com/filiph/conference_darwin) evolutionary algorithm for conference schedules
 
 ## Experiments
 
@@ -43,8 +44,8 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Social
 
-* [Google+](https://plus.google.com/u/0/+filiphracek)
 * [Twitter](https://twitter.com/filiphracek)
+* [Google+](https://plus.google.com/u/0/+filiphracek)
 * [LinkedIn](https://www.linkedin.com/in/visible)
 * [StackOverflow](https://stackoverflow.com/users/1416886/filiph)
 * [Facebook](https://www.facebook.com/filiphracekpublic/)
@@ -53,6 +54,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 ## Writing
 
 * [Medium](https://medium.com/@filiph)
+  * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
   * [Skyrim rendered in text](https://medium.com/@filiph/skyrim-rendered-in-text-1899548ab2c4)
   * [How Google builds web frameworks](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea)
   * [The ‘Hello Word’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
