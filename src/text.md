@@ -89,3 +89,6 @@ This page consist of only two resources: the HTML and the picture.
 The ‘appearing’ effect is achieved using the CSS `keyframes` feature, and it is
 orchestrated by a compile-time Dart script accessible 
 [here](https://github.com/filiph/filiphnet/blob/master/tool/spanify.dart).
+
+You can [edit this page](https://github.com/filiph/filiphnet/edit/master/src/text.md)
+on Github.
