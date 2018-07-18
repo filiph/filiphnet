@@ -1,4 +1,6 @@
-# filiph.net
+# filiph.net 
+
+[![Build Status](https://travis-ci.org/filiph/filiphnet.svg?branch=master)](https://travis-ci.org/filiph/filiphnet)
 
 Code for Filip Hracek's personal homepage.
 
