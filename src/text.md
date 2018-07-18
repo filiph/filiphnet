@@ -22,7 +22,6 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [tmzns.com](http://www.tmzns.com/) timezones converter
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
 * [Alojz.cz](https://alojz.cz/) weather <abbr title="Natural Language Generation">NLG</abbr> system <span class="note"> (in Czech)</span>
-* [tisicknih.cz](http://tisicknih.cz/) book recommendation engine <span class="note"> (in Czech)</span>
 * [conference_darwin](https://github.com/filiph/conference_darwin) evolutionary algorithm for conference schedules
 
 ## Experiments
@@ -38,6 +37,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [djnotation.org](http://www.djnotation.org/) proposal
 * [youtubeology.com](http://www.youtubeology.com/) research
 * [Stav mobilního webu](https://stav-mobilniho-webu.appspot.com/) research <span class="note"> (in Czech)</span>
+* [tisicknih.cz](http://tisicknih.cz/) book recommendation engine <span class="note"> (in Czech)</span>
 * [Github](https://github.com/filiph) &mdash; all other projects
 
 <!--* [krestni-jmena.cz](http://krestni-jmena.cz/) database <span class="note"> (in Czech)</span>-->
@@ -46,6 +46,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 * [Twitter](https://twitter.com/filiphracek)
 * [Google+](https://plus.google.com/u/0/+filiphracek)
+* [Github](https://github.com/filiph)
 * [LinkedIn](https://www.linkedin.com/in/visible)
 * [StackOverflow](https://stackoverflow.com/users/1416886/filiph)
 * [Facebook](https://www.facebook.com/filiphracekpublic/)
