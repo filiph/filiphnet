@@ -3,9 +3,11 @@ description: Filip Hracek's homepage + associated tooling.
 version: 0.0.1
 
 environment:
-  sdk: '>=1.23.0 <2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dev_dependencies:
-  args: ^0.13.7
-  html: ^0.13.2
-  markdown: ^0.11.3
+  args: ^1.5.1
+  build_runner: '>=0.8.10 <2.0.0'
+  build_web_compilers: '>=0.3.6 <2.0.0'
+  html: ^0.13.3+3
+  markdown: ^2.0.2

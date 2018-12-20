@@ -5,6 +5,10 @@ build/
 # Remove the following pattern if you wish to check in your lock file
 pubspec.lock
 
+# IDE and build files
+.idea/
+.dart_tool/
+
 # Directory created by dartdoc
 doc/api/
 

@@ -2,7 +2,7 @@ clean:
 	rm -rf ./build
 
 serve: build
-	firebase serve
+	superstatic
 
 deploy: build
 	firebase deploy
@@ -11,10 +11,10 @@ deploy: build
 build: pub copy_old
 
 pub: spanify
-	pub build
+	webdev build
 
 copy_old:
-	cp -R ./old/* ./build/web
+	cp -R ./old/* ./build
 
 spanify:
 	dart -c tool/spanify.dart --html src/index.template.html src/text.md \

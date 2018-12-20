@@ -55,8 +55,6 @@ final Random _rand = new Random();
 
 final _startWithWhitespace = new RegExp(r'^\s');
 
-final _whitespace = new RegExp(r'\s');
-
 final _wordBoundary = new RegExp(r'\b');
 
 /// Builds the CSS.
