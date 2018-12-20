@@ -74,7 +74,6 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [Tipy a triky pro profesionální uživatele](https://www.youtube.com/watch?v=fXkwBBvDChk) @ mDevCamp 2014 <span class="note"> (in Czech)</span>
 * [Technologie, o kterých byste měli vědět](https://www.youtube.com/watch?v=AiD9ky6pcvU) @ OMG Future 2013 <span class="note"> (in Czech)</span>
 * [Dart 1.0](https://www.youtube.com/watch?v=-8xSupF_Iek) @ DevFest Prague 2013 <span class="note"> (in Czech)</span>
-* [Dart](http://www.ustream.tv/recorded/29325494) @ MLOC.js 2013
 * [Google BigQuery and other tools for big data](https://www.youtube.com/watch?v=vXZnFs5arQI) @ BigClean 2012
 * [Why Dart?](https://www.youtube.com/watch?v=pKe8p-SLgAc) @ dotJS 2012
   
