@@ -7,14 +7,14 @@ import 'package:html/parser.dart';
 import 'package:markdown/markdown.dart' as md;
 
 main(List<String> args) {
-  var argParser = new ArgParser(allowTrailingOptions: true)
+  var argParser = ArgParser(allowTrailingOptions: true)
     ..addOption("html", help: "Template HTML.");
   var options = argParser.parse(args);
 
   var htmlTemplatePath = options['html'];
   var markdown = options.rest.single;
 
-  var mdSource = new File(markdown).readAsStringSync();
+  var mdSource = File(markdown).readAsStringSync();
   var htmlSource = md.markdownToHtml(mdSource);
   var doc = parseFragment(htmlSource);
 
@@ -31,7 +31,7 @@ main(List<String> args) {
     print(css);
   } else {
     // Output the template file updated in marked places with output.
-    var template = new File(htmlTemplatePath).readAsStringSync();
+    var template = File(htmlTemplatePath).readAsStringSync();
     var output = template
         .replaceFirst('<!-- GENERATED HTML -->', html)
         .replaceFirst('/* GENERATED CSS */', css);
@@ -45,21 +45,21 @@ const _keyframesCount = 20;
 /// Mapping from class names to the index of the `keyframes` definition.
 final Map<String, int> _classToKeyframes = {};
 
-final _endsWithWhitespace = new RegExp(r'\s$');
+final _endsWithWhitespace = RegExp(r'\s$');
 
 /// Index of the first generated class name, so that we start with something
 /// like `_2s` instead of `_0`.
 int _index = 100;
 
-final Random _rand = new Random();
+final Random _rand = Random();
 
-final _startWithWhitespace = new RegExp(r'^\s');
+final _startWithWhitespace = RegExp(r'^\s');
 
-final _wordBoundary = new RegExp(r'\b');
+final _wordBoundary = RegExp(r'\b');
 
 /// Builds the CSS.
 String _buildCss() {
-  final StringBuffer css = new StringBuffer();
+  final StringBuffer css = StringBuffer();
   for (int i = 1; i <= _keyframesCount; i++) {
     var classes = <String>[];
     _classToKeyframes.forEach((cl, kf) {
@@ -81,19 +81,19 @@ String _buildKeyframes(int i) {
   return '''
         @keyframes appear$i {
         0% {color: white;}
-        ${i+2}% {color: white;}
-        ${i+30}% {color: inherit;}
+        ${i + 2}% {color: white;}
+        ${i + 30}% {color: inherit;}
       }
   '''
       .trim()
-      .replaceAll(new RegExp(r'\n'), '')
-      .replaceAll(new RegExp(r'\s+'), ' ');
+      .replaceAll(RegExp(r'\n'), '')
+      .replaceAll(RegExp(r'\s+'), ' ');
 }
 
 /// Recursively walk the tree and wrap `<span>` around each word. Assign
 /// a new class to each span.
 void _recursiveWalk(Element e) {
-  var nodes = new List<Node>();
+  var nodes = List<Node>();
   for (var node in e.nodes) {
     if (node is Element) {
       _recursiveWalk(node);
@@ -102,19 +102,19 @@ void _recursiveWalk(Element e) {
       for (var word in _splitByBoundary(node.text)) {
         if (word.isEmpty) continue;
         if (word == '&nbsps;') {
-          nodes.add(new Text('&nbsp;'));
+          nodes.add(Text('&nbsp;'));
           continue;
         }
         if (word == ' ') {
-          nodes.add(new Text(' '));
+          nodes.add(Text(' '));
           continue;
         }
         if (word.contains('\n') && word.trim().isEmpty) {
-          nodes.add(new Text(" "));
+          nodes.add(Text(" "));
           continue;
         }
         var className = '_${_index.toRadixString(36)}';
-        var span = new Element.tag('span')
+        var span = Element.tag('span')
           ..text = word
           ..classes.add(className);
         nodes.add(span);
