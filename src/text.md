@@ -66,6 +66,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Public speaking
 
+* [Announcing Flutter 1.0 demo](https://www.youtube.com/watch?v=kpcjBD1XDwU&t=389) @ Flutter Live 2018
 * [Build reactive mobile apps with Flutter](https://www.youtube.com/watch?v=RS36gBEp8OI) @ Google I/O 2018
 * [Nové technologie mobilního webu](http://www.ceskatelevize.cz/ivysilani/10000000212-webexpo-2015/215254000470012-nove-technologie-mobilniho-webu-rychly-prehled/dalsi-casti/3) @ WebExpo 2015 <span class="note"> (in Czech)</span>
 * [Přednáška o mobilech](https://www.youtube.com/watch?v=3QROfDsuepo) @ mDevCamp 2015 <span class="note"> (in Czech)</span>
@@ -77,8 +78,6 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [Google BigQuery and other tools for big data](https://www.youtube.com/watch?v=vXZnFs5arQI) @ BigClean 2012
 * [Why Dart?](https://www.youtube.com/watch?v=pKe8p-SLgAc) @ dotJS 2012
   
-<!--* [Videos](https://www.google.com/search?q=filip+hr%C3%A1%C4%8Dek&tbm=vid)-->
-
 ## Music
 
 * [Philip Age](http://www.philipage.com/news/) DJ sets
