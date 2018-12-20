@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/web",
+    "public": "build",
     "ignore": [
       "**/packages/**/*.dart"
     ],

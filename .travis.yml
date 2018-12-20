@@ -1,8 +1,9 @@
 language: dart
 
 before_install:
-  - npm install -g firebase-tools --no-optional
+  - npm install -g superstatic
   - pub global activate linkcheck
+  - pub global activate webdev
   - chmod +x ./tool/check_links.sh
   - chmod +x ./tool/deploy.sh
 
