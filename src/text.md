@@ -60,6 +60,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
   * [How Google builds web frameworks](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea)
   * [The ‘Hello Word’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
   * [Why I’m joining the Dart team, of all places](https://medium.com/dartlang/why-i-m-joining-the-dart-team-of-all-places-d0b9f83a3b66)
+  * [What kills toddlers in the U.S. [scatter plot]](https://medium.com/@filiph/what-kills-toddlers-in-the-u-s-scatter-plot-90d2327ce3c2)
 * [Runtime.cz](http://www.runtime.cz/) blog <span class="note"> (in Czech)</span>
 * [Vasil.cz](http://www.vasil.cz/) collaborative blog <span class="note"> (in Czech)</span>
 * [Centrum zábavy](https://books.google.com/books/about/Centrum_z%C3%A1bavy.html?id=CVbsBQAAQBAJ) free ebook <span class="note"> (in Czech)</span>
