@@ -81,7 +81,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 ## Music
 
 * [Philip Age](http://www.philipage.com/news/) DJ sets
-* [*2003 ✝2013](https://play.google.com/store/music/album?id=Brwj7fk7ix672jmdv6cnkvasxwa&tid=song-Thfu4aawdqx4s742tivza3lbwbm) album
+* [Philip Age](https://philipage.bandcamp.com/) tracks
 
 ## About this page
 
