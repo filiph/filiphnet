@@ -17,5 +17,5 @@ copy_old:
 	cp -R ./old/* ./build
 
 spanify:
-	dart -c tool/spanify.dart --html src/index.template.html src/text.md \
+	dart tool/spanify.dart --html src/index.template.html src/text.md \
 	  > web/index.html
