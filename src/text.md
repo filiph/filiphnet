@@ -67,6 +67,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Public speaking
 
+* [Pragmatic State Management in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I) @ Google I/O 2019
 * [Announcing Flutter 1.0 demo](https://www.youtube.com/watch?v=kpcjBD1XDwU&t=389) @ Flutter Live 2018
 * [Build reactive mobile apps with Flutter](https://www.youtube.com/watch?v=RS36gBEp8OI) @ Google I/O 2018
 * [Nové technologie mobilního webu](http://www.ceskatelevize.cz/ivysilani/10000000212-webexpo-2015/215254000470012-nove-technologie-mobilniho-webu-rychly-prehled/dalsi-casti/3) @ WebExpo 2015 <span class="note"> (in Czech)</span>
