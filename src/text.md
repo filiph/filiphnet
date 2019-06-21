@@ -45,11 +45,9 @@ AI-driven book, and create silly soft&shy;ware experiments.
 ## Social
 
 * [Twitter](https://twitter.com/filiphracek)
-* [Google+](https://plus.google.com/u/0/+filiphracek)
 * [Github](https://github.com/filiph)
 * [LinkedIn](https://www.linkedin.com/in/visible)
 * [StackOverflow](https://stackoverflow.com/users/1416886/filiph)
-* [Facebook](https://www.facebook.com/filiphracekpublic/)
 * filip.hracek<span style="display:none">deletethisifyourenotarobot</span>@gmail<span style="display:none">thisaswell</span>.com
 
 ## Writing
