@@ -27,7 +27,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 ## Experiments
 
 * [Automatic Donald Trump](https://filiph.github.io/markov/) Markov chain
-* [Life-time value](https://life-time-value.appspot.com/) calculator
+* [Life-time value](https://github.com/filiph/life-time-value-calc) calculator
 * [Fuzzy logic for web analytics](http://filiph.net/fuzzy/) proof-of-concept
 * [A.I. eshop cart](http://filiph.net/eshop-ai/) proof-of-concept
 * [Startup namer](https://filiph.github.io/startup_namer/) web app
