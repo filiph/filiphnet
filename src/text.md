@@ -65,6 +65,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Public speaking
 
+* [Candid DevRel: The Flutter Boring Show](https://devrel.net/developer-experience/the-flutter-boring-show-and-other-ways-we-make-ourselves-look-human) @ DevRelCon SF 2019
 * [Pragmatic State Management in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I) @ Google I/O 2019
 * [Announcing Flutter 1.0 demo](https://www.youtube.com/watch?v=kpcjBD1XDwU&t=389) @ Flutter Live 2018
 * [Build reactive mobile apps with Flutter](https://www.youtube.com/watch?v=RS36gBEp8OI) @ Google I/O 2018
