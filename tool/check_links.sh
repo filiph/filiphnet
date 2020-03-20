@@ -10,7 +10,7 @@ FBS_PID=$!
 sleep 4
 
 # Check links.
-linkcheck :4001 -e
+linkcheck :4001 -e --connection-failures-as-warnings
 
 # Kill the localhost server.
 kill ${FBS_PID}
