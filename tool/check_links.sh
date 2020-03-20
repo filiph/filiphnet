@@ -10,7 +10,7 @@ FBS_PID=$!
 sleep 4
 
 # Check links.
-linkcheck :4001 -e --connection-failures-as-warnings
+linkcheck :4001 -e --skip-file tool/check_links_skip_file.txt
 
 # Kill the localhost server.
 kill ${FBS_PID}
