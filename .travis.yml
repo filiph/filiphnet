@@ -1,6 +1,7 @@
 language: dart
 
 before_install:
+  - nvm install 12
   - node --version
   - npm install -g firebase-tools --no-optional
   - npm install -g superstatic
