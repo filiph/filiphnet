@@ -1,3 +1,6 @@
+# OS
+.DS_Store
+
 # Files and directories created by pub
 .packages
 .pub/
@@ -17,3 +20,6 @@ doc/api/
 
 # This file is auto-generated from src/index.template.html.
 web/index.html
+
+# Firebase
+.firebase/
