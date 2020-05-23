@@ -1,2 +1,5 @@
 # This one always fails to connect.
-https://philipage.bandcamp.com/
+https://philipage\.bandcamp\.com/
+
+# YouTube regularly fails with "sorry".
+https://www\.youtube\.com/
