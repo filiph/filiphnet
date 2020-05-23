@@ -14,7 +14,8 @@ LINKCHECK_EXIT_CODE=$?
 # Kill the localhost server.
 kill ${FBS_PID}
 
-if [ ${LINKCHECK_EXIT_CODE} -eq 1 ] then
+if [ ${LINKCHECK_EXIT_CODE} -eq 1 ]
+then
   echo "The linkcheck tool had some warnings. We won't fail the build for that."
   exit 0
 else
