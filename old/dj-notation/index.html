@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- People who read source code are awesome.
+         Here you are: https://github.com/filiph/filiphnet -->
+
+    <meta charset="utf-8">
+    <title>DJ Notation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://filiph.net/dj-notation" />
+
+    <meta property="og:title" content="DJ Notation">
+    <meta property="og:url" content="https://filiph.net/dj-notation">
+    <meta property="og:description" content="DJ notation is an easy way to mark up your tracks. Thanks to DJ notation, you can quickly scan the list of your tracks and instantly know what would be best/easiest to play next.">
+<!-- TODO    <meta property="og:image" content="https://filiph.net/img/share-image.jpg">-->
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@filiphracek">
+    <meta name="twitter:title" content="DJ Notation">
+    <meta name="twitter:description" content="DJ notation is an easy way to mark up your tracks. Thanks to DJ notation, you can quickly scan the list of your tracks and instantly know what would be best/easiest to play next.">
+<!--    <meta name="twitter:image" content="https://filiph.net/img/share-image.jpg">-->
+
+    <meta itemprop="name" content="DJ Notation">
+    <meta itemprop="description" content="DJ notation is an easy way to mark up your tracks. Thanks to DJ notation, you can quickly scan the list of your tracks and instantly know what would be best/easiest to play next.">
+<!--    <meta itemprop="image" content="https://filiph.net/img/share-image.jpg">-->
+    <meta itemprop="url" content="https://filiph.net/dj-notation">
+
+    <meta name="robots" content="all" />
+    <meta name="description" content="DJ notation is an easy way to mark up your tracks. Thanks to DJ notation, you can quickly scan the list of your tracks and instantly know what would be best/easiest to play next." />
+    <meta name="author" content="Filip Hráček" />
+
+    <style>
+        .wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 5vw;
+        }
+
+        body {
+            font-family: Times, Georgia, serif;
+        }
+
+        h1, h2 {
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            font-weight: normal;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 1.6em;
+        }
+
+        ul {
+            padding-left: 1em;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.5em;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a, abbr {
+            text-decoration: none;
+        }
+
+        .portrait {
+            margin-top: 1em;
+            margin-left: 2em;
+            margin-bottom: 1em;
+            width: 175px;
+            float: right;
+
+            animation: appear-portrait 6s;
+        }
+
+        @keyframes appear-portrait { 0% {opacity: 0;} 40% {opacity: 1;} }
+
+        .note {
+            text-transform: uppercase;
+            font-size: 60%;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+        }
+
+        @media screen and (max-width: 380px) {
+            .portrait {
+                float: none;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <img class="portrait" alt="A small illustration of a CDJ unit." src="images/cdj-small.jpg">
+
+    <h1>DJ Notation</h1>
+
+    <p>DJ notation is an easy way to mark up your tracks. Thanks to DJ notation, you can quickly scan the list of your tracks and instantly know what would be best/easiest to play next.</p>
+
+    <h2>Why?</h2>
+
+    <p>DJs have <strong>hundreds and thousands of songs</strong> in their libraries nowadays. What's more, thanks to CDJs and digital DJing technology, they can bring them all to the club. While it's great to have such a broad choice of songs, it makes it <strong>almost impossible to remember them all</strong>.</p>
+
+    <p>Wouldn't it be great to be able to look at your song's listing during a gig and <strong>instantly know</strong>:</p>
+
+    <ul>
+        <li>whether the song you're playing is <strong>ending</strong> with beats only or if it fades out or if there's melody up to the very end</li>
+        <li>which other song will be <strong>easy to mix</strong> in next</li>
+        <li>which one is very <strong>hard or almost impossible to mix</strong> into your currently playing song</li>
+        <li>when exactly comes the <strong>major build up / break down</strong> of that particular song</li>
+        <li>and much more?</li>
+    </ul>
+
+    <p>This all might be solved by this proposal of <strong>DJ notation</strong>. Read on for specifications and examples. Note that DJ notation is also very useful when using harmonic mixing.</p>
+
+    <h3>Why this way?</h3>
+
+    <p>It was a lot of hard decisions, but I concluded that these are the crucial requirements for the notation:</p>
+
+    <ul>
+        <li><strong>intuitive</strong> (horizontal timeline metaphor, visualization of the composition)</li>
+        <li><strong>editable using any keyboard</strong> (basic <a href="http://en.wikipedia.org/wiki/Ascii">ASCII</a> characters only)</li>
+        <li><strong>flexible</strong> (the precision/granularity is up to the user/DJ)</li>
+    </ul>
+
+
+
+    <h2>The notation marks</h2>
+
+    <p>This is version 3 of the notation (September 2020). There were only cosmetic improvements in wording, and the site has been moved from <em>www.djnotation.org</em> to this address. Version 2 of the notation (Dec 2013) had one major difference in the addition of the <code>+</code> sign. The first version of this notation appeared in September 2008.</p>
+
+
+    <h3><code>-</code> (dash)</h3>
+
+    <p>Read: <strong>beats</strong>. <audio controls src="sounds/beats.mp3"><a href="sounds/beats.mp3">Listen</a>.</audio></p>
+
+    <p>Beats only, no harmonic sounds. Safe to mix into anything. Many tracks begin and end with these dj-friendly sequences, but definitely not all of them do.</p>
+
+
+    <h3><code>+</code> (plus)</h3>
+
+    <p>Read: <strong>hits</strong>. <audio controls src="sounds/hits.mp3"><a href="sounds/hits.mp3">Listen</a>.</audio></p>
+
+    <p>Beats with discrete, sporadic notes (they don't create a continuous melody). When mixing harmonically, it is definitely safe to mix one track's hits with another track's hits. Moreover, it often sounds right to mix one track's hits with another track's drone or even riff.</p>
+
+
+    <h3><code>~</code> (tilde)</h3>
+
+    <p>Read: <strong>melody</strong>. <audio controls src="sounds/melody.mp3"><a href="sounds/melody.mp3">Listen</a>.</audio></p>
+
+    <p>No beats, only melody or nonrhythmic sounds. Might be difficult to beat-match.</p>
+
+
+    <h3><code>=</code> (equal sign)</h3>
+
+    <p>Read: <strong>drone</strong>. <audio controls src="sounds/drone.mp3"><a href="sounds/drone.mp3">Listen</a>.</audio></p>
+
+    <p>Beats and melodic/harmonic sounds (but not too melodic). Many techno tracks, for example, will consist mainly of this. When mixing harmonically, it's pretty safe to let two drones of the same key play at the same time. Often, it sounds great even if you mix a drone with a (harmonically matching) melody or riff.</p>
+
+
+    <h3><code>#</code> (hash)</h3>
+
+    <p>Read: <strong>riff</strong>. <audio controls src="sounds/riff.mp3"><a href="sounds/riff.mp3">Listen</a>.</audio></p>
+
+    <p>Denotes a sequence with tonal/harmonic shifts. Beats might or might not be present. Core of most melodic house and trance songs. Hard to mix, especially into another melody.</p>
+
+
+    <h3><code>(0:00)</code> (timecode in parenthesis)</h3>
+
+    <p>Read: the time in parenthesis.</p>
+
+    <p>Specifies the time at which the next event happens. It needn't be super accurate in most cases: dance music changes in bars so a DJ can guess the precise moment on their own.</p>
+
+    <p>Note that the timecode may be let out, but in many cases, it's very handy for planning ahead.</p>
+
+    <p>The preferred way is to record the remaining time (time to end of track) because most CDJs (and DJ software) show that by default. In that case, write the time with a minus sign, e.g. <code>(-1:30)</code>.</p>
+
+    <p>Note that CDJs (and software) do <em>not</em> modify the elapsed/remaining time according to time shift. So if your track breaks down at (-1:30), your CDJ will display "-1:30" at that moment even if you're playing the song at twice the speed (so the remaining time is, in fact, -0:45). In other words, no need to recalculate the timecodes in your head when mixing.</p>
+
+
+    <hr>
+
+    <p>The following notation marks are not essential. DJ Notation will be useful even if you only use the notation marks in the above section.</p>
+
+
+    <h3><code>!</code> (exclamation mark)</h3>
+
+    <p>Read: <strong>detuned</strong>. <audio controls src="sounds/detuned.mp3"><a href="sounds/detuned.mp3">Listen</a>.</audio></p>
+
+    <p>Detuned sounds or melody. Beware! Don't try to mix with anything else but beats unless you're sure what you're doing. This is a prefix. Put before other marks so it looks like this: <code>!~</code> (detuned melody).</p>
+
+
+    <h3><code>&lt;</code> (lower than)</h3>
+
+    <p>Read: <strong>faded in</strong>.</p>
+
+    <p>When used at the very beginning of the notation, this means that the track is slowly fading in. Pain to beat-match or mix. For example, <code>&lt;~</code> means that the track fades in from silence to a melody.</p>
+
+    <p>When used in the middle of the track, this signifies a slow transition from the preceding section to the following. So, <code>=&lt;#</code> means that a drone slowly transforms into a riff, and there is no single point of change.</p>
+
+    <p>This can also be used with a timecode. In this case, <code>&lt;(1:00)~</code> means that the melody attains full volume only after 1 minute. Similarly, <code>=(0:30)&lt;#</code> means that the drone starts fading into a riff at 0:30. You can even write something like <code>=(0:30)&lt;(1:00)#</code> (slow transition from drone to riff between 0:30 and 1:00).</p>
+
+
+    <h3><code>&gt;</code> (greater than)</h3>
+
+    <p>Read: <strong>faded out</strong>.</p>
+
+    <p>Same as <code>&lt;</code>, but reversed. At the end of track, this means it fades to silence.</p>
+
+    <p>Between other signs, the <code>&lt;</code> and the <code>&gt;</code> are interchangeable. Both mean 'slow transition'. In reality, you use <code>&lt;</code> when the track is getting louder/more elaborate and you use <code>&gt;</code> when it's getting quieter/simpler. Something like <code>=&lt;#</code> or <code>=&lt;-</code> just feels more natural than if the other character was used. But if in doubt, use whatever.</p>
+
+
+    <h3><code>/</code> (slash)</h3>
+
+    <p>Read: <strong>build up</strong>. <audio controls src="sounds/build-up.mp3"><a href="sounds/build-up.mp3">Listen</a>.</audio></p>
+
+    <p>Major build up. It's good to transition to a new track before it's first major build-up.</p>
+
+
+    <h3><code>\</code> (backslash)</h3>
+
+    <p>Read: <strong>break down</strong>. <audio controls src="sounds/break-down.mp3"><a href="sounds/break-down.mp3">Listen</a>.</audio></p>
+
+    <p>Major and/or final break down. It helps to know when this happens so you can mix in the next track's melody right after the current track's breakdown.</p>
+
+
+    <h2>Examples</h2>
+
+    <p>Here are some examples of the DJ notation in use. The great thing about the proposed DJ notation is that <strong>it's as granular as you make it</strong>. Some DJs only need to know how the track starts and ends, other ones need specific times.</p>
+
+    <h3><code>~#-</code></h3>
+
+    <p>A very basic DJ notation example. This track starts with a melodic sequence with no beats and ends with beats only. Conclusion: the track might be difficult to beat-match into, but on the other hand it will be easy to transition from this track to the next one. A good start of a set, maybe?</p>
+
+
+    <h3><code>+(-6:08)#(-2:57)~(-2:27)#&gt;(-0:15)-</code></h3>
+
+    <p>The other extreme: a very elaborate example of DJ notation. This track starts with hits (beats with discrete, sporadic notes). When the CDJ or DJ software shows -6:08 remaining, the riff comes on. (In most cases, you want to be full on with this track by now.) Between -2:57 and -2:27, there is a short sequence with no beats and only a melody. When this ends, we go back to the riff. Then, after an unspecified time, the riff starts fading out into beats only. By -0:15, only beats are playing.</p>
+
+    <p>You would read the example above out by saying: <em>"hits, six oh-eight riff, two fifty-seven melody, two twenty-seven riff, fade to oh fifteen beat"</em>.</p>
+
+
+    <h3><code>-#-</code></h3>
+
+    <p>This is the basic notation of a song which starts and ends with beats only. In other words: dj-friendly, easy to mix in and out. Most dance tracks actually look more like this: <code>-=#=-</code> but in most cases, when you know the song well, you won't need to be that elaborate.</p>
+
+
+    <h3><code>#</code></h3>
+
+    <p>The track starts away with beats and melody and ends the same way. Your best bet here is to mix into this track from beats only and also transition to a beats-only sequence.</p>
+
+
+    <h3><code>&lt;#&gt;</code></h3>
+
+    <p>This track is even more of a pain than the one above. It fades in with a melody, so you have to seek into the track to beat-match effectively. It also fades out, so you have to be very careful when transitioning to the next song.</p>
+
+
+    <h3><code>-</code></h3>
+
+    <p>A beats-only track, probably a dj tool. Simple to mix, but boring. Use to spice up a track or to transition to an "unmixable" song (like <code>#</code> above).</p>
+
+
+    <h3><code>!=#=-</code></h3>
+
+    <p>A detuned song. Normally, a drone (notation =) is pretty easy to mix into when you are harmonic mixing. Not in this case. "Detuned" generally means that you should avoid mixing this track into any other melody, drone or riff. Stay safe with beats-only.</p>
+
+
+    <h3><code>-(-5:48)#(-1:06)=-</code></h3>
+
+    <p>The track starts with beats-only (easy to mix). At -5:48 (time to end of track) the riff kicks in. The song plays until -1:06 when it breaks down to a drone and after that to beats-only. There may be any number of break downs and/or beats-only between -5:48 and -1:06. The DJ decided he doesn't need to know (he'll play the whole track).</p>
+
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h6>What exactly is the difference between <code>=</code> (drone) and <code>#</code> (riff)? Define!</h6>
+
+    <p>I can't. One definition of drone could be: it's pretty safe for harmonic mixing. Riff, on the other hand, can be tricky even when mixing tracks of the same key. It's difficult to explain, but when you practice a lot, you'll end up knowing what riff is.</p>
+
+    <h6>I think the notation is very fuzzy and ambiguous.</h6>
+
+    <p>It is. But there's a good reason. If DJ notation was software-engineer precise, it would take a lot of time and effort to learn. It just wouldn't be intuitive enough. Since the notation's main purpose is to record the tracks overall composition, it needs to be very simple. Btw, any effort to write music into notation is destined to be imprecise.</p>
+
+    <h6>What about harmonic mixing? Does DJ notation take it into account?</h6>
+
+    <p>Yes, DJ notation was developed with harmonic mixing in mind. See the harmonic mixing section for more info on how you can leverage both.</p>
+
+    <h6>Can I use DJ notation in my commercial product? Can I put it alongside the tracks in my music download service?</h6>
+
+    <p>Yep. I'd like that very much. The notation and this whole page is Creative Commons licensed: <a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>.</p>
+
+    <h6>Are there any other DJ notation systems?</h6>
+
+    <p>Yes, there are, but not the same kind as this one. You can find a lot of different <a href="http://remixmag.com/mag/remix_notes/">scratch and turntablist notations</a> around the internet. But as for writing down dance music composition, I haven't found anything similar. If you do know about something similar to this, do tell!</p>
+
+
+    <h2>Harmonic mixing and DJ notation</h2>
+
+    <p><em>"Harmonic Mixing is an advanced technique used by top DJs all over the world. By mixing tracks that are in the same or related keys, harmonic mixing enables long blends and mash-ups. The goal is to eliminate key clashes." &mdash; from harmonic-mixing.com</em></p>
+
+    <p>Harmonic mixing was a big deal when the DJ notation came out in 2008. Today (2020), it's table stakes. The great news is that DJ notation was developed with harmonic mixing in mind.</p>
+
+    <p>Without harmonic mixing, mosts sets look like this:</p>
+
+    <pre><code>
+~#=
+  -=--
+    -=#-
+    </code></pre>
+
+    <p>In other words, the DJ can only mix beats to beats, beats to drone or beats to riff. If he tried to mix drone to drone, for example, chances are the resulting sound... would suck. It would be disharmonious.</p>
+
+    <p>But when the DJ knows that the two tracks have the same key (= are compatible), he can mix drone to drone, melody to drone or even riff to riff.</p>
+
+    <p>DJ notation doesn't make harmonic mixing obsolete. Quite the contrary: it allows you to plan your harmonic mix ahead.</p>
+
+    <p>Look at this song listing to see how <strong>you can leverage both notations</strong> (<a href="http://www.harmonic-mixing.com/HowTo.aspx">Camelot wheel</a> and DJ notation, that is):</p>
+
+    <ul>
+        <li><code>9A   =#=    Sasha - Mongoose (Guy J Remix)</code></li>
+        <li><code>10A  =#-    Danny Tenaglia - The Space Dance</code></li>
+        <li><code>11A  -=#=-  Alex Gold - Energy Bomb (Xtravaganza Ibiza 2008</code></li>
+        <li><code>11A  -=#=>  David Murtagh - My Only Weakness (Jerome Isma-Ae remix)</code></li>
+        <li>etc.</li>
+    </ul>
+
+
+    <h2>Contact</h2>
+
+    <p>Question? Comments? Suggestions? Want to contribute? Contact me at <a href="http://www.philipage.com/">www.philipage.com</a>. (You can also download the resulting mixes there.)</p>
+
+
+
+</div>
+</body>
+</html>
