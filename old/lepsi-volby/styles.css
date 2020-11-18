@@ -1,0 +1,459 @@
+/* FROM SELFIMPROVING.DEV */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;900&display=swap");
+html {
+  line-height: 1.7;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  color: #1a1a1a;
+  background-color: #fdfdfd;
+}
+
+body {
+  margin: 0 auto;
+  margin-bottom: 5em;
+  max-width: 35em;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 0px;
+  padding-bottom: 50px;
+  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.9em;
+    padding: 1em;
+  }
+}
+@media print {
+  body {
+    background-color: transparent;
+    color: black;
+  }
+
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2, h3, h4 {
+    page-break-after: avoid;
+  }
+}
+p {
+  margin-top: 1.7em;
+}
+
+a {
+  color: #1a1a1a;
+}
+
+a:visited {
+  color: #1a1a1a;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.7em;
+}
+
+h1 {
+  margin-top: 1.7em;
+}
+
+ol, ul {
+  padding-left: 1.7em;
+  margin-top: 1.7em;
+}
+
+li > ol, li > ul {
+  margin-top: 0;
+}
+
+blockquote {
+  margin: 1.7em 0 1.7em 1.7em;
+  padding-left: 1em;
+  border-left: 2px solid #e6e6e6;
+  font-style: italic;
+}
+
+code {
+  font-family: Menlo, Monaco, "Lucida Console", Consolas, monospace;
+  background-color: #f0f0f0;
+  font-size: 85%;
+  margin: 0;
+  padding: 0.2em 0.4em;
+}
+
+pre {
+  line-height: 1.5em;
+  padding: 1em;
+  background-color: #f0f0f0;
+  overflow: auto;
+}
+
+pre code {
+  padding: 0;
+  overflow: visible;
+}
+
+hr {
+  background-color: #1a1a1a;
+  border: none;
+  height: 1px;
+  margin-top: 1.7em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+th, td {
+  border-bottom: 1px solid lightgray;
+  padding: 1em 3em 1em 0;
+}
+
+header {
+  margin-bottom: 6em;
+  text-align: center;
+}
+
+nav a:not(:hover) {
+  text-decoration: none;
+}
+
+code {
+  white-space: pre-wrap;
+}
+
+span.smallcaps {
+  font-variant: small-caps;
+}
+
+span.underline {
+  text-decoration: underline;
+}
+
+div.column {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+
+div.hanging-indent {
+  margin-left: 1.5em;
+  text-indent: -1.5em;
+}
+
+ul.task-list {
+  list-style: none;
+}
+
+pre > code.sourceCode {
+  white-space: pre;
+  position: relative;
+}
+
+pre > code.sourceCode > span {
+  display: inline-block;
+  line-height: 1.25;
+}
+
+pre > code.sourceCode > span:empty {
+  height: 1.2em;
+}
+
+code.sourceCode > span {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+div.sourceCode {
+  margin: 1em 0;
+}
+
+pre.sourceCode {
+  margin: 0;
+}
+
+@media screen {
+  div.sourceCode {
+    overflow: auto;
+  }
+}
+@media print {
+  pre > code.sourceCode {
+    white-space: pre-wrap;
+  }
+
+  pre > code.sourceCode > span {
+    text-indent: -5em;
+    padding-left: 5em;
+  }
+}
+pre.numberSource code {
+  counter-reset: source-line 0;
+}
+
+pre.numberSource code > span {
+  position: relative;
+  left: -4em;
+  counter-increment: source-line;
+}
+
+pre.numberSource code > span > a:first-child::before {
+  content: counter(source-line);
+  position: relative;
+  left: -1em;
+  text-align: right;
+  vertical-align: baseline;
+  border: none;
+  display: inline-block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 4px;
+  width: 4em;
+  color: #aaaaaa;
+}
+
+pre.numberSource {
+  margin-left: 3em;
+  border-left: 1px solid #aaaaaa;
+  padding-left: 4px;
+}
+
+@media screen {
+  pre > code.sourceCode > span > a:first-child::before {
+    text-decoration: underline;
+  }
+}
+.display.math {
+  display: block;
+  text-align: center;
+  margin: 0.5rem auto;
+}
+
+.codehilite .k {
+  color: #007020;
+  font-weight: bold;
+}
+.codehilite .n {
+  color: #40a070;
+}
+.codehilite .s {
+  color: #4070a0;
+}
+.codehilite .e {
+  color: #bb6688;
+}
+.codehilite .c {
+  color: #60a0b0;
+  font-style: italic;
+}
+.codehilite .a {
+  color: #60a0b0;
+  font-weight: bold;
+  font-style: italic;
+}
+.codehilite .i {
+  color: #19177c;
+}
+.codehilite .t {
+  color: #902000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 900;
+}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  font-weight: 300;
+  margin-right: 1em;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 4em;
+  letter-spacing: -0.0415625em;
+  line-height: 1em;
+}
+
+#mc_embed_signup {
+  background-color: #eeeeee;
+  padding: 0.5rem 30% 2.5rem;
+  margin: 2em 0;
+  text-align: center;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+}
+#mc_embed_signup .form-explanation {
+  font-weight: 900;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+img, svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.page-top-nav {
+  text-align: left;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  margin-top: 2em;
+  margin-bottom: 5em;
+}
+.page-top-nav table {
+  display: table;
+}
+.page-top-nav table, .page-top-nav tr {
+  width: 100%;
+}
+.page-top-nav table, .page-top-nav tr, .page-top-nav td, .page-top-nav th {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.page-top-nav th a {
+  letter-spacing: -0.0415625em;
+  font-weight: 900;
+  text-decoration: none;
+  transition: background-color 500ms;
+}
+.page-top-nav th a:hover {
+  background: yellow;
+}
+.page-top-nav .page-top-nav-arrows {
+  cursor: default;
+  text-align: right;
+}
+.page-top-nav td {
+  font-size: small;
+}
+
+aside {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: smaller;
+  margin: 2em;
+  border: 1px dashed gray;
+  padding: 0 2em 1em;
+}
+aside strong {
+  font-weight: 900;
+}
+
+footer {
+  margin-top: 5em;
+}
+footer .tweet-this {
+  background-color: #eeeeee;
+  padding: 0.5rem 20% 0.5rem;
+  line-height: 1.2em;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+footer .tweet-this a {
+  text-decoration: none;
+  color: blue;
+}
+footer .imprint {
+  margin-top: 4em;
+  font-size: smaller;
+}
+
+.next {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: smaller;
+  text-decoration: none;
+}
+
+/* CUSTOM FOR FILIPH.NET/LEPSI-VOLBY */
+
+th {
+  font-weight: bold;
+  text-align: left;
+}
+
+tr.winner td {
+  font-weight: bold;
+}
+
+button {
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: crimson;
+  border: none;
+  padding: 1em 3em;
+
+  cursor: pointer;
+}
+
+button:active {
+  background-color: red;
+}
+
+button[disabled] {
+  background-color: #aaaaaa;
+  cursor: default;
+}
+
+.log {
+  height: 150px;
+  overflow-y: scroll;
+
+  font-size: 80%;
+  background-color: #eee;
+  padding: 1em 3em;
+}
+
+.log em {
+  font-style: normal;
+  /*font-size: 200%;*/
+}
+
+.progress-bar {
+  width: 250px;
+  height: 1.2em;
+  line-height: 1.2em;
+
+  position: relative;
+  display: block;
+}
+
+.progress-bar > span {
+  background-color: blue;
+  border-radius: 2px;
+
+  display: block;
+  text-indent: -9999px;
+
+  transition: width 200ms;
+}
+
+.signed {
+  text-align: right;
+  margin-bottom: 10em;
+}
