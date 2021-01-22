@@ -3,3 +3,6 @@ https://philipage\.bandcamp\.com/
 
 # YouTube regularly fails with "sorry".
 https://www\.youtube\.com/
+
+# Twitter started returning HTTP400 on every request as of January 2021.
+https://twitter\.com/
