@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Script Prompter</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico">
+  <script defer src="main.dart.js"></script>
+</head>
+
+<body>
+
+  <div id="matrioska">
+    <h1>Script Prompter</h1>
+
+    <p>Takes a video script (or other prose) and extracts the first few words of each sentence.</p>
+
+    <div id="input">
+      <label>
+        <h2>Script</h2>
+        <textarea id="script" rows="10" cols="80"></textarea>
+      </label>
+      <br/>
+      <button id="submit">Convert</button>
+    </div>
+
+    <div id="output">
+      <label>
+        <h2>Prompts</h2>
+        <textarea id="shortened" rows="10" cols="80" disabled>Output will appear here.</textarea>
+      </label>
+    </div>
+
+  </div>
+
+</body>
+</html>
