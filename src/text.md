@@ -15,8 +15,9 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Projects
 
-* [egamebook.com](http://egamebook.com/) open-world book framework
-* [Insignificant Little Vermin](http://egamebook.com/vermin) sword & sorcery adventure
+* [Knights of San Francisco](https://egamebook.com/knights) iOS/Android game
+* [egamebook.com](https://egamebook.com/) open-world book framework
+* [Insignificant Little Vermin](https://egamebook.com/vermin) sword & sorcery adventure
 * [Unsure Calculator](https://filiph.github.io/unsure/) tool and notation
 * [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
 * [@year_progress](https://twitter.com/year_progress) twitter bot
