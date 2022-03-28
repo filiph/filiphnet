@@ -9,9 +9,9 @@
 
 Hi, I’m Filip. I’m a pro&shy;gram&shy;ming buff with formal train&shy;ing
 in jour&shy;nal&shy;ism. 
-I&nbsp;work in Sili&shy;con Valley. 
-In&nbsp;my spare time, I’m&nbsp;build&shy;ing a pro&shy;ce&shy;du&shy;ral,
-AI-driven book, and create silly soft&shy;ware experiments.
+I&nbsp;worked in Sili&shy;con Valley, now I’m based in Prague. 
+I&nbsp;build games, teach pro&shy;gram&shy;ming, explain things, 
+and create silly soft&shy;ware experiments.
 
 ## Projects
 
@@ -21,9 +21,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [Unsure Calculator](https://filiph.github.io/unsure/) tool and notation
 * [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
 * [@year_progress](https://twitter.com/year_progress) twitter bot
-* [tmzns.com](http://www.tmzns.com/) timezones converter
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
-* [Alojz.cz](https://alojz.cz/) weather <abbr title="Natural Language Generation">NLG</abbr> system <span class="note"> (in Czech)</span>
 * [conference_darwin](https://github.com/filiph/conference_darwin) evolutionary algorithm for conference schedules
 
 ## Experiments
@@ -36,17 +34,19 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [Significant prime number finder](https://filiph.github.io/prime_finder/) web app
 * [Font with a story](http://egamebook.com/font/) experiment
 * [Genetically brewed neural network ship captains](http://filiph.net/spacepilot/) experiment
-* [djnotation.org](https://filiph.net/dj-notation/) proposal
+* [DJ notation](https://filiph.net/dj-notation/) proposal
 * [youtubeology.com](http://www.youtubeology.com/) research
+* [tmzns.com](http://www.tmzns.com/) timezones converter
+* [YouTube subtitles prettifier](https://filiph.github.io/youtube_subs/) web tool
+* [Script Prompter](https://filiph.net/prompter/) web tool
+* [Slot machine](https://filiph.net/slot/) experiment
+* [Lorem ipsumize](https://filiph.net/lorem/) web tool
+* [Calendar linker](https://filiph.net/gcal/) web tool for Google Calendar
+* [docsToBlogger](https://filiph.net/d2b/) web tool
+* [`mailto:` persistence](https://filiph.net/mailto/) proof-of-concept
+* [Alojz.cz](https://alojz.cz/) weather <abbr title="Natural Language Generation">NLG</abbr> system <span class="note"> (in Czech)</span>
 * [Stav mobilního webu](https://stav-mobilniho-webu.appspot.com/) research <span class="note"> (in Czech)</span>
 * [tisicknih.cz](http://tisicknih.cz/) book recommendation engine <span class="note"> (in Czech)</span>
-* [YouTube subtitles prettifier](https://filiph.github.io/youtube_subs/) tool
-* [Script Prompter](https://filiph.net/prompter/) tool
-* [Slot machine](https://filiph.net/slot/) experiment
-* [Lorem ipsumize](https://filiph.net/lorem/) tool
-* [Calendar linker](https://filiph.net/gcal/) tool for Google Calendar
-* [docsToBlogger](https://filiph.net/d2b/) tool
-* [`mailto:` persistence](https://filiph.net/mailto/) experiment
 * [Github](https://github.com/filiph) &mdash; all other projects
 
 <!--* [krestni-jmena.cz](http://krestni-jmena.cz/) database <span class="note"> (in Czech)</span>-->
@@ -61,6 +61,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Writing
 
+* [Self-Improving Developer](https://selfimproving.dev/) book
 * [Medium](https://medium.com/@filiph)
   * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
   * [Skyrim rendered in text](https://medium.com/@filiph/skyrim-rendered-in-text-1899548ab2c4)
@@ -74,6 +75,7 @@ AI-driven book, and create silly soft&shy;ware experiments.
 
 ## Public speaking
 
+* [YouTube channel](https://www.youtube.com/filiphracek)
 * [Candid DevRel: The Flutter Boring Show](https://devrel.net/developer-experience/the-flutter-boring-show-and-other-ways-we-make-ourselves-look-human) @ DevRelCon SF 2019
 * [Pragmatic State Management in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I) @ Google I/O 2019
 * [Announcing Flutter 1.0 demo](https://www.youtube.com/watch?v=kpcjBD1XDwU&t=389) @ Flutter Live 2018
