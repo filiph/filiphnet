@@ -36,10 +36,17 @@ AI-driven book, and create silly soft&shy;ware experiments.
 * [Significant prime number finder](https://filiph.github.io/prime_finder/) web app
 * [Font with a story](http://egamebook.com/font/) experiment
 * [Genetically brewed neural network ship captains](http://filiph.net/spacepilot/) experiment
-* [djnotation.org](http://www.djnotation.org/) proposal
+* [djnotation.org](https://filiph.net/dj-notation/) proposal
 * [youtubeology.com](http://www.youtubeology.com/) research
 * [Stav mobilního webu](https://stav-mobilniho-webu.appspot.com/) research <span class="note"> (in Czech)</span>
 * [tisicknih.cz](http://tisicknih.cz/) book recommendation engine <span class="note"> (in Czech)</span>
+* [YouTube subtitles prettifier](https://filiph.github.io/youtube_subs/) tool
+* [Script Prompter](https://filiph.net/prompter/) tool
+* [Slot machine](https://filiph.net/slot/) experiment
+* [Lorem ipsumize](https://filiph.net/lorem/) tool
+* [Calendar linker](https://filiph.net/gcal/) tool for Google Calendar
+* [docsToBlogger](https://filiph.net/d2b/) tool
+* [`mailto:` persistence](https://filiph.net/mailto/) experiment
 * [Github](https://github.com/filiph) &mdash; all other projects
 
 <!--* [krestni-jmena.cz](http://krestni-jmena.cz/) database <span class="note"> (in Czech)</span>-->
