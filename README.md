@@ -11,3 +11,9 @@ $ make serve
 ```
 
 This will build the project and will serve it on localhost.
+
+To deploy:
+
+```
+$ make deploy
+```
