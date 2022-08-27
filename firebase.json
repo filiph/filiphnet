@@ -47,6 +47,14 @@
       "source": "/tztime",
       "destination": "http://www.tmzns.com/",
       "type": 301
+    }, {
+      "source": "/counter",
+      "destination": "https://dartpad.dev/?id=d33226a8ba7171dbc2095136b0644a84",
+      "type": 301
+    }, {
+      "source": "/await",
+      "destination": "https://eepurl.com/h9I8wD",
+      "type": 301
     } ]
   }
 }
