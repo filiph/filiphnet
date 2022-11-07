@@ -22,7 +22,7 @@
     "redirects": [ {
       "source": "/+",
       "destination": "https://plus.google.com/u/0/+filiphracek",
-      "type": 301
+      "type": 302
     }, {
       "source": "/avi",
       "destination": "https://www.youtube.com/user/filiphracek/videos",
@@ -54,7 +54,7 @@
     }, {
       "source": "/await",
       "destination": "https://eepurl.com/gzXeo1",
-      "type": 301
+      "type": 302
     } ]
   }
 }
