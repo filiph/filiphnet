@@ -54,6 +54,8 @@ and create silly soft&shy;ware experiments.
 
 ## Social
 
+* [Filip’s newsletter](https://egamebook.us3.list-manage.com/subscribe?u=e232ffe7d6d21c3e969a1e651&id=69ea4d7259)
+* [Raindead Games](https://discord.gg/J8mE7uqJAs) Discord server
 * <a rel="me" href="https://mastodon.social/@filiph">Mastodon</a>
 * [Twitter](https://twitter.com/filiphracek)
 * [Github](https://github.com/filiph)
@@ -63,7 +65,7 @@ and create silly soft&shy;ware experiments.
 
 ## Writing
 
-* [Filip’s newsletter](https://egamebook.us3.list-manage.com/subscribe?u=e232ffe7d6d21c3e969a1e651&id=69ea4d7259)
+* Filip’s newsletter (see above)
 * [Self-Improving Developer](https://selfimproving.dev/) book
 * [Medium](https://medium.com/@filiph)
   * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
