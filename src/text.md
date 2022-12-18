@@ -20,6 +20,7 @@ and create silly soft&shy;ware experiments.
 * [Insignificant Little Vermin](https://egamebook.com/vermin) sword & sorcery adventure
 * [Unsure Calculator](https://filiph.github.io/unsure/) tool and notation
 * [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
+* [@year_progress](https://techhub.social/@year_progress) mastodon bot
 * [@year_progress](https://twitter.com/year_progress) twitter bot
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
 * [conference_darwin](https://github.com/filiph/conference_darwin) evolutionary algorithm for conference schedules
@@ -53,6 +54,7 @@ and create silly soft&shy;ware experiments.
 
 ## Social
 
+* <a rel="me" href="https://mastodon.social/@filiph">Mastodon</a>
 * [Twitter](https://twitter.com/filiphracek)
 * [Github](https://github.com/filiph)
 * [LinkedIn](https://www.linkedin.com/in/visible)
@@ -61,6 +63,7 @@ and create silly soft&shy;ware experiments.
 
 ## Writing
 
+* [Filip’s newsletter](https://egamebook.us3.list-manage.com/subscribe?u=e232ffe7d6d21c3e969a1e651&id=69ea4d7259)
 * [Self-Improving Developer](https://selfimproving.dev/) book
 * [Medium](https://medium.com/@filiph)
   * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
