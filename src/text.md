@@ -101,7 +101,7 @@ and create silly soft&shy;ware experiments.
 
 ## About this page
 
-This page consist of only two resources: the HTML and the picture.
+This page consists of only two resources: the HTML and the picture.
 The ‘appearing’ effect is achieved using the CSS `keyframes` feature, and it is
 orchestrated by a compile-time Dart script accessible 
 [here](https://github.com/filiph/filiphnet/blob/master/tool/spanify.dart).
