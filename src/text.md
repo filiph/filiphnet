@@ -96,7 +96,7 @@ and create silly soft&shy;ware experiments.
   
 ## Music
 
-* [Philip Age](http://www.philipage.com/news/) DJ sets
+* [Philip Age](https://filiph.net/philipage.com/) DJ sets
 * [Philip Age](https://philipage.bandcamp.com/) tracks
 
 ## About this page

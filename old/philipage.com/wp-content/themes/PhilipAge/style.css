@@ -1,0 +1,345 @@
+/*  
+CSS: Philip Age
+Description: Tema je vytvoreno pro web www.philipage.com
+Author: Michal Kuranda
+Author URI: http://www.kuranda.cz/
+*/
+
+/* kontrastní : a71c20; tmavá: 231f20
+
+f: blue: 2380ff
+*/
+
+.neviditelne {
+	display: none; clear: both;
+}
+.clearing {
+	clear: both;
+}
+.tisk{display:none;}
+/*  Pozicování */
+.centrovani,.center {
+	text-align: center;
+}
+.right {
+	float: right;
+}
+.left{
+	float: left;
+}
+/* // Pozicování */
+body{
+	margin: 0;	padding: 0;
+	background: white; /*url(images/body.gif) repeat-x center top;*/
+	text-align: center; color: #333;
+	font-size: 1em;	font-family: Calibri, Verdana, Helvetica, Geneva, Arial, sans-serif;
+	line-height: 1.4em;
+}
+h1,h2,h3,h4,h5{
+	margin: 2px 0;	padding: 2px 0;
+	font-family: Calibri, Verdana, Helvetica, Geneva, Arial, sans-serif;
+}
+h2, h2 a{
+	margin-bottom: 24px;
+  color: #999; 
+  text-decoration: none;
+	font-size: 1.2em;
+	line-height: 1em;
+	font-weight: normal;
+	letter-spacing: -1px;
+}
+h3, h3 a{
+	color: #999;
+}
+h4, h4 a, h5, h5 a{
+  color: #333;
+}
+a{
+	text-decoration: underline;
+	cursor: hand;
+}
+a:hover{
+	text-decoration: none;
+}
+/*převzané*/
+p {
+  margin: 0 0 20px 0;
+}
+ul, ol{
+	margin-left: 40px;
+}
+li{
+  margin-left: 0;
+} 
+del {
+	text-decoration: line-through;
+}
+ins {
+	text-decoration: none;
+}
+
+/* // převzané*/
+/*Layout*/
+#page{
+	margin: 0 auto;
+	width: 1000px;
+}
+#page #header {
+	position: relative;
+	width: 1000px;	height: 150px;
+	background: white url(images/philip-age-homepage.png) no-repeat center;
+	overflow: hidden;
+}
+
+#page #header span{
+	position: absolute; top:0; left:0;
+	width: 1000px;	height: 150px;
+	background: url(images/philip-age-homepage.png) no-repeat center;
+}
+#page #wrap{
+	width: 1000px; padding-top: 20px;
+}
+#page #wrap .wrap_matrjoska{
+	margin: 0px;
+	width: 1000px; 
+}
+#page #wrap #wrapmenu{
+	float: left;
+	margin: 0;	padding: 0;
+	width: 250px;
+}
+#page #wrap menu{
+	margin: 0;	padding: 0;
+	margin-bottom: 30px ;
+	width: 250px;
+	font-size: 100%;
+	font-family: Calibri, Verdana, Helvetica, Geneva, Arial, sans-serif;
+}
+#page #wrap menu li{
+	margin:0; padding: 0;
+	text-align: right;
+	height: 30px;
+	line-height: 30px;
+	list-style: none;
+}
+#page #wrap menu li a{
+  margin:0; padding: 0 4px;
+	padding-right: 16px;
+	display: block;
+	width: 230px; /*250px - 20px v paddingu*/ height: 30px;
+	background: white;
+	font-size: 1.1em;
+	color: #666;
+	text-decoration: none;
+	font-weight: normal;
+	letter-spacing: -1px;
+}
+#page #wrap menu li a:hover{
+	background-color:#eee;
+	color: red;
+}
+
+/* Widgets */
+ul.widget_posledni_prispevky {
+	margin: 0;	padding: 0;
+	width: 250px;
+	text-align: right;
+  /*border-top: 1px solid #EBEBEB;*/
+}
+ul.widget_posledni_prispevky li{
+  margin: 0; padding: 0 2px 0 0;
+	list-style: none;
+}
+ul.widget_posledni_prispevky li.nadpis{
+   padding: 0 4px;
+	padding-right: 16px;
+   background-color: #F5F5F5;
+	font-size: 0.9em;
+}
+ul.widget_posledni_prispevky li .widget_datum{
+	padding-right: 16px;
+  float: right; width: 60px; /*55px*/
+	font-size: 0.9em;
+	color: #666;
+	line-height: 1em;
+	margin-top: 6px;
+}
+ul.widget_posledni_prispevky li .widget_nadpis{
+  float: left; width: 170px;
+	font-size: 0.9em;
+	line-height: 1em;
+	margin-top: 6px;
+}
+ul.widget_posledni_prispevky li .widget_nadpis a {
+  text-decoration: none;
+	color: #666;
+}
+ul.widget_posledni_prispevky li .widget_nadpis a:hover {
+  text-decoration: underline;
+	color: red;
+}
+/*//  Widgets */
+
+/* Twitter widget*/
+#twtr-widget-1 {
+	clear: right;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+#twtr-widget-1 div.twtr-doc {
+	margin-right: 20px;
+	margin-left: auto;
+}
+	
+
+#page #wrap #content{
+	float: right;
+	margin: 0;	padding: 0;
+	width: 748px;
+	text-align: left;
+	border-left: 2px solid #EBEBEB;
+}
+
+#page #wrap #content .content_matrjoska{
+	margin: 0 20px;
+}
+#page #footer{
+	float: right;
+  width: 748px; 
+	text-align: left;
+}
+#page #footer #copyright,#page #footer #link{
+	height: 40px;
+	line-height: 40px;
+}
+#page #footer #copyright{float: left;  width: 450px;}
+#page #footer #link{float: right;  width: 250px; text-align: right;}
+#page #footer .footer_matrjoska
+{
+	margin: 0 20px;
+}
+/* // Layout*/
+
+/* Posts */
+
+.alignright {
+	float: right;
+	clear: both;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.post {
+	margin-bottom: 50px;
+	
+}
+
+.postmetadata{
+  padding: 5px 0; margin: 0 0;
+	margin-top: 50px;
+  /*background-color: #F5F5F5;*/
+  border-bottom: 1px solid #EBEBEB;
+  font-size: 0.9em;
+  color: #666; 
+}
+
+.post .postmetadata {
+	border-top: none;
+}
+
+.postmetadata2{
+	font-size: 0.9em;
+  color: #666; 
+}
+.postmetadata a, .postmetadata2 a {
+  color: #666;
+}
+/* // Posts*/
+/* Comments */
+
+h3#comments, h3#respond {
+	margin-top: 50px;
+	font-weight: normal;
+}
+
+.commentlist{
+	margin-top: 20px;
+}
+.commentlist .comment{
+  margin: 0 0 10px 0;
+}
+.commentlist .commentheader{
+  padding: 2px 4px;
+  background-color: #F5F5F5;
+  border-left: 1px solid #EBEBEB;
+  border-right: 1px solid #EBEBEB;
+  border-top: 1px solid #EBEBEB;
+  font-size: 75%;
+  color: #333; /* jako na celé body*/
+}
+.commentlist .commentheader .autor{
+  float: left;
+  margin-left: 5px;
+  font-weight: bold; font-size: 120%; 
+}
+.commentlist .commentheader .id{
+  float: left;
+}
+.commentlist .commentheader .id a{
+  text-decoration: none;
+}
+.commentlist .commentheader .id a:hover{
+  text-decoration: underline;
+}
+.commentlist .commentheader .date{
+  float: right;
+}
+.commentlist .commatrjoska{
+  padding: 3px 6px; margin: 0;
+  border: 1px solid #EBEBEB;
+}
+.commentlist .commatrjoska p{
+  margin: 5px 0 5px 0; padding: 0;
+}
+.commentlist .odsouhlaseni{
+  width: 100%; display: block;
+  text-align: right;
+  color: red; font-size: 75%;
+}
+.commentlist .commentmedata{
+  padding: 2px 4px;
+  /*background-color: #F5F5F5;*/
+  border-left: 1px solid #EBEBEB;
+  border-right: 1px solid #EBEBEB;
+  border-bottom: 1px solid #EBEBEB;
+  font-size: 75%;
+  color: #333; /* jako na celé body*/
+}
+.commentlist hr{
+  display: none;
+  /*border: 1px solid #EBEBEB;
+  background-color: #EBEBEB;*/
+}
+/* // Comments */
+/* Comments Form */
+  form.commentform{
+  width: 80%; display: block; 
+  /*border: 1px solid #EBEBEB;*/
+  text-align: left;
+  
+  }
+  form.commentform fieldset{
+  width: 100%; display: block;
+  margin: 0; padding:0;
+  border: none; 
+  }
+  form.commentform fieldset div{
+  margin: 0 0 2px 0;
+  }
+  
+  form.commentform fieldset textarea{
+  width: 99%;
+  }
+
+/* // Comments Form */
