@@ -15,6 +15,7 @@ and create silly soft&shy;ware experiments.
 
 ## Projects
 
+* [Giant Robot Game](https://giantrobotgame.com/) PC game in development
 * [Knights of San Francisco](https://egamebook.com/knights) iOS/Android game
 * [egamebook.com](https://egamebook.com/) open-world book framework
 * [Insignificant Little Vermin](https://egamebook.com/vermin) sword & sorcery adventure
@@ -81,6 +82,8 @@ and create silly soft&shy;ware experiments.
 ## Public speaking
 
 * [YouTube channel](https://www.youtube.com/filiphracek)
+* [Secrets to Effortless Code Editing in Android Studio](https://www.udemy.com/course/effortless-android-studio/?referralCode=2CCB5A67D39B74E3058D) Udemy course
+* [Quick Start to Game Development in Flutter](https://www.youtube.com/watch?v=yTMzEFv3mBI) @ Flutter Vikings 2022
 * [Candid DevRel: The Flutter Boring Show](https://devrel.net/developer-experience/the-flutter-boring-show-and-other-ways-we-make-ourselves-look-human) @ DevRelCon SF 2019
 * [Pragmatic State Management in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I) @ Google I/O 2019
 * [Announcing Flutter 1.0 demo](https://www.youtube.com/watch?v=kpcjBD1XDwU&t=389) @ Flutter Live 2018
