@@ -30,14 +30,14 @@ and create silly soft&shy;ware experiments.
 
 * [Automatic Donald Trump](https://filiph.github.io/markov/) Markov chain
 * [Life-time value](https://github.com/filiph/life-time-value-calc) calculator
-* [Fuzzy logic for web analytics](http://filiph.net/fuzzy/) proof-of-concept
-* [A.I. eshop cart](http://filiph.net/eshop-ai/) proof-of-concept
+* [Fuzzy logic for web analytics](https://filiph.net/fuzzy/) proof-of-concept
+* [A.I. eshop cart](https://filiph.net/eshop-ai/) proof-of-concept
 * [Startup namer](https://filiph.github.io/startup_namer/) web app
 * [Significant prime number finder](https://filiph.github.io/prime_finder/) web app
-* [Font with a story](http://egamebook.com/font/) experiment
-* [Genetically brewed neural network ship captains](http://filiph.net/spacepilot/) experiment
+* [Font with a story](https://egamebook.com/font/) experiment
+* [Genetically brewed neural network ship captains](https://filiph.net/spacepilot/) experiment
 * [DJ notation](https://filiph.net/dj-notation/) proposal
-* [youtubeology.com](http://www.youtubeology.com/) research
+* [youtubeology.com](https://www.youtubeology.com/) research
 * [tmzns.com](http://www.tmzns.com/) timezones converter
 * [YouTube subtitles prettifier](https://filiph.github.io/youtube_subs/) web tool
 * [Script Prompter](https://filiph.net/prompter/) web tool
@@ -51,7 +51,7 @@ and create silly soft&shy;ware experiments.
 * [tisicknih.cz](http://tisicknih.cz/) book recommendation engine <span class="note"> (in Czech)</span>
 * [Github](https://github.com/filiph) &mdash; all other projects
 
-<!--* [krestni-jmena.cz](http://krestni-jmena.cz/) database <span class="note"> (in Czech)</span>-->
+<!--* [krestni-jmena.cz](https://krestni-jmena.cz/) database <span class="note"> (in Czech)</span>-->
 
 ## Social
 
@@ -75,8 +75,8 @@ and create silly soft&shy;ware experiments.
   * [The ‘Hello Word’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
   * [Why I’m joining the Dart team, of all places](https://medium.com/dartlang/why-i-m-joining-the-dart-team-of-all-places-d0b9f83a3b66)
   * [What kills toddlers in the U.S. [scatter plot]](https://medium.com/@filiph/what-kills-toddlers-in-the-u-s-scatter-plot-90d2327ce3c2)
-* [Runtime.cz](http://www.runtime.cz/) blog <span class="note"> (in Czech)</span>
-* [Vasil.cz](http://www.vasil.cz/) collaborative blog <span class="note"> (in Czech)</span>
+* [Runtime.cz](https://www.runtime.cz/) blog <span class="note"> (in Czech)</span>
+* [Vasil.cz](https://www.vasil.cz/) collaborative blog <span class="note"> (in Czech)</span>
 * [Centrum zábavy](https://books.google.com/books/about/Centrum_z%C3%A1bavy.html?id=CVbsBQAAQBAJ) free ebook <span class="note"> (in Czech)</span>
 
 ## Public speaking
@@ -88,7 +88,7 @@ and create silly soft&shy;ware experiments.
 * [Pragmatic State Management in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I) @ Google I/O 2019
 * [Announcing Flutter 1.0 demo](https://www.youtube.com/watch?v=kpcjBD1XDwU&t=389) @ Flutter Live 2018
 * [Build reactive mobile apps with Flutter](https://www.youtube.com/watch?v=RS36gBEp8OI) @ Google I/O 2018
-* [Nové technologie mobilního webu](http://www.ceskatelevize.cz/ivysilani/10000000212-webexpo-2015/215254000470012-nove-technologie-mobilniho-webu-rychly-prehled/dalsi-casti/3) @ WebExpo 2015 <span class="note"> (in Czech)</span>
+* [Nové technologie mobilního webu](https://www.ceskatelevize.cz/ivysilani/10000000212-webexpo-2015/215254000470012-nove-technologie-mobilniho-webu-rychly-prehled/dalsi-casti/3) @ WebExpo 2015 <span class="note"> (in Czech)</span>
 * [Přednáška o mobilech](https://www.youtube.com/watch?v=3QROfDsuepo) @ mDevCamp 2015 <span class="note"> (in Czech)</span>
 * [TL;DR přehled statistik](https://www.youtube.com/watch?v=-X1W4e9gZZQ) @ mDevCamp 2014 <span class="note"> (in Czech)</span>
 * [Tipy a triky pro profesionální uživatele](https://www.youtube.com/watch?v=fXkwBBvDChk) @ mDevCamp 2014 <span class="note"> (in Czech)</span>
