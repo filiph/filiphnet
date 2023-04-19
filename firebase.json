@@ -55,6 +55,10 @@
       "source": "/await",
       "destination": "https://eepurl.com/gzXeo1",
       "type": 302
+    }, {
+      "source": "/webexpo",
+      "destination": "/webexpo2023",
+      "type": 301
     } ]
   }
 }
