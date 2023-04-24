@@ -15,9 +15,9 @@ and create silly soft&shy;ware experiments.
 
 ## Projects
 
-* [Giant Robot Game](https://giantrobotgame.com/) PC game in development
+* [Giant Robot Game](https://giantrobotgame.com/) in development
 * [Knights of San Francisco](https://egamebook.com/knights) iOS/Android game
-* [egamebook.com](https://egamebook.com/) open-world book framework
+* [egamebook.com](https://egamebook.com/) text game framework
 * [Insignificant Little Vermin](https://egamebook.com/vermin) sword & sorcery adventure
 * [Unsure Calculator](https://filiph.github.io/unsure/) tool and notation
 * [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
@@ -82,6 +82,7 @@ and create silly soft&shy;ware experiments.
 ## Public speaking
 
 * [YouTube channel](https://www.youtube.com/filiphracek)
+* [Futuristic UI](https://slideslive.com/39000557/futuristic-ui-how-to-make-users-feel-like-they-re-in-a-scifi-movie?ref=folder-117551) @ WebExpo 2023
 * [Secrets to Effortless Code Editing in Android Studio](https://www.udemy.com/course/effortless-android-studio/?referralCode=2CCB5A67D39B74E3058D) Udemy course
 * [Quick Start to Game Development in Flutter](https://www.youtube.com/watch?v=yTMzEFv3mBI) @ Flutter Vikings 2022
 * [Candid DevRel: The Flutter Boring Show](https://devrel.net/developer-experience/the-flutter-boring-show-and-other-ways-we-make-ourselves-look-human) @ DevRelCon SF 2019
