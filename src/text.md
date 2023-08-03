@@ -72,7 +72,7 @@ and create silly soft&shy;ware experiments.
   * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
   * [Skyrim rendered in text](https://medium.com/@filiph/skyrim-rendered-in-text-1899548ab2c4)
   * [How Google builds web frameworks](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea)
-  * [The ‘Hello Word’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
+  * [The ‘Hello World’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
   * [Why I’m joining the Dart team, of all places](https://medium.com/dartlang/why-i-m-joining-the-dart-team-of-all-places-d0b9f83a3b66)
   * [What kills toddlers in the U.S. [scatter plot]](https://medium.com/@filiph/what-kills-toddlers-in-the-u-s-scatter-plot-90d2327ce3c2)
 * [Runtime.cz](https://www.runtime.cz/) blog <span class="note"> (in Czech)</span>
