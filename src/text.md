@@ -15,7 +15,7 @@ and create silly soft&shy;ware experiments.
 
 ## Projects
 
-* [Giant Robot Game](https://giantrobotgame.com/) in development
+* [Giant Robot Game](https://store.steampowered.com/app/2538440/GIANT_ROBOT_GAME/) in development
 * [Knights of San Francisco](https://egamebook.com/knights) iOS/Android game
 * [egamebook.com](https://egamebook.com/) text game framework
 * [Insignificant Little Vermin](https://egamebook.com/vermin) sword & sorcery adventure
