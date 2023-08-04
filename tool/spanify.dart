@@ -93,7 +93,7 @@ String _buildKeyframes(int i) {
 /// Recursively walk the tree and wrap `<span>` around each word. Assign
 /// a new class to each span.
 void _recursiveWalk(Element e) {
-  var nodes = List<Node>();
+  var nodes = <Node>[];
   for (var node in e.nodes) {
     if (node is Element) {
       _recursiveWalk(node);
@@ -128,7 +128,7 @@ void _recursiveWalk(Element e) {
 }
 
 Iterable<String> _splitByBoundary(String text) {
-  final result = text.split(_wordBoundary);
+  final result = List<String?>.from(text.split(_wordBoundary));
 
   for (int i = 0; i < result.length; i++) {
     var current = result[i];
@@ -137,12 +137,12 @@ Iterable<String> _splitByBoundary(String text) {
     for (int j = i + 1; j < result.length; j++) {
       final next = result[j];
       assert(next != null);
-      if (_startWithWhitespace.hasMatch(next)) break;
+      if (_startWithWhitespace.hasMatch(next!)) break;
       current = '$current$next';
       result[j] = null;
     }
     result[i] = current;
   }
 
-  return result.where((s) => s != null);
+  return result.whereType<String>();
 }
