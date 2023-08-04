@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:html/dom.dart';
 import 'package:path/path.dart' as path;
 import 'package:html/parser.dart';
 import 'package:markdown/markdown.dart' as md;
@@ -77,7 +78,7 @@ void main(List<String> args) {
     final blogUrl = Uri.parse('https://filiph.net/text/');
     var fullUrl = blogUrl.resolve(htmlFileName);
 
-    var title = path.basenameWithoutExtension(markdownPath);
+    var title = _smartyPants(path.basenameWithoutExtension(markdownPath));
 
     // Remove and parse front-matter.
     var yamlBuf = StringBuffer();
@@ -140,6 +141,11 @@ void main(List<String> args) {
       extensionSet: md.ExtensionSet.gitHubWeb,
     );
     var doc = parseFragment(htmlSource);
+
+    // Apply smartypants quotes.
+    for (final element in doc.children) {
+      _recursiveWalk(element);
+    }
 
     // Gather all images. Not just embeds, but also images referenced
     // by regular (non-Obsidian) markdown or HTML.
@@ -217,7 +223,7 @@ class ObsidianEmbed {
             "Unimplemented: dimensions of an obsidian embed");
 }
 
-String _sanitizeFilename(String input, {String replacement = '-'}) {
+String _sanitizeFilename(String input, {String replacement = ''}) {
   final result = input
       // illegalRe
       .replaceAll(
@@ -247,7 +253,7 @@ String _sanitizeFilename(String input, {String replacement = '-'}) {
       // windowsTrailingRe
       .replaceFirst(RegExp(r'[\. ]+$'), replacement)
       // Spaces
-      .replaceAll(' ', replacement)
+      .replaceAll(' ', '-')
       // Lowercase looks better
       .toLowerCase();
 
@@ -258,3 +264,68 @@ final RegExp _frontMatterLine = RegExp(r'^\s*-{3,}\s*$');
 
 /// Escaping text going into double-quoted HTML attribute values.
 final _attributeEscape = HtmlEscape(HtmlEscapeMode.attribute);
+
+/// Recursively walk the tree and fix quotes.
+void _recursiveWalk(Element e) {
+  for (var node in e.nodes) {
+    if (node is Element) {
+      _recursiveWalk(node);
+    } else if (node is Text) {
+      node.text = _smartyPants(node.text);
+    }
+  }
+}
+
+/// An extremely simplified algorithm for substituting `'` with `’`.
+String _smartyPants(String text) {
+  // List of common contractions
+  var contractions = [
+    "I'm",
+    "you're",
+    "it's",
+    "don't",
+    "can't",
+    "won't",
+    "isn't",
+    "aren't",
+    "he's",
+    "she's",
+    "they're",
+    "we're",
+    "wasn't",
+    "wouldn't",
+    "couldn't",
+    "shouldn't",
+    "doesn't",
+    "haven't",
+    "hasn't",
+    "hadn't"
+  ];
+
+  // Replace single quotes in common contractions
+  for (var contraction in contractions) {
+    var replacement = contraction.replaceAll("'", "’");
+    text = text.replaceAll(contraction, replacement);
+
+    var capitalized =
+        contraction.substring(0, 1).toUpperCase() + contraction.substring(1);
+    var replacementCapitalized = capitalized.replaceAll("'", "’");
+    text = text.replaceAll(capitalized, replacementCapitalized);
+  }
+
+  // Replace single quotes in simple possessives (ending with 's)
+  text = text.replaceAllMapped(_simplePossessive, (match) {
+    return '${match.group(1)}’s';
+  });
+
+  // Replace double quotes based on surrounding context
+  text = text.replaceAllMapped(_doubleQuotes, (match) {
+    return '“${match.group(1)}${match.group(2)}”';
+  });
+
+  return text;
+}
+
+final _simplePossessive = RegExp(r"(\w)'s\b");
+
+final _doubleQuotes = RegExp(r'"(\s?\w.*?)([!,.?;:]?\s?)"');
