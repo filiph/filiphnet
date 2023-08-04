@@ -100,6 +100,13 @@ void main(List<String> args) {
     var frontMatter = loadYaml(yamlBuf.toString());
     var description = frontMatter['description'] ?? '';
     var date = frontMatter['date'] ?? '';
+    var shouldPublish = frontMatter['publish'] == true;
+
+    if (!shouldPublish) {
+      print("Skipping '$title' "
+          "as its publish is set to '${frontMatter['publish']}'");
+      continue;
+    }
 
     var mdSource = mdBuf.toString();
 
@@ -152,10 +159,6 @@ void main(List<String> args) {
         final newPath = path.join(outputDirectoryPath, newSrcPath);
         File(newPath).writeAsBytesSync(imageContents.data);
       }
-    }
-
-    for (final image in images) {
-      print('${image.src} : ${image.data.length} bytes');
     }
 
     var html = doc.outerHtml;
