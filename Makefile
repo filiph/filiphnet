@@ -8,10 +8,11 @@ deploy: build
 	firebase deploy
 	@echo "Visit https://filiph.net"
 
-build: pub copy_old
+build: copy_web htmlgen copy_old
 
-pub: spanify
-	webdev build
+copy_web: spanify
+	mkdir -p build
+	cp -R ./web/* ./build
 
 copy_old:
 	cp -R ./old/* ./build
@@ -21,3 +22,6 @@ spanify:
 	  --html src/index.template.html \
 	  src/text.md \
 	  > web/index.html
+
+htmlgen:
+	dart --enable-asserts tool/htmlgen.dart
