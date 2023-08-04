@@ -68,6 +68,15 @@ void main(List<String> args) {
     var mdFile = File(markdownPath);
     var mdSourceFull = mdFile.readAsStringSync();
 
+    var filename =
+        _sanitizeFilename(path.basenameWithoutExtension(markdownPath));
+    var htmlFileName = path.setExtension(
+      filename,
+      '.html',
+    );
+    final blogUrl = Uri.parse('https://filiph.net/text/');
+    var fullUrl = blogUrl.resolve(htmlFileName);
+
     var title = path.basenameWithoutExtension(markdownPath);
 
     // Remove and parse front-matter.
@@ -168,16 +177,13 @@ void main(List<String> args) {
     var output = template
         .replaceFirst('<!-- GENERATED_HTML -->', html)
         .replaceFirst('<!-- GENERATED_FOOTER -->', footerHtml)
+        .replaceAll('GENERATED_URL', fullUrl.toString())
         .replaceAll('GENERATED_TITLE_ESCAPED', _attributeEscape.convert(title))
         .replaceAll('GENERATED_TITLE', title)
         .replaceAll('GENERATED_DESCRIPTION_ESCAPED',
             _attributeEscape.convert(description))
         .replaceAll('<!-- GENERATED_DATE -->', date);
 
-    var htmlFileName = path.setExtension(
-      _sanitizeFilename(path.basenameWithoutExtension(markdownPath)),
-      '.html',
-    );
     var htmlFilePath = path.join(outputDirectoryPath, htmlFileName);
     File(htmlFilePath).writeAsStringSync(output);
   }
