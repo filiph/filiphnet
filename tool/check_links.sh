@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Serve web on localhost.
-superstatic --port 4001 > /dev/null &
+superstatic --port 4001 . > /dev/null &
 FBS_PID=$!
 
 # Wait for superstatic to start.
