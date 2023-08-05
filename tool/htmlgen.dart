@@ -81,33 +81,14 @@ void main(List<String> args) {
     var title = _smartyPants(path.basenameWithoutExtension(markdownPath));
 
     // Remove and parse front-matter.
-    var yamlBuf = StringBuffer();
-    var mdBuf = StringBuffer();
-    var afterFrontMatter = false;
-    int lineNo = -1;
+    var (frontMatter: yaml, markdown: mdSource) = _readFile(mdSourceFull);
 
-    for (final line in LineSplitter.split(mdSourceFull)) {
-      lineNo++;
-      if (lineNo == 0) {
-        if (!_frontMatterLine.hasMatch(line)) {
-          throw FormatException(
-              "File doesn't start with front matter: $markdownPath");
-        }
-        continue;
-      }
-      if (_frontMatterLine.hasMatch(line) && !afterFrontMatter) {
-        // Reached end of front matter.
-        afterFrontMatter = true;
-        continue;
-      }
-      if (afterFrontMatter) {
-        mdBuf.writeln(line);
-      } else {
-        yamlBuf.writeln(line);
-      }
+    if (yaml == null) {
+      print("Skipping file with no front matter: $markdownPath.");
+      continue;
     }
 
-    var frontMatter = loadYaml(yamlBuf.toString());
+    var frontMatter = loadYaml(yaml);
     var description = frontMatter['description'] ?? '';
     var date = frontMatter['date'] ?? '';
     var shouldPublish = frontMatter['publish'] == true;
@@ -117,8 +98,6 @@ void main(List<String> args) {
           "as its publish is set to '${frontMatter['publish']}'");
       continue;
     }
-
-    var mdSource = mdBuf.toString();
 
     var obsidianEmbeds = <ObsidianEmbed>[];
     mdSource = mdSource.replaceAllMapped(ObsidianEmbed.regExp, (e) {
@@ -329,3 +308,37 @@ String _smartyPants(String text) {
 final _simplePossessive = RegExp(r"(\w)'s\b");
 
 final _doubleQuotes = RegExp(r'"(\s?\w.*?)([!,.?;:]?\s?)"');
+
+/// Splits file [content] into [frontMatter] and [markdown].
+({String? frontMatter, String markdown}) _readFile(String content) {
+  var yamlBuf = StringBuffer();
+  var mdBuf = StringBuffer();
+  var afterFrontMatter = false;
+  int lineNo = -1;
+
+  for (final line in LineSplitter.split(content)) {
+    lineNo++;
+    if (lineNo == 0) {
+      if (!_frontMatterLine.hasMatch(line)) {
+        // File doesn't start with front matter.
+        return (frontMatter: null, markdown: content);
+      }
+      continue;
+    }
+    if (_frontMatterLine.hasMatch(line) && !afterFrontMatter) {
+      // Reached end of front matter.
+      afterFrontMatter = true;
+      continue;
+    }
+    if (afterFrontMatter) {
+      mdBuf.writeln(line);
+    } else {
+      yamlBuf.writeln(line);
+    }
+  }
+
+  return (
+    frontMatter: yamlBuf.toString(),
+    markdown: mdBuf.toString(),
+  );
+}
