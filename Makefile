@@ -20,7 +20,7 @@ copy_old:
 spanify:
 	dart --enable-asserts tool/spanify.dart \
 	  --html src/index.template.html \
-	  src/text.md \
+	  src/index.md \
 	  > web/index.html
 
 htmlgen:
