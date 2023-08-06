@@ -81,7 +81,8 @@ void main(List<String> args) {
     var title = _smartyPants(path.basenameWithoutExtension(markdownPath));
 
     // Remove and parse front-matter.
-    var (frontMatter: yaml, markdown: mdSource) = _readFile(mdSourceFull);
+    var (frontMatter: yaml, markdown: mdSourceObsidian) =
+        _readFile(mdSourceFull);
 
     if (yaml == null) {
       print("Skipping file with no front matter: $filename.");
@@ -102,7 +103,11 @@ void main(List<String> args) {
     }
 
     var obsidianEmbeds = <ObsidianEmbed>[];
-    mdSource = mdSource.replaceAllMapped(ObsidianEmbed.regExp, (e) {
+    // Take the Markdown with Obsidian-specific notation
+    // (such as `![[image.png]]` for an embedded picture)
+    // and output a markdown that works everywhere.
+    final mdSourceGeneric =
+        mdSourceObsidian.replaceAllMapped(ObsidianEmbed.regExp, (e) {
       final fullMatch = e.group(0)!;
       final path = e.group(1)!;
       final dimensions = e.groupCount < 3
@@ -116,7 +121,7 @@ void main(List<String> args) {
     });
 
     var htmlSource = md.markdownToHtml(
-      mdSource,
+      mdSourceGeneric,
       // Use things like fenced code block.
       // See https://pub.dev/packages/markdown for details.
       extensionSet: md.ExtensionSet.gitHubWeb,
