@@ -1,6 +1,11 @@
 # This file configures the behavior of tool/htmlgen.dart.
 
+# Where to put the generated .html files.
 output_directory = 'build/text'
+
+# Where to put the copied images.
+#
+# This is a subdirectory of [output_directory] above.
 output_images_subdirectory = 'imgs'
 
 # Where to get *.md files from. This is probably an absolute path
