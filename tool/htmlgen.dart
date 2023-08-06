@@ -84,7 +84,7 @@ void main(List<String> args) {
     var (frontMatter: yaml, markdown: mdSource) = _readFile(mdSourceFull);
 
     if (yaml == null) {
-      print("Skipping file with no front matter: $markdownPath.");
+      print("Skipping file with no front matter: $filename.");
       continue;
     }
 
@@ -171,6 +171,8 @@ void main(List<String> args) {
 
     var htmlFilePath = path.join(outputDirectoryPath, htmlFileName);
     File(htmlFilePath).writeAsStringSync(output);
+
+    print('written $fullUrl');
   }
 }
 
