@@ -67,6 +67,7 @@ and create silly soft&shy;ware experiments.
 ## Writing
 
 * Filip’s newsletter (see above)
+* Articles here on [filiph.net/text](https://filiph.net/text/)
 * [Self-Improving Developer](https://selfimproving.dev/) book
 * [Medium](https://medium.com/@filiph)
   * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
