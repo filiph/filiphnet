@@ -4,7 +4,7 @@ clean:
 serve: build
 	superstatic .
 
-deploy: build
+deploy: clean build
 	firebase deploy
 	@echo "Visit https://filiph.net"
 
