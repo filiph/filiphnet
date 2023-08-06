@@ -91,6 +91,8 @@ void main(List<String> args) {
     var frontMatter = loadYaml(yaml);
     var description = frontMatter['description'] ?? '';
     var date = frontMatter['date'] ?? '';
+    var socialImage = frontMatter['social_image'] ??
+        'https://filiph.net/img/filiphnet-text.png';
     var shouldPublish = frontMatter['publish'] == true;
 
     if (!shouldPublish) {
@@ -162,11 +164,16 @@ void main(List<String> args) {
     var output = template
         .replaceFirst('<!-- GENERATED_HTML -->', html)
         .replaceFirst('<!-- GENERATED_FOOTER -->', footerHtml)
-        .replaceAll('GENERATED_URL', fullUrl.toString())
+        .replaceAll('GENERATED_URL_ESCAPED',
+            _attributeEscape.convert(fullUrl.toString()))
         .replaceAll('GENERATED_TITLE_ESCAPED', _attributeEscape.convert(title))
+        // Must be _after_ the *_ESCAPED version because otherwise
+        // we get things like "Videogames that teach you stuff_ESCAPED".
         .replaceAll('GENERATED_TITLE', title)
         .replaceAll('GENERATED_DESCRIPTION_ESCAPED',
             _attributeEscape.convert(description))
+        .replaceAll('GENERATED_SOCIAL_IMAGE_ESCAPED',
+            _attributeEscape.convert(socialImage))
         .replaceAll('<!-- GENERATED_DATE -->', date);
 
     var htmlFilePath = path.join(outputDirectoryPath, htmlFileName);
