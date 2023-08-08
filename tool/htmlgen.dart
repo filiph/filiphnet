@@ -248,6 +248,8 @@ String _sanitizeFilename(String input, {String replacement = ''}) {
       .replaceFirst(RegExp(r'[\. ]+$'), replacement)
       // Spaces
       .replaceAll(' ', '-')
+      // Replace many dashes in a row.
+      .replaceAll(_severalDashes, '-')
       // Lowercase looks better
       .toLowerCase();
 
@@ -255,6 +257,8 @@ String _sanitizeFilename(String input, {String replacement = ''}) {
 }
 
 final RegExp _frontMatterLine = RegExp(r'^\s*-{3,}\s*$');
+
+final RegExp _severalDashes = RegExp(r'\-{2,}');
 
 /// Escaping text going into double-quoted HTML attribute values.
 final _attributeEscape = HtmlEscape(HtmlEscapeMode.attribute);
