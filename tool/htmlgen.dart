@@ -78,8 +78,6 @@ void main(List<String> args) {
     final blogUrl = Uri.parse('https://filiph.net/text/');
     var fullUrl = blogUrl.resolve(htmlFileName);
 
-    var title = _smartyPants(path.basenameWithoutExtension(markdownPath));
-
     // Remove and parse front-matter.
     var (frontMatter: yaml, markdown: mdSourceObsidian) =
         _readFile(mdSourceFull);
@@ -90,6 +88,9 @@ void main(List<String> args) {
     }
 
     var frontMatter = loadYaml(yaml);
+    var title = _smartyPants(
+      frontMatter['title'] ?? path.basenameWithoutExtension(markdownPath),
+    );
     var description = frontMatter['description'] ?? '';
     var date = frontMatter['date'] ?? '';
     var socialImage = frontMatter['social_image'] ??
