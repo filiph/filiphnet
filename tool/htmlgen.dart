@@ -316,6 +316,11 @@ String _smartyPants(String text) {
     return '${match.group(1)}’s';
   });
 
+  // Replace single quotes in simple future tense (ending with 'll)
+  text = text.replaceAllMapped(_simpleFuture, (match) {
+    return '${match.group(1)}’ll';
+  });
+
   // Replace double quotes based on surrounding context
   text = text.replaceAllMapped(_doubleQuotes, (match) {
     return '“${match.group(1)}${match.group(2)}”';
@@ -325,6 +330,8 @@ String _smartyPants(String text) {
 }
 
 final _simplePossessive = RegExp(r"(\w)'s\b");
+
+final _simpleFuture = RegExp(r"(\w)'ll\b");
 
 final _doubleQuotes = RegExp(r'"(\s?\w.*?)([!,.?;:]?\s?)"');
 
