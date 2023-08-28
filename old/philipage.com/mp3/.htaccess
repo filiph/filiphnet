@@ -1,0 +1,11 @@
+#<Files *.mp3>
+#  ForceType application/octet-stream
+#  Header set Content-Disposition attachment
+#  Header set Content-Transfer-Encoding binary
+#</Files>
+
+<Files *.torrent>
+  ForceType application/octet-stream
+  Header set Content-Disposition attachment
+  Header set Content-Transfer-Encoding binary
+</Files>
