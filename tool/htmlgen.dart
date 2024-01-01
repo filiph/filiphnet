@@ -10,6 +10,8 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:toml/toml.dart';
 import 'package:yaml/yaml.dart';
 
+import 'src/atom_xml.dart';
+
 void main(List<String> args) {
   TomlDocument document;
   try {
@@ -235,6 +237,11 @@ void main(List<String> args) {
   articles.forEach((a) {
     print('${a.created} - ${a.title}');
   });
+
+  var atomXmlFilePath = path.join(outputDirectoryPath, 'atom.xml');
+  var atomXmlFile = File(atomXmlFilePath);
+  var atomContents = generateAtomXml(articles);
+  atomXmlFile.writeAsStringSync(atomContents);
 }
 
 class Article {
