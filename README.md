@@ -28,6 +28,7 @@ that looks something like this:
 ---
 description: The description of the article
 date: August 2023
+created: 2023-08-07T08:00:00.000Z
 publish: true
 ---
 
@@ -41,5 +42,3 @@ or by dragging them into the Obsidian window as an embed:
 
 That's all!
 ```
-
-
