@@ -25,3 +25,10 @@ page_template = 'src/text/page.template.html'
 # This is probably a bit of info about the author and possibly a 'what next'
 # message (such as "go wishlist my game on Steam").
 footer_markdown_path = 'src/text/page_footer.md'
+
+# All Markdown files that end up being published are copied
+# from [markdown_directory] into the following backup directory in this project.
+# That way, the website always has everything it needs to rebuild itself,
+# even if [markdown_directory] is inaccessible (Google Drive is down,
+# lost access somehow, running on a server, etc.).
+markdown_files_backup = 'src/text/pages'

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:html/dom.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:html/parser.dart';
 import 'package:markdown/markdown.dart' as md;
@@ -26,6 +27,7 @@ void main(List<String> args) {
   var markdownDirectoryPath = options['markdown_directory'] as String;
   var imagesDirectoryPath = options['images_directory'] as String;
   var footerMarkdownPath = options['footer_markdown_path'] as String;
+  var markdownFilesBackup = options['markdown_files_backup'] as String;
 
   var outputDirectoryPath = options['output_directory'] as String;
   var outputImagesSubdirectoryPath =
@@ -65,6 +67,8 @@ void main(List<String> args) {
       .where((element) => path.extension(element.path) == '.md')
       .toList(growable: false);
 
+  var articles = <Article>[];
+
   for (var markdownPath in markDownFiles.map((f) => f.path)) {
     var mdFile = File(markdownPath);
     var mdSourceFull = mdFile.readAsStringSync();
@@ -100,6 +104,25 @@ void main(List<String> args) {
     if (!shouldPublish) {
       print("Skipping '$title' "
           "as its publish is set to '${frontMatter['publish']}'");
+      continue;
+    }
+
+    var createdString = frontMatter['created'];
+    if (createdString == null) {
+      stderr.writeln("Article '$title' has no `created` despite being marked "
+          "for publishing.");
+      stderr.writeln("Add something like:\n"
+          "created: ${_isoDateFormat.format(DateTime.now().toUtc())}");
+      exitCode = 1;
+      continue;
+    }
+    DateTime created;
+    try {
+      created = DateTime.parse(createdString);
+    } on FormatException catch (e) {
+      stderr.writeln("Article '$title' has a `created` field that "
+          "doesn't parse: $e");
+      exitCode = 1;
       continue;
     }
 
@@ -186,7 +209,55 @@ void main(List<String> args) {
     File(htmlFilePath).writeAsStringSync(output);
 
     print('written $fullUrl');
+
+    // Make a backup of the markdown file.
+    var backupDirectory = Directory(markdownFilesBackup);
+    backupDirectory.createSync(recursive: true);
+
+    var backupFilePath =
+        path.join(markdownFilesBackup, path.basename(markdownPath));
+    mdFile.copySync(backupFilePath);
+
+    var article = Article(
+      url: fullUrl,
+      title: title,
+      description: description,
+      created: created,
+      socialImageUrl: socialImage,
+      humanDate: date,
+    );
+    articles.add(article);
   }
+
+  articles.sort((a, b) => -a.created.compareTo(b.created));
+
+  print('\nAll articles:');
+  articles.forEach((a) {
+    print('${a.created} - ${a.title}');
+  });
+}
+
+class Article {
+  final Uri url;
+
+  final String title;
+
+  final String description;
+
+  final String? socialImageUrl;
+
+  final DateTime created;
+
+  final String? humanDate;
+
+  const Article({
+    required this.url,
+    required this.title,
+    required this.description,
+    required this.created,
+    required this.socialImageUrl,
+    required this.humanDate,
+  });
 }
 
 class ImageContents {
@@ -256,6 +327,8 @@ String _sanitizeFilename(String input, {String replacement = ''}) {
   return result.length > 255 ? result.substring(0, 255) : result;
 }
 
+final DateFormat _isoDateFormat = DateFormat('yyyy-MM-ddTHH:mm:ss.mmm000Z');
+
 final RegExp _frontMatterLine = RegExp(r'^\s*-{3,}\s*$');
 
 final RegExp _severalDashes = RegExp(r'\-{2,}');
@@ -275,6 +348,7 @@ void _recursiveWalk(Element e) {
 }
 
 /// An extremely simplified algorithm for substituting `'` with `’`.
+/// TODO: use https://github.com/munificent/journal/blob/master/packages/typographic_markdown/lib/typographic_markdown.dart
 String _smartyPants(String text) {
   // List of common contractions
   var contractions = [

@@ -1,0 +1,21 @@
+---
+description: Filip’s articles published on this site.
+created: 2023-08-06T08:00:00.000Z
+publish: true
+---
+
+I've written a lot of articles over the years. Some of them are over at [selfimproving.dev](https://selfimproving.dev/), others [on Medium](https://medium.com/@filiph). Most of those are of a particular theme (software development and Flutter & Dart, respectively), and will stay where they are.
+
+But for a long time, I wanted a place of my own on which to publish my articles. Not really a "blog", as it's really just static pages generated from Markdown files. But something close to that.
+
+Articles:
+
+- [The engineering principles behind GIANT ROBOT GAME](https://filiph.net/text/the-engineering-principles-behind-giant-robot-game.html)  
+  How this weird game is being built.
+- [Memex is already here, it's just not evenly distributed](memex-is-already-here,-it's-just-not-evenly-distributed.html)  
+  How to keep an external brain using ideas from 1945 and technology from 2023.
+- [Videogames that teach you stuff](videogames-that-teach-you-stuff.html)  
+  Videogames like SimCity or Dwarf Fortress aren’t exactly “educational”, but they still teach you a lot.
+
+Hope you enjoy at least some of them.
+
