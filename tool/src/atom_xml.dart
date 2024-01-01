@@ -7,7 +7,7 @@ String generateAtomXml(List<Article> articles) {
   String buildEntry(Article article) {
     var content = """
     <p>${article.description}</p>
-    <p><strong><a href='${article.url}'>${article.url}</a></strong></p>
+    <p><strong><a href="${article.url}">${article.url}</a></strong></p>
     """;
 
     return '''
