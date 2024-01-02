@@ -111,5 +111,5 @@ The ‘appearing’ effect is achieved using the CSS `keyframes` feature, and it
 orchestrated by a compile-time Dart script accessible 
 [here](https://github.com/filiph/filiphnet/blob/master/tool/spanify.dart).
 
-You can [edit this page](https://github.com/filiph/filiphnet/edit/master/src/text.md)
+You can [edit this page](https://github.com/filiph/filiphnet/edit/master/src/index.md)
 on Github.
