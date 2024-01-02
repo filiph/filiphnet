@@ -20,7 +20,7 @@ and create silly soft&shy;ware experiments.
 * [egamebook.com](https://egamebook.com/) text game framework
 * [Insignificant Little Vermin](https://egamebook.com/vermin) sword & sorcery adventure
 * [Unsure Calculator](https://filiph.github.io/unsure/) tool and notation
-* [linkcheck](https://github.com/filiph/linkcheck/#linkcheck) link checker
+* [linkcheck](https://github.com/filiph/linkcheck) link checker
 * [@year_progress](https://techhub.social/@year_progress) mastodon bot
 * [@year_progress](https://twitter.com/year_progress) twitter bot
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
@@ -69,11 +69,11 @@ and create silly soft&shy;ware experiments.
 * Filip’s newsletter (see above)
 * Articles here on [filiph.net/text](https://filiph.net/text/) ([RSS](https://filiph.net/text/atom.xml))
 * [Self-Improving Developer](https://selfimproving.dev/) book
+  * [How Google builds web frameworks](https://selfimproving.dev/how-google-builds-web-frameworks.html)
+  * [The ‘Hello World’ fallacy](https://selfimproving.dev/the-hello-world-fallacy.html)
 * [Medium](https://medium.com/@filiph)
   * [Player agency in an open world, versus combinatorial explosion](https://medium.com/@filiph/player-agency-in-an-open-world-versus-combinatorial-explosion-5a6bcd7d0d38)
   * [Skyrim rendered in text](https://medium.com/@filiph/skyrim-rendered-in-text-1899548ab2c4)
-  * [How Google builds web frameworks](https://medium.freecodecamp.com/how-google-builds-a-web-framework-5eeddd691dea)
-  * [The ‘Hello World’ fallacy](https://medium.com/@filiph/the-hello-world-fallacy-ef4f43ca8b7e)
   * [Why I’m joining the Dart team, of all places](https://medium.com/dartlang/why-i-m-joining-the-dart-team-of-all-places-d0b9f83a3b66)
   * [What kills toddlers in the U.S. [scatter plot]](https://medium.com/@filiph/what-kills-toddlers-in-the-u-s-scatter-plot-90d2327ce3c2)
 * [Runtime.cz](https://www.runtime.cz/) blog <span class="note"> (in Czech)</span>

@@ -2,6 +2,7 @@
 title: "(Personally) sustainable social media"
 description: How does one use social media without falling into its traps?
 created: 2024-01-01T08:00:00.000Z
+date: January 2024
 social_image: https://filiph.net/text/imgs/sustainable-social-media-scatter-plot-public-topic%202.png
 publish: true
 ---
