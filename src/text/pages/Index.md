@@ -10,6 +10,10 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [We need technology that is less immersive, not more](https://filiph.net/text/we-need-technology-that-is-less-immersive,-not-more.html)  
+  How come so many of the most talented engineers of our time work on making our entertainment more immersive?
+- [(Personally) sustainable social media](https://filiph.net/text/(personally)-sustainable-social-media.html)  
+  How does one use social media without falling into its traps?
 - [The engineering principles behind GIANT ROBOT GAME](https://filiph.net/text/the-engineering-principles-behind-giant-robot-game.html)  
   How this weird game is being built.
 - [Memex is already here, it's just not evenly distributed](memex-is-already-here,-it's-just-not-evenly-distributed.html)  
