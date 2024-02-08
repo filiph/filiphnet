@@ -22,7 +22,6 @@ and create silly soft&shy;ware experiments.
 * [Unsure Calculator](https://filiph.github.io/unsure/) tool and notation
 * [linkcheck](https://github.com/filiph/linkcheck) link checker
 * [@year_progress](https://techhub.social/@year_progress) mastodon bot
-* [@year_progress](https://twitter.com/year_progress) twitter bot
 * [Star map 2D](https://starmap2d.appspot.com/) self-organizing map
 * [conference_darwin](https://github.com/filiph/conference_darwin) evolutionary algorithm for conference schedules
 
