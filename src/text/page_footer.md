@@ -4,4 +4,4 @@
 
 His main project these days is
 [GIANT ROBOT GAME](https://store.steampowered.com/app/2538440/GIANT_ROBOT_GAME/)
-(which you should wishlist right now).
+(Steam link).
