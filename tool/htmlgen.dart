@@ -162,9 +162,11 @@ void main(List<String> args) {
     // Gather all images. Not just embeds, but also images referenced
     // by regular (non-Obsidian) markdown or HTML.
     var images = <ImageContents>[];
-    var htmlImageElements = doc.querySelectorAll('img');
-    var htmlSourceElements = doc.querySelectorAll('source');
-    for (final image in htmlImageElements.followedBy(htmlSourceElements)) {
+    final srcElements = <Element>[
+      ...doc.querySelectorAll('img'),
+      ...doc.querySelectorAll('source'),
+    ];
+    for (final (index, image) in srcElements.indexed) {
       assert(image.localName == 'img' || image.localName == 'source');
       final src = image.attributes['src']!;
       final srcUri = Uri.parse(src);
@@ -186,6 +188,11 @@ void main(List<String> args) {
         // Copy the file.
         final newPath = path.join(outputDirectoryPath, newSrcPath);
         File(newPath).writeAsBytesSync(imageContents.data);
+      }
+
+      if (image.localName == 'img' && index > 0) {
+        // Apart from the first image, mark all as loading="lazy".
+        image.attributes['loading'] = 'lazy';
       }
     }
 
