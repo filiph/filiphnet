@@ -10,6 +10,10 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [Welcome to the superstar economy](https://filiph.net/text/welcome-to-the-superstar-economy.html)  
+  It’s when “relatively small numbers of people earn enormous amounts of money and seem to dominate the fields in which they engage” (Sherwin Rosen, 1981).
+- [Respectfully, socialism is a bad idea](https://filiph.net/text/respectfully,-socialism-is-a-bad-idea.html)  
+  I grew up in actual socialism, behind the Iron Curtain, and I find it a little bit worrying to see all these cool people promoting socialism these days.
 - [We need technology that is less immersive, not more](https://filiph.net/text/we-need-technology-that-is-less-immersive,-not-more.html)  
   How come so many of the most talented engineers of our time work on making our entertainment more immersive?
 - [(Personally) sustainable social media](https://filiph.net/text/(personally)-sustainable-social-media.html)  
