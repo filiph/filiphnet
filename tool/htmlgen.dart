@@ -3,10 +3,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:html/dom.dart';
-import 'package:intl/intl.dart';
-import 'package:path/path.dart' as path;
 import 'package:html/parser.dart';
+import 'package:intl/intl.dart';
 import 'package:markdown/markdown.dart' as md;
+import 'package:path/path.dart' as path;
 import 'package:toml/toml.dart';
 import 'package:yaml/yaml.dart';
 
@@ -163,8 +163,9 @@ void main(List<String> args) {
     // by regular (non-Obsidian) markdown or HTML.
     var images = <ImageContents>[];
     var htmlImageElements = doc.querySelectorAll('img');
-    for (final image in htmlImageElements) {
-      assert(image.localName == 'img');
+    var htmlSourceElements = doc.querySelectorAll('source');
+    for (final image in htmlImageElements.followedBy(htmlSourceElements)) {
+      assert(image.localName == 'img' || image.localName == 'source');
       final src = image.attributes['src']!;
       final srcUri = Uri.parse(src);
 
