@@ -10,6 +10,8 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [Benchmarking Flutter, Flame, Unity and Godot](https://filiph.net/text/benchmarking-flutter-flame-unity-godot.html)  
+  What happens when you decide to benchmark Flutter as if it was a 2D game development framework.
 - [Welcome to the superstar economy](https://filiph.net/text/welcome-to-the-superstar-economy.html)  
   It’s when “relatively small numbers of people earn enormous amounts of money and seem to dominate the fields in which they engage” (Sherwin Rosen, 1981).
 - [Respectfully, socialism is a bad idea](https://filiph.net/text/respectfully,-socialism-is-a-bad-idea.html)  

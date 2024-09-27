@@ -57,7 +57,7 @@ But is Flutter fast enough, and efficient enough, to let you build the game of y
 
 Games are different from apps. There's more computation going on in the average game than in the average app. Moreover, games cannot afford having static screens. To create visual interest, something is *always* moving on a game screen. What if this "permanent animation" requirement erases Flutter's optimization advantage. What if Flutter is actually a terribly ineffective technology for games?
 
-<video width="50%" autoplay loop>
+<video width="50%" playsinline autoplay muted loop>
 <source src="slay-the-spire-always-on-animation.mp4" type="video/webm" />
 Download the
 <a href="imgs/slay-the-spire-always-on-animation.mp4">WEBM</a>
@@ -192,9 +192,9 @@ The fact that Unity and Godot are much better at tracking many game entities at 
 
 Flutter's performance was a little strange. I got to 3600 entities without a dropped frame, but then I saw a few major frame drops so I kept coming down until the FPS stabilized again. This is how I got to the 400 number. I think it's safe to say that vanilla Flutter is not the best game engine for busy action games. For the avoidance of doubt, I'd also like to remind you that the Flutter version of *The Bench* is all built purely using widgets. So the wandering objects on the screen are literally widgets in a `Stack`, rebuilt every single frame.
 
-**UPDATE:** Jonah Williams from the Flutter team had a look at Flutter's performance on *The Bench* when I shared the preview of this article with the team. Read on to learn the details.
+> **UPDATE:** Jonah Williams from the Flutter team had a look at Flutter's performance on *The Bench* when I shared the preview of this article with the team. Read on to learn the details.
 
-> A sidenote about `SharedArrayBuffer`. Modern browsers have technologies that unlock multi-threading performance on the web. This comes at a price, though. For security reasons, any page that enables these multi-threading capabilities must, at the same time, disable some other capabilities, including pretty basic things such as embedding. Both Unity and Godot *require* `SharedArrayBuffer` to be enabled for their web exports to work at all. This means that Unity and Godot games cannot run on servers that don't have this special configuration. These incompatible servers include, well, most web servers on the internet. Many popular hosting platforms, such as GitHub Pages, don't even have the option to enable `SharedArrayBuffer`. Thankfully, Flutter (and therefore Flame) doesn't have this requirement. Flutter auto-detects whether it can use `SharedArrayBuffer`, and if so, it switches to multi-threaded mode. But it has no problem working in single-threaded mode on servers that don't support the feature. You can read more about this [here](https://github.com/flutter/flutter/issues/153760). In fact, I'm realizing (too late) that I neglected to enable `SharedArrayBuffer` for the localhost server when running the Flutter and Flame benchmarks. So we're comparing single-threaded Flutter with multi-threaded Unity and Godot, even though multi-threaded Flutter is very much possible. It's possible Flutter and Flame actually fare better on the web than what's presented here.
+A sidenote about `SharedArrayBuffer`. Modern browsers have technologies that unlock multi-threading performance on the web. This comes at a price, though. For security reasons, any page that enables these multi-threading capabilities must, at the same time, disable some other capabilities, including pretty basic things such as embedding. Both Unity and Godot *require* `SharedArrayBuffer` to be enabled for their web exports to work at all. This means that Unity and Godot games cannot run on servers that don't have this special configuration. These incompatible servers include, well, most web servers on the internet. Many popular hosting platforms, such as GitHub Pages, don't even have the option to enable `SharedArrayBuffer`. Thankfully, Flutter (and therefore Flame) doesn't have this requirement. Flutter auto-detects whether it can use `SharedArrayBuffer`, and if so, it switches to multi-threaded mode. But it has no problem working in single-threaded mode on servers that don't support the feature. You can read more about this [here](https://github.com/flutter/flutter/issues/153760). In fact, I'm realizing (too late) that I neglected to enable `SharedArrayBuffer` for the localhost server when running the Flutter and Flame benchmarks. So we're comparing single-threaded Flutter with multi-threaded Unity and Godot, even though multi-threaded Flutter is very much possible. It's possible Flutter and Flame actually fare better on the web than what's presented here.
 
 Here's the *Max entities* situation on iOS:
 
@@ -244,7 +244,7 @@ To give some context to the numbers, here are 5 second CPU cycle measurements fo
   * "Permission to debug com.apple.mobilegarageband was denied."
   * etc.
 
-**UPDATE:** Jonah Williams from the Flutter team had a look at Flutter's performance on *The Bench* when I shared the preview of this article with the team. Read on to learn the details.
+> **UPDATE:** Jonah Williams from the Flutter team had a look at Flutter's performance on *The Bench* when I shared the preview of this article with the team. Read on to learn the details.
 
 ## Memory usage
 
@@ -256,13 +256,13 @@ For this benchmark, I ran *The Bench* with 1000 entities for 60 seconds, and mea
 
 As you can see, the Flutter and Flame versions of *The Bench* consume a lot more memory on the web than the Unity and Godot versions. In fact, the allocated memory size rose even further after the 60 seconds. It's not a memory leak — the memory gets reclaimed eventually — but the engine isn't aggressive enough in freeing memory on the web.
 
-**UPDATE:** I reported this as an [issue](https://github.com/flutter/flutter/issues/153678) on the Flutter bug tracker. Between then and the publishing of this article, the issue has been largely addressed. Read on for details.
+> **UPDATE:** I reported this as an [issue](https://github.com/flutter/flutter/issues/153678) on the Flutter bug tracker. Between then and the publishing of this article, the issue has been largely addressed. Read on for details.
 
 Unity and Godot are on similar footing, with Godot claiming a bit more memory but also having a lot more consistent consumption (while Unity's RAM allocation fluctuated, Godot stayed at the same level for dozens of seconds at a time).
 
 ![[image10.png]]
 
-On iOS, I used Xcode Instruments' [Game Memory](https://developer.apple.com/documentation/xcode/analyzing-the-memory-usage-of-your-metal-app) tool to track the memory space of *The Bench* over one minute. I summed the Dirty Size, Swapped Size and Resident Size and found the maximum inside the measured 60 minutes.
+On iOS, I used Xcode Instruments' [Game Memory](https://developer.apple.com/documentation/xcode/analyzing-the-memory-usage-of-your-metal-app) tool to track the memory space of *The Bench* over one minute. I summed the Dirty Size, Swapped Size and Resident Size and found the maximum during the measured 60 seconds.
 
 Flutter and Flame keep a lower resident memory footprint than Unity and Godot. To be clear, Flutter and Flame allocate (and then immediately free) a lot more memory than both Unity and Godot. I thought this would translate to a larger CPU footprint but, looking back at the *CPU usage* section, apparently it does not? If anyone has more context on this, I'm happy to update the article.
 
@@ -274,7 +274,7 @@ First off, the memory issue on the web is [largely addressed](https://github.com
 
 When I shared the preview of this article with the Flutter team, Jonah Williams (Staff SWE at Flutter) had a closer look. At first, he was suspicious about Flutter's relatively good result on the CPU usage benchmark on iOS. "Depending on how the benchmark is running, Flutter could be hitting some very efficient usage of dirty region management - and skipping a lot of work," he wrote. He went ahead and thoroughly profiled *The Bench* on iOS.
 
-You can read his investigation doc [here](https://docs.google.com/document/d/14Gsw_EGlWeLBHGW6BcFFUh2Oab85zfFhZsOKLD7iB98/edit?resourcekey=0-nuycvHwjntdW6qXPEqHzPw). I highly recommend reading it if you care about game performance in Flutter but I also want to offer a summary:
+You can read his investigation doc [here](https://docs.google.com/document/d/1za1Gt_0mk70oKORbMNRcfGpqdgD-4-A7mJAJpiLmPUQ/pub). I highly recommend reading it if you care about game performance in Flutter but I also want to offer a summary:
 
 * The app is not hitting any dirty region management jackpot, as Jonah suspected at first. So the result is legit.
 * A small but significant amount of the UI thread work is due to a newly discovered inefficiency around fonts on the engine side (Flutter doesn't cache something that it should). This is a Flutter SDK bug to be fixed — the second one found because of this article. You can buy me a drink if the fixing of this bug makes your app or game more performant just by upgrading to the newest SDK version.
