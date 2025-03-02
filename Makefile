@@ -2,7 +2,7 @@ clean:
 	rm -rf ./build
 
 serve: build
-	superstatic .
+	npx superstatic .
 
 deploy: clean build
 	firebase deploy
