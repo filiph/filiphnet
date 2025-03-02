@@ -37,7 +37,7 @@ and create silly soft&shy;ware experiments.
 * [Genetically brewed neural network ship captains](https://filiph.net/spacepilot/) experiment
 * [DJ notation](https://filiph.net/dj-notation/) proposal
 * [youtubeology.com](https://www.youtubeology.com/) research
-* [tmzns.com](http://www.tmzns.com/) timezones converter
+* [tmzns.com](https://web.archive.org/web/20240425115816/http://www.tmzns.com/) timezones converter
 * [YouTube subtitles prettifier](https://filiph.github.io/youtube_subs/) web tool
 * [Script Prompter](https://filiph.net/prompter/) web tool
 * [Slot machine](https://filiph.net/slot/) experiment
