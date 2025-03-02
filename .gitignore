@@ -23,3 +23,6 @@ web/index.html
 
 # Firebase
 .firebase/
+
+# Node modules / npx
+node_modules/
