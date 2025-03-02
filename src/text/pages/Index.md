@@ -10,6 +10,10 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [“Math minus math” is wild](https://filiph.net/text/math-minus-math-is-wild.html)  
+  I love this self-published little book from 2009 full of abstract math-inspired graphic art.
+- [Performance versus Preference](https://filiph.net/text/performance-versus-preference.html)  
+  Why the C programming language won over Lisp, why QWERTY is winning over Dvorak, and why our favorite hyperfixations aren't as successful as they "obviously" deserve.
 - [Benchmarking Flutter, Flame, Unity and Godot](https://filiph.net/text/benchmarking-flutter-flame-unity-godot.html)  
   What happens when you decide to benchmark Flutter as if it was a 2D game development framework.
 - [Welcome to the superstar economy](https://filiph.net/text/welcome-to-the-superstar-economy.html)  
