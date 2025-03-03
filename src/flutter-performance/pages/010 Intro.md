@@ -13,7 +13,7 @@ This continues in Computer Science departments, doesn't it. Whatever the profess
 
 %% (comic: Haha yeah, he's right.) %%
 
-They are, of course, all wrong. The most important field of all is performance.
+They are, of course, all wrong. The most important field of all is Flutter performance.
 
 %% (comic: lowered eyelids) %%
 
