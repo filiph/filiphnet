@@ -5,8 +5,6 @@ created: 2025-03-03T08:00:00.000Z
 publish: true
 ---
 
-==WARNING:== The math formulas in this chapter don't render yet.
-
 ## The parable of the islander
 
 Imagine you're an islander and every week, you make a journey to a city inland. You don't want to waste time, so you decide to make that journey as short as possible.
