@@ -14,6 +14,7 @@ import 'package:yaml/yaml.dart';
 import 'src/atom_xml.dart';
 import 'src/obsidian_comment_syntax.dart';
 import 'src/obsidian_highlight_syntax.dart';
+import 'src/obsidian_mathjax_syntax.dart';
 
 void main(List<String> args) {
   var argParser = ArgParser(allowTrailingOptions: true)
@@ -172,9 +173,13 @@ void main(List<String> args) {
       extensionSet: md.ExtensionSet.gitHubWeb,
       inlineSyntaxes: [
         ObsidianCommentInlineSyntax(),
-        ObsidianHighlightInlineSyntax()
+        ObsidianHighlightInlineSyntax(),
+        ObsidianMathJaxInlineSyntax(),
       ],
-      blockSyntaxes: [ObsidianCommentBlockSyntax()],
+      blockSyntaxes: [
+        ObsidianCommentBlockSyntax(),
+        ObsidianMathJaxBlockSyntax(),
+      ],
     );
     var doc = parseFragment(htmlSource);
 
