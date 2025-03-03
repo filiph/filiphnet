@@ -5,11 +5,11 @@ created: 2025-03-03T08:00:00.000Z
 publish: true
 ---
 
-Hi, I'm Filip. I worked on the Dart and Flutter teams at Google between 2016 and 2021, and I've been involved in Flutter performance for over 7 years now. You may remember me from the official Flutter YouTube channel.
+Hi, I'm Filip. I worked on the Dart and Flutter teams at Google between 2016 and 2021, and I've been involved in Flutter performance, specifically, for over 7 years now. I've helped a few Flutter startups from performance-related trouble, and I've done more than my share of education and outreach.
 
 ![[Screenshot 2025-03-03 at 10.47.48 1.png]]
 
-Some of the veterans of Flutter development might know my Flutter performance talk at Flutter Europe 2020 or maybe they've read my old Medium.com articles on performance testing and raster thread optimization.
+You may recognize my face from the official Flutter YouTube channel. Some of the veterans of Flutter development might remember my Flutter performance talk at Flutter Europe 2020 or maybe they've read my old Medium.com articles on performance testing and raster thread optimization.
 
 <!-- Flutter Europe 2020](https://www.youtube.com/watch?v=SQcmrl_NkqY) -->
 
@@ -30,7 +30,7 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 5. Performance lottery
 6. Statistics for performance engineers %% Scientific method %%
 7. Performance profiling vs analysis vs benchmarking vs testing %% Performance Profiling/Analysis (what's wrong), Benchmarking (which is better), Testing (are things ok?) %%
-8. Benchmarking (tight loop/hot path, DoNotOptimizeAway)
+8. Benchmarking (tight loop/hot path, DoNotOptimizeAway) %% remember: it's tooling from the days of batch programs -- it may not be important %%
 9. CPU Profiling (`time -v`, flame chart, `perf`, `simpleperf`)
 10. Timeline %% Frame Pipeline (frame budget, ui vs raster thread), `dart:developer`, maximize minimal frame rate (not average framerate) %%
 11. Raster thread optimization %% (oversized images, RepaintBoundary?, debugDisableOpacityLayers, debugPaintLayerBordersEnabled, checkerboardRasterCacheImages, ) %%

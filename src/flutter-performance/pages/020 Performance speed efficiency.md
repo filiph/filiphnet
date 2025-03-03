@@ -11,7 +11,7 @@ I'm intentionally calling this book "Flutter Performance" even though the term i
 
 That said, we can build such a view from smaller parts.
 
-### Efficiency
+## Efficiency
 
 Efficiency is the easiest term to define and measure. Given a problem, the more efficient program simply *does less work*.
 
@@ -101,11 +101,11 @@ More efficient code does less work, and therefore draws less energy and improves
 
 It also generally finishes faster. But not always.
 
-### Speed
+## Speed
 
 A program can do less work but still be slower.
 
-One obvious way this happens is when using parallelism. A Dart program can spawn a separate isolate and outsource half of its work to it. By doing so, it will be finished almost twice as fast, but it will also have to spend CPU cycles on managing the extra isolate do it'll do slightly more work. Slightly lower efficiency, more complex code, but also much faster execution.
+One obvious way this happens is when using parallelism. A Dart program can spawn a separate isolate and outsource half of its work to it. By doing so, it will be finished almost twice as fast, but it will also do slightly more work (for example, the work to spawn the extra isolate). Slightly lower efficiency, more complex code, but also much faster execution.
 
 Another reason why efficiency and speed sometime don't go hand in hand is the fact that not all CPU operations take the same amount of time. A CPU loads a number from memory address `x0` to register `d31`. (That's `ldr d31, [x0]` in ARM assembly.) This operation can take something like 1 nanosecond if the address `x0` happens to be in Level 1 (L1) cache that sits right next to the CPU. But the same load instruction will take 70-100 nanoseconds if `x0` is currently not in one of the L1-L3 caches and must be obtained from RAM. (This is why data locality %% TODO is this the word? %% matters and why we'll be coming back to this.) So, once again, you can do fewer instructions and therefore have higher efficiency but still be slower. 
 
@@ -113,8 +113,6 @@ Another reason why efficiency and speed sometime don't go hand in hand is the fa
 
 ![[Screenshot 2025-01-13 at 15.27.53.png]]
   
-### Jank // Smoothness
-
 Now, this is where we might stop if we were building mainframe programs. In the old days — like, way before my time even — the most important programs were batch jobs. Think about something like cracking a military code, where you feed a program with the encoded message and some parameters, and you let it run for minutes or even hours. Same with weather forecast or a ballistic research computer, which runs a physics simulation for a long time before spitting out a result.
 
 These programs needed efficiency and speed, of course, especially since hardware was so slow and expensive back then. What they didn't need was nice user experience.
@@ -123,26 +121,39 @@ If you were running a weather forecast simulation in the 1960s, you didn't care 
 
 Today, though, most computing is different. You expect your pocket computer to update a multi-megapixel screen at least 60 times per second while it's also decoding an animated gif meme on the background. Most computation comes in very short bursts between frames, not in multi-minute batches.
 
-Our tools and our thinking sometime haven't caught up to this new reality. So many people on the internet stress over the wrong kind of performance. They write and publish benchmarks as if we were all still living in the mainframe days.
+This is why we also need to talk about jank.
 
-Tight loops that run for
+## Jank
+
+In computing, "jank" means perceptible pause in the smooth rendering of an app's user interface.[^jank_videogames] If your app renders at 60 frames per second, and then suddenly freezes for a moment, that's jank.
+
+[^jank_videogames]: Don't confuse with the meaning of "jank" in videogames, where it's about game mechanics that break immersion or disrupt play.
+
+Technically speaking, jank isn't a "bug", in the traditional sense. The app still works — it just isn't rendering as smoothly as we'd like to. But jank _can_ lead to user error, and it definitely leads to frustration and the perception of low quality.
+
+That's why any discussion about performance must include jank. We're not in the 1980s anymore. Our tools and our thinking sometimes haven't caught up to this new reality, though. Many people on the internet stress over the wrong kind of performance. They write and publish benchmarks as if we were all still living in the mainframe days.
+
+## Perception
+
+But it gets deeper than just jank. In one of the later chapters of this book, we'll talk about the _perception_ of performance. Because it's absolutely possible to have a performant app that feels sluggish. And it's also possible to have an app with occasional, well-placed jank that nevertheless feels snappy and smooth.
+
+Perception, in this case, is _everything._
 
 ==TODO: finish chapter==
 
+---
+
 %% ==XXX START HERE==
 
-TODO: This is also when all our tools were built — so we make benchmarks and use perf tools.
-
-TODO: We're not building batch programs, Perception
 
 
-### Memory consumption
+## Memory consumption
 
 TODO: Take too much memory, and you degrade the system's performance or even kill your own app.
 TODO: Also, more memory means more GC pauses.
 
 
-### Performance
+## Performance
 
 TODO: the most fluffy but also the goal
  %%
