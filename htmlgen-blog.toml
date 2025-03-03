@@ -26,6 +26,10 @@ page_template = 'src/text/page.template.html'
 # message (such as "go wishlist my game on Steam").
 footer_markdown_path = 'src/text/page_footer.md'
 
+# The URL to use as the default social image for articles that don't include
+# the `social_image` parameter in their front matter.
+default_social_image = 'https://filiph.net/img/filiphnet-text.png'
+
 # All Markdown files that end up being published are copied
 # from [markdown_directory] into the following backup directory in this project.
 # That way, the website always has everything it needs to rebuild itself,

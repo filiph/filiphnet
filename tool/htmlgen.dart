@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:args/args.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
@@ -11,11 +12,28 @@ import 'package:toml/toml.dart';
 import 'package:yaml/yaml.dart';
 
 import 'src/atom_xml.dart';
+import 'src/obsidian_comment_syntax.dart';
 
 void main(List<String> args) {
+  var argParser = ArgParser(allowTrailingOptions: true)
+    ..addFlag(
+      'generate-rss',
+      help: 'If set to true, the found articles will be added to the RSS feed.',
+      defaultsTo: false,
+    );
+  var argOptions = argParser.parse(args);
+  var tomlPath = argOptions.rest.singleOrNull;
+
+  if (tomlPath == null) {
+    print('Missing toml file path. Usage:\n\n'
+        '  htmlgen path/to/config.toml\n');
+    print(argParser.usage);
+    exit(2);
+  }
+
   TomlDocument document;
   try {
-    document = TomlDocument.loadSync('htmlgen.toml');
+    document = TomlDocument.loadSync(tomlPath);
   } on ParseError catch (e) {
     print("Parse error: $e");
     exit(99);
@@ -30,6 +48,7 @@ void main(List<String> args) {
   var imagesDirectoryPath = options['images_directory'] as String;
   var footerMarkdownPath = options['footer_markdown_path'] as String;
   var markdownFilesBackup = options['markdown_files_backup'] as String;
+  var defaultSocialImageUrl = options['default_social_image'] as String;
 
   var outputDirectoryPath = options['output_directory'] as String;
   var outputImagesSubdirectoryPath =
@@ -99,8 +118,7 @@ void main(List<String> args) {
     );
     var description = frontMatter['description'] ?? '';
     var date = frontMatter['date'] ?? '';
-    var socialImage = frontMatter['social_image'] ??
-        'https://filiph.net/img/filiphnet-text.png';
+    var socialImage = frontMatter['social_image'] ?? defaultSocialImageUrl;
     var shouldPublish = frontMatter['publish'] == true;
 
     if (!shouldPublish) {
@@ -151,6 +169,8 @@ void main(List<String> args) {
       // Use things like fenced code block.
       // See https://pub.dev/packages/markdown for details.
       extensionSet: md.ExtensionSet.gitHubWeb,
+      inlineSyntaxes: [ObsidianCommentInlineSyntax()],
+      blockSyntaxes: [ObsidianCommentBlockSyntax()],
     );
     var doc = parseFragment(htmlSource);
 
@@ -246,10 +266,14 @@ void main(List<String> args) {
     print('${a.created} - ${a.title}');
   });
 
-  var atomXmlFilePath = path.join(outputDirectoryPath, 'atom.xml');
-  var atomXmlFile = File(atomXmlFilePath);
-  var atomContents = generateAtomXml(articles);
-  atomXmlFile.writeAsStringSync(atomContents);
+  if (argOptions['generate-rss']) {
+    var atomXmlFilePath = path.join(outputDirectoryPath, 'atom.xml');
+    var atomXmlFile = File(atomXmlFilePath);
+    var atomContents = generateAtomXml(articles);
+    atomXmlFile.writeAsStringSync(atomContents);
+  } else {
+    print('skipping generating atom.xml');
+  }
 }
 
 class Article {

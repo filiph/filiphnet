@@ -1,0 +1,38 @@
+# This file configures the behavior of tool/htmlgen.dart.
+
+# Where to put the generated .html files.
+output_directory = 'build/flutter-performance'
+
+# Where to put the copied images.
+#
+# This is a subdirectory of [output_directory] above.
+output_images_subdirectory = 'imgs'
+
+# Where to get *.md files from. This is probably an absolute path
+# into your Obsidian vault or something similar.
+markdown_directory = '/Users/filiph/Google Drive/notes/memex/projects/flutter-performance-book'
+
+# When markdown files reference images, where do we go find them?
+# This is probably an absolute path to the place where Obsidian stores
+# images.
+images_directory = '/Users/filiph/Google Drive/notes/memex/images'
+
+# The HTML file with the structure of the page, and special strings
+# that serve as placeholders.
+page_template = 'src/flutter-performance/page.template.html'
+
+# Markdown file to render and place at the end of each article.
+# This is probably a bit of info about the author and possibly a 'what next'
+# message (such as "go wishlist my game on Steam").
+footer_markdown_path = 'src/flutter-performance/page_footer.md'
+
+# The URL to use as the default social image for articles that don't include
+# the `social_image` parameter in their front matter.
+default_social_image = 'https://filiph.net/img/filiphnet-text.png'
+
+# All Markdown files that end up being published are copied
+# from [markdown_directory] into the following backup directory in this project.
+# That way, the website always has everything it needs to rebuild itself,
+# even if [markdown_directory] is inaccessible (Google Drive is down,
+# lost access somehow, running on a server, etc.).
+markdown_files_backup = 'src/flutter-performance/pages'

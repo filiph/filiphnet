@@ -8,7 +8,7 @@ deploy: clean build
 	firebase deploy
 	@echo "Visit https://filiph.net"
 
-build: copy_web htmlgen copy_old
+build: copy_web htmlgen_blog htmlgen_flutter_performance copy_old
 
 copy_web: spanify
 	mkdir -p build
@@ -23,5 +23,13 @@ spanify:
 	  src/index.md \
 	  > web/index.html
 
-htmlgen:
-	dart --enable-asserts tool/htmlgen.dart
+htmlgen_blog:
+	dart --enable-asserts tool/htmlgen.dart \
+      htmlgen-blog.toml \
+      --generate-rss
+
+htmlgen_flutter_performance:
+	dart --enable-asserts tool/htmlgen.dart \
+      htmlgen-flutter-performance.toml \
+      --generate-rss
+
