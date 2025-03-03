@@ -5,7 +5,7 @@ created: 2025-03-03T08:00:00.000Z
 publish: true
 ---
 
-Hi, I'm Filip. You may remember me from the official Flutter YouTube channel. I worked on the Dart and Flutter teams at Google between 2016 and 2021, and I've been involved in Flutter performance for over 7 years now.
+Hi, I'm Filip. I worked on the Dart and Flutter teams at Google between 2016 and 2021, and I've been involved in Flutter performance for over 7 years now. You may remember me from the official Flutter YouTube channel.
 
 ![[Screenshot 2025-03-03 at 10.47.48 1.png]]
 
@@ -21,7 +21,7 @@ That could be you. Performance optimization is a vast and complicated topic but 
 
 ## Chapters
 
-I'm writing the book in the open so that I can get feedback. Here's a very rough outline. Chapters that are drafted already are linked.
+I'm writing the book in the open so that I can get feedback ([email me](mailto:filip.hracek@gmail.com)). Here's a very rough outline. Chapters that are drafted already are linked.
 
 1. [Intro](/flutter-performance/010-intro.html)
 2. [Performance, speed, efficiency](/flutter-performance/020-performance-speed-efficiency.html) (unfinished)
