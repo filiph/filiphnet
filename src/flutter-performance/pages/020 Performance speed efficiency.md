@@ -5,6 +5,8 @@ created: 2025-03-03T08:00:00.000Z
 publish: true
 ---
 
+==WARNING:== This chapter is unfinished.
+
 I'm intentionally calling this book "Flutter Performance" even though the term is vague. That's because, if you care about optimizing apps or games, you're not looking at one neat metric. You have to have a more complex view.
 
 That said, we can build such a view from smaller parts.

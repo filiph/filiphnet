@@ -13,6 +13,7 @@ import 'package:yaml/yaml.dart';
 
 import 'src/atom_xml.dart';
 import 'src/obsidian_comment_syntax.dart';
+import 'src/obsidian_highlight_syntax.dart';
 
 void main(List<String> args) {
   var argParser = ArgParser(allowTrailingOptions: true)
@@ -169,7 +170,10 @@ void main(List<String> args) {
       // Use things like fenced code block.
       // See https://pub.dev/packages/markdown for details.
       extensionSet: md.ExtensionSet.gitHubWeb,
-      inlineSyntaxes: [ObsidianCommentInlineSyntax()],
+      inlineSyntaxes: [
+        ObsidianCommentInlineSyntax(),
+        ObsidianHighlightInlineSyntax()
+      ],
       blockSyntaxes: [ObsidianCommentBlockSyntax()],
     );
     var doc = parseFragment(htmlSource);
