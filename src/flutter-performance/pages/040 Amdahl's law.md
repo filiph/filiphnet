@@ -54,21 +54,21 @@ This is not a trick question.
 The formula for overall speedup is:
 
 $$
-\text{Speedup}_{\text{overall}}={\frac {1}{(1-{\text{time}}_{\text{optimized}})+{\frac {{\text{time}}_{\text{optimized}}}{{\text{speedup}}_{\text{optimized}}}}}}
+S_{\text{overall}}={\frac {1}{(1-t_{\text{opt}})+{\frac {t_{\text{opt}}}{S_{\text{opt}}}}}}
 $$
 
 where
 
-- $\text{Speedup}_{\text{overall}}$  is the improvement ratio of the optimized code versus the unoptimized code. For example, a value of $2$ means that the overall performance has improved 2x (i.e. we've halved the execution time).
-- ${\text{time}}_{\text{optimized}}$  is the fraction of execution time spent in the  function we're trying to optimize. For example, a value of $0.1$ means that we're optimizing a function that takes 10% of the overall execution time.
-- ${\text{speedup}}_{\text{optimized}}$  is the ratio by which we're able to improve the function. For example, if this is $1.01$, then we're making the function 1% faster.
+- $S_{\text{overall}}$ (overall speedup) is the improvement ratio of the optimized code versus the unoptimized code. For example, a value of $2$ means that the overall performance has improved 2x (i.e. we've halved the execution time).
+- $t_{\text{opt}}$ (time optimized)  is the fraction of execution time spent in the  function we're trying to optimize. For example, a value of $0.1$ means that we're optimizing a function that takes 10% of the overall execution time.
+- $S_{\text{opt}}$ (speedup optimized)  is the ratio by which we're able to improve the function. For example, if this is $1.01$, then we're making the function 1% faster.
 
 %% ![[Screenshot 2025-01-14 at 20.13.19 1.png]] %%
 
 Assigning values from above, we get:
 
 $$
-\text{Speedup}_{\text{overall}}={\frac {1}{(1-0.05)+{\frac {0.05}{1.20}}}}={\frac {1}{0.95 + 0.0416}} = 1.008403361345
+S_{\text{overall}}={\frac {1}{(1-0.05)+{\frac {0.05}{1.20}}}}={\frac {1}{0.95 + 0.0416}} = 1.008403361345
 $$
 
 Yep. That's less than 1% overall speedup. And remember that we sped `computeFoo()` up by 20% (which is amazing in most scenarios) and that the function constitutes a whopping 5% of all execution time (which is a lot for a single function).
@@ -82,7 +82,7 @@ In reality, they make the code, say, 30% faster, which gives them an overall imp
 
 Now, don't get me wrong: every improvement is an improvement, and sometimes you have no choice but to optimize by tiny fractions here and there.
 
-It's just really, _really_ important to always have Amdahl's law in mind. Whenever you optimize, or even just start thinking about optimizing, have a rough idea of the value of ${\text{time}}_{\text{optimized}}$. Are you optimizing something that takes 50% of the overall execution time? 10%? 1%? Less?
+It's just really, _really_ important to always have Amdahl's law in mind. Whenever you optimize, or even just start thinking about optimizing, have a rough idea of the value of $t_{\text{opt}}$. Are you optimizing something that takes 50% of the overall execution time? 10%? 1%? Less?
 
 ## Microbenchmarks suck
 
@@ -127,7 +127,7 @@ Cue everyone rewriting every record into a class.
 
 But, since this is a chapter about Amdahl's law, you probably know what's next.
 
-First of all, this benchmark is completely arbitrary so we _can't_ have an idea of what ${\text{time}}_{\text{optimized}}$ is. (Remember, ${\text{time}}_{\text{optimized}}$ is the *ratio* of the optimized time versus the overall execution time. Since there's no app, there _is_ no overall execution time.) 
+First of all, this benchmark is completely arbitrary so we _can't_ have an idea of what $t_{\text{opt}}$ is. (Remember, $t_{\text{opt}}$ is the *ratio* of the optimized time versus the overall execution time. Since there's no app, there _is_ no overall execution time.) 
 
 But we could at least look at the time scales involved. Instead of saying "3x faster", let's have a look at the measured time.
 
@@ -149,6 +149,6 @@ The legendary computer scientist, Donald Knuth, wrote this about performance opt
 
 > Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
 
-You might have heard someone repeat the phrase "premature optimization is the root of all evil". It's basically a software engineering adage at this point. Yet, I don't think many people know the full context of that sentence. By chiding developers for wasting enormous amounts of time worrying about "noncritical parts of their programs", Donald Knuth indirectly talks about Amdahl's law. Those "noncritical parts" are the functions with relatively negligible ${\text{time}}_{\text{optimized}}$. Forget about small inefficiencies there. Instead, find the critical parts of your program (read: find the functions with large ${\text{time}}_{\text{optimized}}$) and spend your time optimizing *those*.
+You might have heard someone repeat the phrase "premature optimization is the root of all evil". It's basically a software engineering adage at this point. Yet, I don't think many people know the full context of that sentence. By chiding developers for wasting enormous amounts of time worrying about "noncritical parts of their programs", Donald Knuth indirectly talks about Amdahl's law. Those "noncritical parts" are the functions with relatively negligible $t_{\text{opt}}$. Forget about small inefficiencies there. Instead, find the critical parts of your program (read: find the functions with large $t_{\text{opt}}$) and spend your time optimizing *those*.
 
-We'll talk more about how to figure out which part of your code to optimize. For now, just remember Amdahl's law. Let it become your second nature to always ask: "But how often does this code actually run?" What's the ${\text{time}}_{\text{optimized}}$?
+We'll talk more about how to figure out which part of your code to optimize. For now, just remember Amdahl's law. Let it become your second nature to always ask: "But how often does this code actually run?" What's the $t_{\text{opt}}$?
