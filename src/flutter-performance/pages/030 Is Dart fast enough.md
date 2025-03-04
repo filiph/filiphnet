@@ -5,19 +5,25 @@ created: 2025-03-03T08:00:00.000Z
 publish: true
 ---
 
-%% ## Is Dart fast enough?
+%% ## Is Dart fast enough? %%
 
-Yes.
+Yes, it is.
 
-## Can you elaborate? %%
+%% ## Can you elaborate?
 
-Yes.
+Yes. %%
 
-Alright, look. Dart is _not_ the most performant programming language out there. 
+...
 
-Now, I'm going to ignore the complex (and interesting) question of "what does it mean that a _programming language_ is performant?" We all know that there is not a single ranking of programming languages by speed. But I hope we can also agree that, roughly speaking and with a lot of handwaving, some programming languages are more performant than others.
+Alright, look. If I was playing a wise performance guru, I would say something like:
 
-For example, most people would agree that C is more performant than Python. I bet you could find special cases in which Python is, in fact, faster or less resource-intensive than C. But if they exist, they're rare. There's a reason why real-time simulations are almost exclusively written in C++ and not a more high-level language. 
+> Does it even make sense to talk about the performance of a _programming language?_ Programming languages are abstractions! Only concrete programs, compiled with concrete compilers and executed on concrete hardware, can have a notion of performance.
+
+Then I'd nod to my own wisdom, stroke my long white beard, and close my eyes to meditate on the meaning of "benchmark."
+
+And I would be correct, of course! We all know that there is not a single ranking of programming languages by speed. But I hope we can also agree that, roughly speaking and with a lot of handwaving, some programming languages _are_ more performant than others.
+
+In most ways that matter, C++ is more performant than Python, for example. Implementing the same algorithm in C++ and in Python will *generally* lead to a faster program in C++, and a slower one in Python. I bet they are special cases in which Python is, in fact, faster or less resource-intensive than C. But — they're rare. There's a reason why real-time simulations are almost exclusively written in C++ and not a more high-level language like Python.
 
 Most people also understand the idea of trade-offs. You can trade a bit of performance for some ease of use, security, portability, or speed of development. And that can obviously be fine because otherwise, if it wasn't fine, every app _ever_ would be written either in assembly or in C.
 
