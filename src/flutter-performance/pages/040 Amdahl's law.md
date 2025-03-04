@@ -59,7 +59,15 @@ where
 
 - $S_{\text{overall}}$ (overall speedup) is the improvement ratio of the optimized code versus the unoptimized code. For example, a value of $2$ means that the overall performance has improved 2x (i.e. we've halved the execution time).
 - $t_{\text{opt}}$ (time optimized)  is the fraction of execution time spent in the  function we're trying to optimize. For example, a value of $0.1$ means that we're optimizing a function that takes 10% of the overall execution time.
+- Therefore, the term $(1-t_{\text{opt}})$ is the fraction of execution time spent _outside_ the function we're trying to optimize. In other words, it's the rest of the execution time.
 - $S_{\text{opt}}$ (speedup optimized)  is the ratio by which we're able to improve the function. For example, if this is $1.01$, then we're making the function 1% faster.
+
+In code, the above equality could be written as:
+
+```dart
+var speedupOverall =
+        1.0 / ((1 - timeOptimized) + timeOptimized / speedupOptimized);
+```
 
 %% ![[Screenshot 2025-01-14 at 20.13.19 1.png]] %%
 

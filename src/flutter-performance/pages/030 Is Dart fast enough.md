@@ -21,9 +21,9 @@ Alright, look. If I was playing a wise performance guru, I would say something l
 
 Then I'd nod to my own wisdom, stroke my long white beard, and close my eyes to meditate on the meaning of "benchmark."
 
-And I would be correct, of course! We all know that there is not a single ranking of programming languages by speed. But I hope we can also agree that, roughly speaking and with a lot of handwaving, some programming languages _are_ more performant than others.
+And I would be correct, of course! We all know that there does not exist a single ranking of programming languages by speed. But I hope we can also agree that, roughly speaking and with a lot of handwaving, that some programming languages _are_ more performant than others.
 
-In most ways that matter, C++ is more performant than Python, for example. Implementing the same algorithm in C++ and in Python will *generally* lead to a faster program in C++, and a slower one in Python. I bet they are special cases in which Python is, in fact, faster or less resource-intensive than C. But — they're rare. There's a reason why real-time simulations are almost exclusively written in C++ and not a more high-level language like Python.
+In most ways that matter, C++ *is* more performant than Python, for example. Implementing the same algorithm in C++ and in Python will *generally* lead to a faster program in C++, and a slower one in Python. I bet there are special cases in which Python is, in fact, faster or less resource-intensive than C. But — they're rare. There's a reason why real-time simulations are almost exclusively written in C++ and not a more high-level language like Python.
 
 Most people also understand the idea of trade-offs. You can trade a bit of performance for some ease of use, security, portability, or speed of development. And that can obviously be fine because otherwise, if it wasn't fine, every app _ever_ would be written either in assembly or in C.
 
@@ -43,7 +43,7 @@ Maybe you've seen them before. The most shallow reading of these graphs tells us
 
 - C and C++ and Rust are the fastest programming languages
 - The following two languages, Chapel and C#, are both about 2x slower than C.
-- The next cluster of 10 languages is about 3x to 5x slower and includes Fortran, Julia, Java, Go and Swift.
+- The next cluster of 10 languages is about 3x to 5x slower than C and includes Fortran, Julia, Java, Go and Swift.
 - The cluster just after that is about 5x to 7x slower and includes OCaml, Dart and Javascript (Node.js).
 - Racket is next, more than 10x slower than C.
 - The graph is capped by 7 languages, including PHP (40x slower), Ruby (50x slower), Python (60x) and Lua (90x slower).
