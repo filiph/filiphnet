@@ -41,6 +41,49 @@ Here's an example of ARM64 assembly code for finding a maximum value in an array
 
 ```asm
 findMax:
+        sub     sp, sp, #48    # Allocate 48 bytes on stack
+        str     x0, [sp, 8]    # Store array pointer at sp+8
+        str     w1, [sp, 4]    # Store array length at sp+4
+        str     xzr, [sp, 32]  # Initialize max value to 0
+        str     wzr, [sp, 44]  # Initialize loop counter (i) to 0
+        b       .L2            # Branch to loop condition
+
+.L5:    # Main loop body
+        ldrsw   x0, [sp, 44]   # Load loop counter (sign-extended)
+        lsl     x0, x0, 3      # Multiply by 8 (size of double)
+        ldr     x1, [sp, 8]    # Load array pointer
+        add     x0, x1, x0     # Calculate address of current element
+        ldr     d31, [x0]      # Load current element into d31
+        str     d31, [sp, 24]  # Store current element on stack
+        ldr     d30, [sp, 24]  # Load current element into d30
+        ldr     d31, [sp, 32]  # Load current max into d31
+        fcmpe   d30, d31       # Compare current with max
+        bgt     .L7            # If current > max, branch to L7
+        b       .L3            # Else continue to L3
+
+.L7:    # Update maximum value
+        ldr     d31, [sp, 24]  # Load current value
+        str     d31, [sp, 32]  # Store as new maximum
+
+.L3:    # Increment counter
+        ldr     w0, [sp, 44]   # Load counter
+        add     w0, w0, 1      # Increment by 1
+        str     w0, [sp, 44]   # Store updated counter
+
+.L2:    # Loop condition
+        ldr     w1, [sp, 44]   # Load counter
+        ldr     w0, [sp, 4]    # Load array length
+        cmp     w1, w0         # Compare counter with length
+        blt     .L5            # If counter < length, continue loop
+        ldr     d31, [sp, 32]  # Load final maximum value
+        fmov    d0, d31        # Move to return register d0
+        add     sp, sp, 48     # Deallocate stack space
+        ret                    # Return
+```
+
+%%
+```asm
+findMax:
         sub     sp, sp, #48
         str     x0, [sp, 8]
         str     w1, [sp, 4]
@@ -76,9 +119,30 @@ findMax:
         add     sp, sp, 48
         ret
 ```
+%%
 
 And here's the same program, but compiled in a higher optimization level. The listing above was compiled with the `-O0` flag (default mode). The listing below was compiled with the `-O3` flag (a lot more optimizations enabled).
 
+```asm
+findMax:
+        movi    d0, #0              # Initialize max (d0) to 0
+        cmp     w1, 0               # Compare array length with 0
+        ble     .L1                 # If length <= 0, return
+        add     x1, x0, w1, uxtw 3  # Calculate end address
+
+.L3:    # Loop body
+        ldr     d31, [x0], 8        # Load double and increment x0 by 8
+                                    # Post-indexed addressing mode
+        fcmpe   d31, d0             # Compare current value with max
+        fcsel   d0, d31, d0, gt     # Select larger value (d31 if d31 > d0)
+        cmp     x1, x0              # Compare current pointer with end address
+        bne     .L3                 # Continue if not at end
+
+.L1:
+        ret                         # Return max value in d0
+```
+
+%%
 ```asm
 findMax:
         movi    d0, #0
@@ -94,6 +158,7 @@ findMax:
 .L1:
         ret
 ```
+%%
 
 Even if you've never seen assembly, you can probably tell that the second listing does less work. There are simply fewer instructions. The unoptimized version does a lot of loading (`ldr`) and storing (`str`) into memory, and lacks the obvious optimization of skipping the whole function if the list is empty (`cmp w1, 0` — is the length zero? `ble .L1` — if so, jump to the end of the function). 
 
@@ -119,23 +184,25 @@ These programs needed efficiency and speed, of course, especially since hardware
 
 If you were running a weather forecast simulation in the 1960s, you didn't care how usable or unusable the computer got while it was processing — because the simulation was probably the only program running. You just patiently waited.
 
-Today, though, most computing is different. You expect your pocket computer to update a multi-megapixel screen at least 60 times per second while it's also decoding an animated gif meme on the background. Most computation comes in very short bursts between frames, not in multi-minute batches.
+Today, though, most computing is different. You expect your pocket computer to update a multi-megapixel screen at least 60 times per second while it's also decoding an animated gif meme in the background. Most computation comes in very short bursts between frames, not in multi-minute batches.
 
 This is why we also need to talk about jank.
 
 ## Jank
 
-In computing, "jank" means perceptible pause in the smooth rendering of an app's user interface.[^jank_videogames] If your app renders at 60 frames per second, and then suddenly freezes for a moment, that's jank.
+In computing, "jank" is a word for a perceptible pause in the smooth rendering of an app's user interface.[^jank_videogames] If your app renders at 60 frames per second, and then suddenly freezes for a moment, that's jank.
 
 [^jank_videogames]: Don't confuse with the meaning of "jank" in videogames, where it's about game mechanics that break immersion or disrupt play.
 
-Technically speaking, jank isn't a "bug", in the traditional sense. The app still works — it just isn't rendering as smoothly as we'd like to. But jank _can_ lead to user error, and it definitely leads to frustration and the perception of low quality.
+Technically speaking, jank isn't a "bug", in the traditional sense. The app still works — it just isn't rendering as smoothly as we'd like it to. But jank _can_ lead to user error, and it definitely leads to frustration and the perception of low quality.
 
-That's why any discussion about performance must include jank. We're not in the 1980s anymore. Our tools and our thinking sometimes haven't caught up to this new reality, though. Many people on the internet stress over the wrong kind of performance. They write and publish benchmarks as if we were all still living in the mainframe days.
+Our tools and our thinking sometimes haven't caught up to this new reality — but jank is a real problem and we'll spend a significant part of the book learning how to avoid it. We're not in the mainframe days anymore.
 
 ## Perception
 
-But it gets deeper than just jank. In one of the later chapters of this book, we'll talk about the _perception_ of performance. Because it's absolutely possible to have a performant app that feels sluggish. And it's also possible to have an app with occasional, well-placed jank that nevertheless feels snappy and smooth.
+Jank is when the app objectively, measurably freezes. But there exists a subtler, less concrete, more "fluffy" kind of performance problem — the _user perception_ of sluggish performance.
+
+I dedicate a whole chapter to this idea but for now, let's just say that it's absolutely possible to have a fast, efficient, jank-free app that nevertheless feels sluggish. And it's also possible to have an app with occasional, well-placed jank that feels snappy and smooth.
 
 Perception, in this case, is _everything._
 

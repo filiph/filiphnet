@@ -45,7 +45,7 @@ In other words, if you write slow code today, you can expect it to be about as s
 
 ### Career
 
-If making performant software doesn't motivate you enough, think about something even more important: you. I mean, your bank account.
+If making performant software doesn't motivate you enough, think about something even more important to you: you. I mean, your bank account.
 
 You may have heard the term "marketable skills". It's the skills you have that people are willing to pay for. The rule is that if you have a skill that people are willing to pay for, *and* it's rare for people to have that skill, then you are getting paid handsomely.
 
@@ -56,7 +56,7 @@ Here's a table:
 | Breathing | No | No | No |
 | Burping alphabet | No | Yes | No |
 | Mediocre writing | Yes | No | Meh |
-| Optimizing code | Yes | Yes | \$\$\$\$\$ |
+| Optimizing code | Yes | Yes | 💰💰💰 |
 
 This book teaches Flutter performance which — at least in the medium term — is a skill both marketable and rare. If you're the person in your team who others turn to when dealing with performance issues, that's a good position to be in. If you're interviewing for a new job and you can tell people you singlehandedly removed jank from a critical app in your previous job, that's a gem in your resumé.
 
