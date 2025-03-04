@@ -419,7 +419,11 @@ String _smartyPants(String text) {
     "doesn't",
     "haven't",
     "hasn't",
-    "hadn't"
+    "hadn't",
+    "I'd",
+    "we'd",
+    "you'd",
+    "they'd",
   ];
 
   // Replace single quotes in common contractions
