@@ -24,10 +24,10 @@ That could be you. Performance optimization is a vast and complicated topic but 
 I'm writing the book in the open so that I can get feedback ([email me](mailto:filip.hracek@gmail.com), [message me](https://mastodon.social/@filiph), or [discuss](https://forum.itsallwidgets.com/t/flutter-performance-book/2777)). Here's a very rough outline. Chapters that are drafted already are linked.
 
 1. [Intro](/flutter-performance/010-intro.html)
-2. [Performance, speed, efficiency](/flutter-performance/020-performance-speed-efficiency.html) (unfinished)
+2. [Performance, speed, efficiency](/flutter-performance/020-performance-speed-efficiency.html)
 3. [Is Dart fast enough?](/flutter-performance/030-is-dart-fast-enough.html)
 4. [Amdahl's law](/flutter-performance/040-amdahl's-law.html)
-5. Performance lottery
+5. [Performance lottery](/flutter-performance/050-performance-lottery.html)
 6. Statistics for performance engineers %% Scientific method %%
 7. Performance profiling vs analysis vs benchmarking vs testing %% Performance Profiling/Analysis (what's wrong), Benchmarking (which is better), Testing (are things ok?) %%
 8. Benchmarking (tight loop/hot path, DoNotOptimizeAway) %% remember: it's tooling from the days of batch programs -- it may not be important %%

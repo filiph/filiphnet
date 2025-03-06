@@ -5,8 +5,6 @@ created: 2025-03-03T08:00:00.000Z
 publish: true
 ---
 
-==WARNING:== This chapter is unfinished.
-
 I'm intentionally calling this book "Flutter Performance" even though the term is vague. That's because, if you care about optimizing apps or games, you're not looking at one neat metric. You have to have a more complex view.
 
 That said, we can build such a view from smaller parts.
@@ -206,21 +204,54 @@ I dedicate a whole chapter to this idea but for now, let's just say that it's ab
 
 Perception, in this case, is _everything._
 
-==TODO: finish chapter==
-
----
-
-%% ==XXX START HERE==
-
-
-
 ## Memory consumption
 
-TODO: Take too much memory, and you degrade the system's performance or even kill your own app.
-TODO: Also, more memory means more GC pauses.
+Performance optimization is all about trade-offs, and one of the more important trade-offs is the one between "time and space". That is to say, speed and memory. This is because, in many cases, you can trade one for the other.
 
+To give an example, you can make your $\ln(x)$ (natural logarithm) computation faster by precomputing a table of results in a $x\rightarrow\ln(x)$ map. That approach will let you avoid some CPU cycles — but the table will also consume some space in memory. (You obviously need to be smart about the range and granularity of the precomputed table because — from what I understand — computers with infinite amounts of RAM are in short supply.)
+
+The opposite silly example would be to never cache anything, and always recompute all secondary data from first principles. That would save on memory but it would also make everything extremely slow. Imagine Flutter having to downsize images every frame anew, for example, instead of caching the result.
+
+But memory's role in performance is more complex than just the time and space trade-off. When a device runs low on memory, the operating system needs to deal with it, shutting down apps on the background or moving parts of RAM to disk (memory swapping). This makes things slower. Moreover, memory for short-living objects needs to be allocated and then later freed (garbage collected), which is also additional work that can lead to jank.
+
+In extreme cases, too much memory consumption can lead to your app being outright shut down. For example, the Chrome browser has a certain limit to what a single tab can allocate. When the limit is reached, Chrome will simply crash the tab.
+
+![[Screenshot 2025-03-06 at 14.20.51.png]]
+
+So memory is an integral part of performance and it interacts with it in complex ways. We'll talk about all that in a later chapter.
 
 ## Performance
 
-TODO: the most fluffy but also the goal
- %%
+Now we can finally get to "performance." Hopefully, by now you understand that performance is not an easily defined term. It has elements of efficiency in it (which is nicely measurable) but it also encompasses fluffier ideas, such as "acceptable jank" and perception. Performance can be — and often is — in the eye of the beholder.
+
+%% some kind of funny illustration here, about eye of the beholder %%
+
+Some authors have a problem with this. They want an exact definition before they delve deeper. I understand this and, to be honest, only a few short years ago I was one of those people. But these days, I would much rather focus on practical matters than to try to pinpoint an exact definition.
+
+The field of performance optimization is full of exact measurements and precise methodology. Yet the _idea_ of app performance is — in my view — *impossible* to collapse into well-defined metrics. 
+
+There's a name for our tendency to discount anything that cannot be quantified: *McNamara fallacy*, named after the US Secretary of Defense during the Vietnam war. The story[^mcnamara] goes that McNamara was trying to come up with a list of aspects to follow the progress of the war. An Air Force general suggested that one such aspect could be the feelings of the Vietnamese people. 
+
+[^mcnamara]: Rufus Phillips: *Why Vietnam Matters: An Eyewitness Account of Lessons Not Learned* (2017), pp. xiii-xiv.
+
+McNamara wrote this down, then immediately erased it. "How can anyone get a reading on people's feelings?" he asked sarcastically. Feelings cannot be measured, and therefore they must not be important.
+
+%% https://en.wikipedia.org/wiki/Surrogation %%
+
+McNamara's example might be a bit extreme, but there's a related phenomenon that you can observe almost everywhere — *surrogation*. It's when people begin to believe that a metric _is_ what it attempts to measure:
+
+ - Customer satisfaction survey score _is_ customer satisfaction.
+ - Patient wait times _are_ hospital efficiency.
+ - Net promoter score _is_ word of mouth.
+ - Graduation rates _are_ school effectiveness. %% University rankings _are_ educational excellence. %%
+ - View count _is_ video quality.
+ - ...
+ - Lines of code _is_ developer productivity.
+ - Number of comments _is_ code documentation quality.
+ - Function length _is_ code complexity.
+ - Test coverage percentage _is_ code quality.
+ - Benchmark results _are_ performance.
+
+None of these are true, as I hope everyone realizes.
+
+As unsatisfying as it might feel, I'll keep the term "performance" vaguely defined by the combination of efficiency, speed, lack of jank, and subjective perception of responsiveness.
