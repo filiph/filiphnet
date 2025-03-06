@@ -42,22 +42,23 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 17. Inlining
 18. Understanding Dart Kernel Representation
 19. SIMD / vectorization
-20. Continuous performance testing
-21. Sleights of hand (perceived performance magic tricks)
-22. A bag of tricks
+20. Interop with the platform (the other side of method channels, FFI) %% out of scope, but mention e.g. Xcode’s Organizer %%
+21. Continuous performance testing %% stress testing, browserstack - a farm of actual devices %%
+22. Sleights of hand (perceived performance magic tricks)
+23. A bag of tricks
 
 
-%%	1. JSON parsing
-	1. SnapshotWidget
-	2. Thunks (e.g. logging takes function, not a computed value)
-	3. "stub"
-18. Continuous performance testing
-	5. browserstack - a farm of actual devices
-19. --
-20. Pragmas
-21. Inlining
-22. Understanding Dart Kernel Representation
-23. SIMD / vectorization %%
+%%
+bag of tricks
+
+1. JSON parsing
+2. SnapshotWidget
+3. Thunks (e.g. logging takes function, not a computed value)
+4. `late final` (like a thunk)
+5. "stub"
+6. emojis are slow on iOS because they're SVGs https://forum.itsallwidgets.com/t/flutter-performance-book/2777/9
+
+%%
 
 No guarantees the book will ever be finished but if you want to be notified, subscribe to [my mailing list](https://filiph.net/await).
 
