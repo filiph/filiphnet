@@ -1,5 +1,11 @@
 # This file configures the behavior of tool/htmlgen.dart.
 
+# The title for the RSS feed (and the blog itself).
+feed_title = 'Flutter Performance Book by Filip Hracek'
+
+# The URL of the blog itself.
+self_url = 'https://filiph.net/flutter-performance/'
+
 # Where to put the generated .html files.
 output_directory = 'build/flutter-performance'
 

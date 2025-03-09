@@ -3,7 +3,11 @@ import 'dart:io';
 
 import '../htmlgen.dart';
 
-String generateAtomXml(List<Article> articles) {
+String generateAtomXml({
+  required List<Article> articles,
+  required String feedTitle,
+  required String sourceUrl,
+}) {
   String buildEntry(Article article) {
     var content = """
     <p>${article.description}</p>
@@ -26,15 +30,18 @@ String generateAtomXml(List<Article> articles) {
     ''';
   }
 
+  assert(sourceUrl.endsWith('/'));
+  final feedUrl = '${sourceUrl}atom.xml';
+
   return '''
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>filiph.net/text</title>
-  <link href="https://filiph.net/text/"/>
-  <link type="application/atom+xml" rel="self" href="https://filiph.net/text/atom.xml"/>
+  <title>$feedTitle</title>
+  <link href="$sourceUrl"/>
+  <link type="application/atom+xml" rel="self" href="$feedUrl"/>
   <updated>${DateTime.now().toUtc().toIso8601String()}</updated>
-  <id>https://filiph.net/text/</id>
+  <id>$sourceUrl</id>
   <author>
     <name>Filip Hracek</name>
     <email>filip.hracek@gmail.com</email>

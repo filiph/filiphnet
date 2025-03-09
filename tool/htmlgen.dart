@@ -45,6 +45,8 @@ void main(List<String> args) {
   }
 
   var options = document.toMap();
+  var feedTitle = options['feed_title'] as String;
+  var selfUrl = options['self_url'] as String;
   var htmlTemplatePath = options['page_template'] as String;
   var markdownDirectoryPath = options['markdown_directory'] as String;
   var imagesDirectoryPath = options['images_directory'] as String;
@@ -278,7 +280,11 @@ void main(List<String> args) {
   if (argOptions['generate-rss']) {
     var atomXmlFilePath = path.join(outputDirectoryPath, 'atom.xml');
     var atomXmlFile = File(atomXmlFilePath);
-    var atomContents = generateAtomXml(articles);
+    var atomContents = generateAtomXml(
+      articles: articles,
+      feedTitle: feedTitle,
+      sourceUrl: selfUrl,
+    );
     atomXmlFile.writeAsStringSync(atomContents);
   } else {
     print('skipping generating atom.xml');
