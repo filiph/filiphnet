@@ -206,13 +206,13 @@ Perception, in this case, is _everything._
 
 ## Memory consumption
 
-Performance optimization is all about trade-offs, and one of the more important trade-offs is the one between "time and space". That is to say, speed and memory. This is because, in many cases, you can trade one for the other.
+Performance optimization is all about tradeoffs, and one of the more important tradeoffs is the one between "time and space". That is to say, speed and memory. This is because, in many cases, you can trade one for the other.
 
 To give an example, you can make your $\ln(x)$ (natural logarithm) computation faster by precomputing a table of results in a $x\rightarrow\ln(x)$ map. That approach will let you avoid some CPU cycles — but the table will also consume some space in memory. (You obviously need to be smart about the range and granularity of the precomputed table because — from what I understand — computers with infinite amounts of RAM are in short supply.)
 
 The opposite silly example would be to never cache anything, and always recompute all secondary data from first principles. That would save on memory but it would also make everything extremely slow. Imagine Flutter having to downsize images every frame anew, for example, instead of caching the result.
 
-But memory's role in performance is more complex than just the time and space trade-off. When a device runs low on memory, the operating system needs to deal with it, shutting down apps on the background or moving parts of RAM to disk (memory swapping). This makes things slower. Moreover, memory for short-living objects needs to be allocated and then later freed (garbage collected), which is also additional work that can lead to jank.
+But memory's role in performance is more complex than just the time-space tradeoff. When a device runs low on memory, the operating system needs to deal with it, shutting down apps on the background or moving parts of RAM to disk (memory swapping). This makes things slower. Moreover, memory for short-living objects needs to be allocated and then later freed (garbage collected), which is also additional work that can lead to jank.
 
 In extreme cases, too much memory consumption can lead to your app being outright shut down. For example, the Chrome browser has a certain limit to what a single tab can allocate. When the limit is reached, Chrome will simply crash the tab.
 

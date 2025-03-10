@@ -28,24 +28,25 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 3. [Is Dart fast enough?](/flutter-performance/030-is-dart-fast-enough.html)
 4. [Amdahl's law](/flutter-performance/040-amdahl's-law.html)
 5. [Performance lottery](/flutter-performance/050-performance-lottery.html)
-6. Statistics for performance engineers %% Scientific method %%
-7. Performance profiling vs analysis vs benchmarking vs testing %% Performance Profiling/Analysis (what's wrong), Benchmarking (which is better), Testing (are things ok?) %%
-8. Benchmarking (tight loop/hot path, DoNotOptimizeAway) %% remember: it's tooling from the days of batch programs -- it may not be important %%
-9. CPU Profiling (`time -v`, flame chart, `perf`, `simpleperf`)
-10. Timeline %% Frame Pipeline (frame budget, ui vs raster thread), `dart:developer`, maximize minimal frame rate (not average framerate) %%
-11. Raster thread optimization %% (oversized images, RepaintBoundary?, debugDisableOpacityLayers, debugPaintLayerBordersEnabled, checkerboardRasterCacheImages, ) %%
-12. Memory (caching, memory pressure, memory leaks, GC, GC jank, WeakReference)
-13. Data structures (TypedData, Buffers, "Efficiency with Algorithms, Performance with Data Structures")
-14. FFI
-15. Parallelism & Concurrency (Futures, async/await, isolates, "Dart is not multithreaded", `pragma("vm:shared")`)
-16. Pragmas
-17. Inlining
-18. Understanding Dart Kernel Representation
-19. SIMD / vectorization
-20. Interop with the platform (the other side of method channels, FFI) %% out of scope, but mention e.g. Xcode’s Organizer %%
-21. Continuous performance testing %% stress testing, browserstack - a farm of actual devices %%
-22. Sleights of hand (perceived performance magic tricks)
-23. A bag of tricks
+6. Environment
+7. Statistics for performance engineers %% Scientific method %%
+8. Performance profiling vs analysis vs benchmarking vs testing %% Performance Profiling/Analysis (what's wrong), Benchmarking (which is better), Testing (are things ok?) %%
+9. Benchmarking (tight loop/hot path, DoNotOptimizeAway) %% remember: it's tooling from the days of batch programs -- it may not be important %%
+10. CPU Profiling (`time -v`, flame chart, `perf`, `simpleperf`)
+11. Timeline %% Frame Pipeline (frame budget, ui vs raster thread), `dart:developer`, maximize minimal frame rate (not average framerate) %%
+12. Raster thread optimization %% (oversized images, RepaintBoundary?, debugDisableOpacityLayers, debugPaintLayerBordersEnabled, checkerboardRasterCacheImages, ) %%
+13. Memory (caching, memory pressure, memory leaks, GC, GC jank, WeakReference)
+14. Data structures (TypedData, Buffers, "Efficiency with Algorithms, Performance with Data Structures")
+15. FFI
+16. Parallelism & Concurrency (Futures, async/await, isolates, "Dart is not multithreaded", `pragma("vm:shared")`)
+17. Pragmas
+18. Inlining
+19. Understanding Dart Kernel Representation
+20. SIMD / vectorization
+21. Interop with the platform (the other side of method channels, FFI) %% out of scope, but mention e.g. Xcode’s Organizer %%
+22. Continuous performance testing %% stress testing, browserstack - a farm of actual devices %%
+23. Sleights of hand (perceived performance magic tricks)
+24. A bag of tricks
 
 
 %%
