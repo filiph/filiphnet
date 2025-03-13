@@ -28,10 +28,10 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 3. [Is Dart fast enough?](/flutter-performance/030-is-dart-fast-enough.html)
 4. [Amdahl's law](/flutter-performance/040-amdahl's-law.html)
 5. [Performance lottery](/flutter-performance/050-performance-lottery.html)
-6. Environment
+6. [Environment](/flutter-performance/060-environment.html)
 7. Statistics for performance engineers %% Scientific method %%
 8. Performance profiling vs analysis vs benchmarking vs testing %% Performance Profiling/Analysis (what's wrong), Benchmarking (which is better), Testing (are things ok?) %%
-9. Benchmarking (tight loop/hot path, DoNotOptimizeAway) %% remember: it's tooling from the days of batch programs -- it may not be important %%
+9. Benchmarking (tight loop/hot path, DoNotOptimizeAway) %% remember: it's tooling from the days of batch programs -- it may not be important; code locality is high, though — 80% of total execution is covered by 50 to 150 functions (JSMeter 2009) ; maybe look at claim from https://medium.com/@chetan.akarte/what-is-symbol-in-dart-4483b2f7f5d6 - Symbols faster? actually no. despite that, LLMs recommend it https://kagi.com/assistant/92a6d6ff-fcef-41d4-b0e5-21a16ef7a661 %%
 10. CPU Profiling (`time -v`, flame chart, `perf`, `simpleperf`)
 11. Timeline %% Frame Pipeline (frame budget, ui vs raster thread), `dart:developer`, maximize minimal frame rate (not average framerate) %%
 12. Raster thread optimization %% (oversized images, RepaintBoundary?, debugDisableOpacityLayers, debugPaintLayerBordersEnabled, checkerboardRasterCacheImages, ) %%
