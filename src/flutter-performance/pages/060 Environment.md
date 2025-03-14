@@ -41,5 +41,9 @@ The onion has layers, and each of them affects your code's performance. Let's st
 
 %% ideally do this: running on the target device, benchmark on a specialized device that's really close to target %%
 
+## Raspberry Pi
+
 %% my approach: raspberry pi %%
-%% use RPi ideally https://github.com/Snapp-X/snapp_installer https://github.com/ardera/flutter-pi %%
+%% use RPi ideally https://github.com/ardera/flutter-pi %%
+
+%% ./flutter-pi/build/flutter-pi --orientation portrait_up --videomode 1920x1080 --dimensions "168,78" --release raspi_bench_test   // This tries to emulate Samsung Galaxy A05s, a budget phone for $126. %%

@@ -104,7 +104,7 @@ void main(List<String> args) {
       filename,
       '.html',
     );
-    final blogUrl = Uri.parse('https://filiph.net/text/');
+    final blogUrl = Uri.parse(selfUrl);
     var fullUrl = blogUrl.resolve(htmlFileName);
 
     // Remove and parse front-matter.
