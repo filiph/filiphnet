@@ -10,6 +10,12 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [How to playtest a video game](https://filiph.net/text/how-to-playtest-a-video-game.html)  
+   So you've been asked to playtest a game for a friend or a stranger. Here's how to be the most helpful.
+- [The two types of open source](https://filiph.net/text/two-types-of-open-source.html)  
+   Let's stop pretending that "without warranty" means "without expectation".
+- [The revenge of Server Side Includes (SSI)](https://filiph.net/text/the-revenge-of-server-side-includes.html)  
+  How a technology from 1993 makes so much sense for today's "Indie Small Web".
 - [“Math minus math” is wild](https://filiph.net/text/math-minus-math-is-wild.html)  
   I love this self-published little book from 2009 full of abstract math-inspired graphic art.
 - [Performance versus Preference](https://filiph.net/text/performance-versus-preference.html)  
