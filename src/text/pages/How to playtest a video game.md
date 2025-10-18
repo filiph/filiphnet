@@ -8,7 +8,7 @@ publish: true
 ---
 
 
-First things first: ==playtests aren't demos==. Demos are supposed to demonstrate how cool something is. Playtests suck. You get access to a game that largely doesn't work yet. Things aren't explained well (or at all), gameplay is still clunky and there are even more bugs than usual.
+First things first: ==playtests aren't demos==. Demos are supposed to demonstrate how cool something is. Playtests suck. You get access to a game that largely doesn't work yet. Things aren't explained well (or at all), gameplay is still clunky, and there are even more bugs than usual.
 
 That said, being part of a playtest can be an exciting thing. You're able to play something way before anyone else, you can give early feedback, and you can see the game evolve to its final form. You'll learn important things about how the gamedev sausage is made. You will also become a big reason why the game makes it to a release, and why it doesn't suck when it does so.
 
@@ -30,17 +30,17 @@ Also, some games let you send feedback right from the game (press `F1` in my gam
 
 When providing gameplay feedback, always be aware of your own expectations, and make them known to the developer. 
 
-An early playtest game doesn't yet have the chance to express the "promise", the genre, the intended gameplay, that it brings to the table. So it's quite possible for you to pick up a playtest and go "nice, I'm going to enjoy this Action RPG" when in fact you're playing a tactical simulation. This can lead to confusion and frustration.
+An early playtest game doesn't yet have the chance to express the "promise," the genre, the intended gameplay, that it brings to the table. So it's quite possible for you to pick up a playtest and go "nice, I'm going to enjoy this Action RPG" when in fact you're playing a tactical simulation. This can lead to confusion and frustration.
 
 It's like chomping into a delicious-looking apple pie only to realize it's a meat pie. Both recipes are delicious, but your expectation wreaks havoc on the experience. Always tell the developer if your expectation about the game (from the Steam page, for example) didn't meet reality.
 
 ## Understand the goal of the playtest
 
-Game development is all about testing hypotheses. At first, they can be technical. It's like people in the early 1990's hypothesizing that a personal computer could run realtime 3D graphics at acceptable framerates. Only after they (Looking Glass Studios and id Software) corroborated this technical hypothesis could they start figuring out how to make a game from this technology (*Ultima Underworld* and *Doom*, respectively).
+Game development is all about testing hypotheses. At first, they can be technical. It's like people in the early 1990's hypothesizing that a personal computer could run real-time 3D graphics at acceptable frame rates. Only after they (Looking Glass Studios and id Software) corroborated this technical hypothesis could they start figuring out how to make a game from this technology (*Ultima Underworld* and *Doom*, respectively).
 
 ![[ultima-underworld.jpg]]
 
-A lot of the times, the game developer's hypothesis will be revolving around the concept of fun. 
+A lot of the time, the game developer's hypothesis will be revolving around the concept of fun. 
 
 - Hypothesis: this new mechanic will be fun to play with.
 - Hypothesis: adding this feature will increase depth without sacrificing fun.
@@ -77,7 +77,7 @@ When you identify a problem, focus on reporting the problem. Let's say you get b
 
 You may suggest remedies, of course, but don't jump to that too early. Don't drown the juicy stuff about the problem with ideas for solutions.
 
-The thing about game development is that almost no problem has a simple solution, even when it might seems so from afar. If you ever wondered why this or that game developer _doesn't just fix that one problem already_, you've encountered the issue. Generally speaking, game developers aren't lazy. They just deal with problems that are much harder in reality than they seem.
+The thing about game development is that almost no problem has a simple solution, even when it might seem so from afar. If you ever wondered why this or that game developer _doesn't just fix that one problem already_, you've encountered the issue. Generally speaking, game developers aren't lazy. They just deal with problems that are much harder in reality than they seem.
 
 ![[connection-between-the-two-networks-network-simul-2025-01-09-01-00-30-utc.jpg]]
 
