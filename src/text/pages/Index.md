@@ -10,6 +10,10 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [IfChange ThenChange](https://filiph.net/text/ifchange-thenchange.html)  
+   I miss Google's LINT.IfChange.
+- [I don’t think about «your tech» at all](https://filiph.net/text/i-don't-think-about-your-tech-at-all.html)  
+   Here's what to do when someone on the internet says that some technology they're not using 'is dead'.
 - [How to playtest a video game](https://filiph.net/text/how-to-playtest-a-video-game.html)  
    So you've been asked to playtest a game for a friend or a stranger. Here's how to be the most helpful.
 - [The two types of open source](https://filiph.net/text/two-types-of-open-source.html)  
