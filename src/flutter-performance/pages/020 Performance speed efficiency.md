@@ -204,6 +204,20 @@ I dedicate a whole chapter to this idea but for now, let's just say that it's ab
 
 Perception, in this case, is _everything._
 
+## Latency
+
+One way to avoid jank (the objective one) is to give yourself more time per each frame. 
+
+For example, Flutter uses pipelining. If you imagine a timeline with evenly spaced ticks for every frame, Flutter allows itself to work on every frame for up to two ticks. While the raster thread is working on one frame, the UI thread can start working on the next one. This utilizes the hardware more efficiently, and it acts as a buffer against the occasional frame that happens to be much more computationally expensive than the others. Such a "misbehaved" frame can essentially take _two_ frames worth of time, and the user still won't notice.
+
+![[Pipelining 4.png]]
+
+This introduces a frame of latency, though, for every frame.
+
+Latency is the time between the time something _should_ happen, and the time it actually happens. A small amount of latency is okay and pretty much imperceptible. But higher latency can be really frustrating.
+
+It's good to remember that high latency is something different than jank. You can have a completely smooth app, with no dropped frames, and yet have a high latency: the user clicks a button and the app only reacts after 100ms. That's bad even if the UI is butter smooth throughout the experience.
+
 ## Memory consumption
 
 Performance optimization is all about tradeoffs, and one of the more important tradeoffs is the one between "time and space". That is to say, speed and memory. This is because, in many cases, you can trade one for the other.

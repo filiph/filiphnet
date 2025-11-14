@@ -39,18 +39,19 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 14. CPU Profiling (`time -v`, flame chart, `perf`, `simpleperf`)
 15. Timeline %% Frame Pipeline (frame budget, ui vs raster thread), `dart:developer`, maximize minimal frame rate (not average framerate) %%
 16. Raster thread optimization %% (oversized images, RepaintBoundary?, debugDisableOpacityLayers, debugPaintLayerBordersEnabled, checkerboardRasterCacheImages, ) %%
-17. Memory (caching, memory pressure, memory leaks, GC, GC jank, WeakReference)
-18. Data structures (TypedData, Buffers, "Efficiency with Algorithms, Performance with Data Structures")
-19. FFI
-20. Parallelism & Concurrency (Futures, async/await, isolates, "Dart is not multithreaded", `pragma("vm:shared")`)
-21. Pragmas
-22. Inlining
-23. Understanding Dart Kernel Representation
-24. SIMD / vectorization
-25. Interop with the platform (the other side of method channels, FFI) %% out of scope, but mention e.g. Xcode’s Organizer %%
-26. Continuous performance testing %% stress testing, browserstack - a farm of actual devices %%
-27. Sleights of hand (perceived performance magic tricks)
-28. A bag of tricks
+17. Latency %% streams vs changenotifier, StreamController(sync: true) versus drawbacks, pipelining (UseFlutterMetalView=false), OS compositing (use full screen),  %%
+18. Memory (caching, memory pressure, memory leaks, GC, GC jank, WeakReference)
+19. Data structures (TypedData, Buffers, "Efficiency with Algorithms, Performance with Data Structures")
+20. FFI
+21. Parallelism & Concurrency (Futures, async/await, isolates, "Dart is not multithreaded", `pragma("vm:shared")`)
+22. Pragmas
+23. Inlining
+24. Understanding Dart Kernel Representation
+25. SIMD / vectorization
+26. Interop with the platform (the other side of method channels, FFI) %% out of scope, but mention e.g. Xcode’s Organizer %%
+27. Continuous performance testing %% stress testing, browserstack - a farm of actual devices %%
+28. Sleights of hand (perceived performance magic tricks)
+29. A bag of tricks
 
 
 %%
