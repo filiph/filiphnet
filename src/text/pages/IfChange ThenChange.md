@@ -23,7 +23,7 @@ That's it.
 Now, in the ideal world, we wouldn't need this lint at all, right?
 
 - Whenever a developer makes a change to one file, they should read all the associated comments, and there they will probably find something like "This should be kept in sync with XYZ." If they neglect to do it, then the code reviewer will surely correct that mistake! But let's be real: almost nobody reads the whole file that's being changed.
-- A statically typed codebase should catch these types of "forgotten manual sync" errors during writing. For example, a Dart switch statement will refuse to compile if you don't address every possible option. So if an enum value is added in one place, all the affected switch statements will be marked. But not all codebases are statically typed, not all language features can check exhaustiveness and not all correctness can be automatically dis-proven. Plus, almost every codebase mixes more than one language (programming, markup, etc.).
+- A statically typed codebase should catch these types of "forgotten manual sync" errors during writing. For example, a Dart switch statement will refuse to compile if you don't address every possible option. So if an enum value is added in one place, all the affected switch statements will be marked. But not all codebases are statically typed, not all language features can check for exhaustiveness and not all correctness can be automatically disproven by the analyzer. Plus, almost every codebase mixes more than one language (programming, markup, etc.).
 - A properly tested codebase should catch these bugs as soon as the unit tests run. But not all of these errors are simple to test, and some of them are nigh *impossible* to test without full, continuous integration testing — which, in turn, can be flaky, prohibitively hard to set up, and expensive to run.
 - In the modern world of A.I., an error like this should not be able to slip past automated LLM code review. But, well — try it. Unless it's a trivial example, chances are pretty high that the A.I. will miss it. (And even if it doesn't, the feedback comes a lot later than with a simple git hook that executes in a tiny fraction of a second on your workstation.)
 
@@ -72,6 +72,8 @@ I love `LINT.IfChange` so much that I would even argue that it should be sometim
 Here's an example.
 
 Let's say you have a special mode in your app that lets you bring up debugging information. For example, in GIANT ROBOT GAME, when I press `Ctrl-Shift-D`, I get a debugging overlay, and when I press `Ctrl-D` over an entity, I get lots of information about that entity. YouTube has "Stats for Nerds" (try right clicking a video on desktop). A social media app might have something similar for posts.
+
+![[grg-debug-modal.jpg]]
 
 Now, it's easy to forget to add things to these debugging overlays. I, for one, forget all the time. Entities in my game get new capabilities and new data — and then I don't add them to the debugging modal. Only when I later need to debug something and I bring up the modal, I realize my error. (Too late if it's in production.)
 
