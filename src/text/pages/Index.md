@@ -10,6 +10,8 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [Making my 1970’s-style renderer multi-threaded](https://filiph.net/text/making-my-1970s-renderer-multi-threaded.html)  
+   A tech deep dive into multi-threading in Flutter & Dart.
 - [IfChange ThenChange](https://filiph.net/text/ifchange-thenchange.html)  
    I miss Google's LINT.IfChange.
 - [I don’t think about «your tech» at all](https://filiph.net/text/i-don't-think-about-your-tech-at-all.html)  
