@@ -10,6 +10,8 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [A.I. is a printed birthday card train to Paris](https://filiph.net/text/ai-is-a-printed-birthday-card-train-to-paris.html)  
+   In which I use a few short anecdotes to illuminate the Scylla and Charybdis that is A.I.
 - [Making my 1970’s-style renderer multi-threaded](https://filiph.net/text/making-my-1970s-renderer-multi-threaded.html)  
    A tech deep dive into multi-threading in Flutter & Dart.
 - [IfChange ThenChange](https://filiph.net/text/ifchange-thenchange.html)  

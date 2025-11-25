@@ -22,7 +22,7 @@ Download the
 video.
 </video>
 
-For this aesthetic, a "normal", modem 3D renderer just wouldn't work. So I decided to create a software (non-GPU) 3d renderer mostly from scratch. This allowed me to have complete control over every aspect of the final look of the 3d objects, and since we live in the 21st century, our contemporary computers are more than capable of running the renderer at high framerates.
+For this aesthetic, a "normal", modern 3D renderer just wouldn't work. So I decided to create a software (non-GPU) 3d renderer mostly from scratch. This allowed me to have complete control over every aspect of the final look of the 3d objects, and since we live in the 21st century, our contemporary computers are more than capable of running the renderer at high framerates.
 
 ## Single-threaded beginnings
 
@@ -101,7 +101,7 @@ So, now that we have a way to punch a hole (as Slava puts it) into Dart's concur
 Here's how:
 
 - When the widget that renders 3D (I call it `Retro3D`) is added to the Flutter widget tree, it first loads the bytes of the 3D file from assets. (`AssetBundle` is not available outside the main isolate, AFAIK.)
-- Then it constructs an `IsolateRenderer` and asks it to `initialize()` with the file bytes and some initial, immutable information about the scene.
+- Then it constructs an `IsolateRenderer` (a completely custom class) and asks it to `initialize()` with the file bytes and some initial, immutable information about the scene.
 - The `IsolateRenderer` spawns the worker isolate and sends the data over with the initial message. It then starts waiting for messages from the worker isolate.
 - Inside the worker isolate, the bytes of the 3D file are parsed into a 3D scene.
 - The worker isolate counts the number of vertices and faces in the scene. This informs the size of arrays that will be needed for the draw calls. (For example, for `n` vertices, you need a `Float32List` of `n*2` elements — two 2D coordinates per each vertex. Similarly, for `m` triangles, you need an `Int32List` of `m*3` elements — one ARGB color for each point on the triangle.)
@@ -121,7 +121,7 @@ Here's how:
 - `IsolateRenderer` receives the `_RenderReady` message and transforms it into a `RenderResult` which contains all the data needed for a `Canvas.drawVertices()` call. So, the index of the buffer received from the worker isolate is used to find the actual `TypedData` objects.
 - The `RenderResult` is assigned as the new value of a `ValueNotifier`.
 - This value notifier is used as a [`repaint` listenable](https://api.flutter.dev/flutter/rendering/CustomPainter/CustomPainter.html) for the `CustomPainter` that actually paints the 3D render on the screen.
-- Now we have a loop — any change to `SceneViewConfig` leads to `requestNextFrame()` call, which in turn sends a `RenderConfig` to the worker isolate, which renders it into one of the shared buffers, then notifies the main isolate, which repaints using the new data.
+- Now we have a loop — any change to `SceneViewConfig` leads to a `requestNextFrame()` call, which in turn sends a `RenderConfig` to the worker isolate, which renders it into one of the shared buffers, then notifies the main isolate, which repaints using the new data.
 
 The result is noticeable, even when running on a very powerful device. On my M4 MacBook Pro, when showing three 3D renders at once, average time taken by a frame on the main thread goes from 3.7 ms to 2.9 ms. That's 20% improvement on a thread that currently does a _lot_ of other things (from physics simulation through marching squares all the way to AI).
 
@@ -157,3 +157,5 @@ I'm obviously not done with the game or its optimization. Choosing Flutter & Dar
 So this post isn't some kind of a "here's how you do it" explainer. It's more of a "look at this obscure problem I had" kind of article.
 
 If you _do_ find any of the above useful or at least entertaining, I'm happy.
+
+**P.S.:** The multi-threaded renderer update is now up on Steam if you want to [playtest it](https://store.steampowered.com/app/2538440/GIANT_ROBOT_GAME/).
