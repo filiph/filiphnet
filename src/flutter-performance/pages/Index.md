@@ -40,7 +40,7 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 15. Timeline %% Frame Pipeline (frame budget, ui vs raster thread), `dart:developer`, maximize minimal frame rate (not average framerate) %%
 16. Raster thread optimization %% (oversized images, RepaintBoundary?, debugDisableOpacityLayers, debugPaintLayerBordersEnabled, checkerboardRasterCacheImages, ) %%
 17. Latency %% streams vs changenotifier, StreamController(sync: true) versus drawbacks, pipelining (UseFlutterMetalView=false), OS compositing (use full screen),  %%
-18. Memory (caching, memory pressure, memory leaks, GC, GC jank, WeakReference)
+18. Memory (caching, memory pressure, memory leaks, GC, GC jank, WeakReference) %% avoid creating a lot of, say, Vector3 in a loop %%
 19. Data structures (TypedData, Buffers, "Efficiency with Algorithms, Performance with Data Structures")
 20. FFI
 21. Parallelism & Concurrency (Futures, async/await, isolates, "Dart is not multithreaded", `pragma("vm:shared")`)

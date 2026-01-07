@@ -10,6 +10,12 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [Shove your AI features where the sun don't shine](https://filiph.net/text/shove-your-ai-features-where-the-sun-don't-shine.html)  
+   A diatribe.
+- [Making a tile-based game look like it's not](https://filiph.net/text/making-a-tile-based-game-look-like-it's-not.html)  
+   Hide tiles from the player using these three weird gamedev tricks.
+- [Your science is not strong enough](https://filiph.net/text/your-science-is-not-strong-enough.html)  
+   On explaining things simply and the fake "Albert Einstein" quote.
 - [A.I. is a printed birthday card train to Paris](https://filiph.net/text/ai-is-a-printed-birthday-card-train-to-paris.html)  
    In which I use a few short anecdotes to illuminate the Scylla and Charybdis that is A.I.
 - [Making my 1970’s-style renderer multi-threaded](https://filiph.net/text/making-my-1970s-renderer-multi-threaded.html)  
