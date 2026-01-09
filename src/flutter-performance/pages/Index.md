@@ -57,13 +57,14 @@ I'm writing the book in the open so that I can get feedback ([email me](mailto:f
 %%
 bag of tricks
 
-1. JSON parsing
-2. SnapshotWidget
-3. Thunks (e.g. logging takes function, not a computed value)
-4. `late final` (like a thunk)
-5. "stub"
-6. emojis are slow on iOS because they're SVGs https://forum.itsallwidgets.com/t/flutter-performance-book/2777/9
-7. consider using `SchedulerBinding.scheduleTask` with low priority for initializing stuff
+1. slow features, such as sync*: https://github.com/dart-lang/sdk/issues/51806
+2. JSON parsing
+3. SnapshotWidget
+4. Thunks (e.g. logging takes function, not a computed value)
+5. `late final` (like a thunk)
+6. "stub"
+7. emojis are slow on iOS because they're SVGs https://forum.itsallwidgets.com/t/flutter-performance-book/2777/9
+8. consider using `SchedulerBinding.scheduleTask` with low priority for initializing stuff
 
 %%
 
