@@ -12,6 +12,7 @@ import 'package:toml/toml.dart';
 import 'package:yaml/yaml.dart';
 
 import 'src/atom_xml.dart';
+import 'src/filip_aside_syntax.dart';
 import 'src/obsidian_comment_syntax.dart';
 import 'src/obsidian_highlight_syntax.dart';
 import 'src/obsidian_mathjax_syntax.dart';
@@ -179,6 +180,7 @@ void main(List<String> args) {
         ObsidianMathJaxInlineSyntax(),
       ],
       blockSyntaxes: [
+        FilipAsideBlockSyntax(),
         ObsidianCommentBlockSyntax(),
         ObsidianMathJaxBlockSyntax(),
       ],

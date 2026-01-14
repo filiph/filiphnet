@@ -46,7 +46,7 @@ When you give a kid access to, say, YouTube or TikTok or the latest mobile game,
 
 Basically, it's your kid versus teams of experts who've by now had over a decade of experience in making technology more "sticky" (industry term for *addictive*).
 
-At this point, it's pretty safe to say that screen time is linked to ADHD. Researchers are first to note that the study of screen time effects is in its infancy but after reviewing the most recent articles, I think you'd have to be very pro-screen to think that screen time isn't bad for kids.
+At this point, it's pretty safe to say that screen time is linked to ADHD (see aside below for important caveat). Researchers are first to note that the study of screen time effects is in its infancy but after reviewing the most recent articles, I think you'd have to be very pro-screen to think that screen time isn't bad for kids.
 
 > The results showed a statistically significant between-person effect of social media use, television viewing, and video gaming on ADHD symptoms. Results also indicated a statistically significant concurrent within-person effect of social media use, television viewing, and video gaming on ADHD symptoms. Computer use showed no statistical significant association with ADHD symptoms at between and within levels.
 > 
@@ -54,7 +54,9 @@ At this point, it's pretty safe to say that screen time is linked to ADHD. Resea
 
 I'm quoting from Wallace 2023 here but there's also a [more recent article](https://pubmed.ncbi.nlm.nih.gov/41237171/) from 2025.
 
-Just yesterday, I talked to a mother of a kid who goes to a nearby elementary school. She told me that out of 28 kids in the class, 12 have ADHD. Now, it's important to say that ADHD is a spectrum and yes, that diagnosis wasn't really a thing a few decades ago. It's not that there was zero before and now there's 12. Screen time is clearly not the _only_ source of ADHD. I'm sure we had at least one kid in my class in the 1990s that would be diagnosed with ADHD today. But that doesn't nullify the fact that these attention issues are more prevalent today. 
+**Aside:** Based on reader feedback, I want to make something very clear. Screen time does not _cause_ ADHD itself. The disorder is [mostly genetic](https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder#Causes). _But_ the scientific research I'm quoting here gives strong evidence that screen time _exacerbates symptoms_ of ADHD. So, we're talking about ADHD kids that might go undiagnosed or be on the lower end of the spectrum having their ADHD symptoms heightened by screen time. The resulting effect is that more kids are diagnosed, and ADHD symptoms tend to be worse. Saying that "screen time causes ADHD" is incorrect. But the effect of screen time is that we _see_ more of ADHD and the _cases are more severe_.
+
+Just yesterday, I talked to a mother of a kid who goes to a nearby elementary school. She told me that out of 28 kids in the class, 12 have ADHD. Now, it's important to say that ADHD is a spectrum and yes, that diagnosis wasn't really a thing a few decades ago. It's not that there was zero before and now there's 12. Screen time is clearly not the _only_ source of worsening ADHD symptoms. I'm sure we had at least one kid in my class in the 1990s that would be diagnosed with ADHD today. But that doesn't nullify the fact that these attention issues are more prevalent today. 
 
 ![[diagnosed-with-adhd.jpg]]
 
@@ -272,7 +274,7 @@ So maybe giving kids 24/7 access to an LLM is a mistake. But I feel much less st
 
 ## What else?
 
-I want to reiterate that this is just a single parent's interpretation of the research available to him. I'm not a pediatric psychologist. I also don't have access to all the research. For example, there's this one data analysis [study from 2023](https://doi.org/10.1016/j.jpsychires.2023.03.014) which apparently finds that while there is a statistical link between screen time and depression and anxiety, there's no link with ADHD. But the full text of that study is behind a paywall, and the study stands against several other studies (some of which it cites, just to be clear). <!--Also, I don't normally like to play the reputability card, but this study comes from Anhui Medical University in Hefei, while the study I cite above is from University of Montreal.--> So my money is on the studies that do show a link between screen time and ADHD — but that's simply a layman's opinion.
+I want to reiterate that this is just a single parent's interpretation of the research available to him. I'm not a pediatric psychologist. I also don't have access to all the research. For example, there's this one data analysis [study from 2023](https://doi.org/10.1016/j.jpsychires.2023.03.014) which apparently finds that while there is a statistical link between screen time and depression and anxiety, there's no link with ADHD. But the full text of that study is behind a paywall, and the study stands against several other studies (some of which it cites, just to be clear). Are they talking about ADHD itself (which, as I say above, is mostly genetic, and has little to do with technology use) or are they actually saying that screen time is _not_ worsening its symptoms? <!--Also, I don't normally like to play the reputability card, but this study comes from Anhui Medical University in Hefei, while the study I cite above is from University of Montreal.--> Anyway, my money is on the studies that do show a link between screen time and worsening ADHD symptoms — but that's simply a layman's opinion.
 
 This is not meant to be a definitive guide. I hope that someone with more expertise can shed light on the best available research and recommend best practices for regular parents.
 

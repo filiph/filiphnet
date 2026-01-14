@@ -11,8 +11,8 @@ A new technology arrives and everybody's like, wow, ==this will save so much tim
 
 For example, when they linked cities with railway in the 19th century, a salesman from Prague who regularly visited Paris for work could have said:
 
-> ![[train.jpg]]
->
+![[train.jpg]]
+
 > ... What would have taken me a week is now an overnight journey! I'm still going to take a week to go to Paris but I'll have a little vacation along the way!"
 
 On the surface, this might be a completely logical thing to say. You do the same amount of work in a fraction of the time. Why not take some of that saved time and live a little?
