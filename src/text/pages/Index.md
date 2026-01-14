@@ -10,6 +10,8 @@ But for a long time, I wanted a place of my own on which to publish my articles.
 
 Articles:
 
+- [A techie’s guide to keeping young kids away from technology](https://filiph.net/text/tech-versus-kids.html)  
+   Raising tech-savvy kids by limiting their early childhood access to technology.
 - [Shove your AI features where the sun don't shine](https://filiph.net/text/shove-your-ai-features-where-the-sun-don't-shine.html)  
    A diatribe.
 - [Making a tile-based game look like it's not](https://filiph.net/text/making-a-tile-based-game-look-like-it's-not.html)  

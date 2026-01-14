@@ -3,6 +3,7 @@ title: "Your science is not strong enough"
 description: "On explaining things simply and the fake 'Albert Einstein' quote."
 created: 2025-12-12T09:00:00.000Z
 date: December 2025
+social_image: https://filiph.net/text/imgs/TV8Gcci.jpeg
 publish: true
 ---
 
@@ -17,6 +18,8 @@ For example:
 Right now, we live in a world where hearing this is considered rude. And in some contexts, it _is_ rude, don't take me wrong. But other times, it's just a statement of fact. Some things simply need layers of understanding of _other_ things before they can be grasped.
 
 Not everything in the world can be explained to a five year old. There's a very popular subreddit called ELI5: "Explain like I'm 5". In it, people ask hard question, and experts answer in ways that can be comprehended by a layman (not necessarily a 5 year old — that's just a shortcut). And it's a fascinating forum full of really cool and innovative explanations. But it's a lie. All it gives you is the most shallow understanding of something that people spend _years_ studying. It's better than nothing, I'd argue, but it's not _it._ The readers of ELI5 aren't even close to understanding all these topics they've read about on that forum.
+
+![[TV8Gcci.jpeg]]
 
 I'm old enough to admit to myself that I won't truly understand the vast majority of human knowledge. Yes, I know what semiconductors are, and what radioactivity is, and I like to read about anthropology and psychology and physics and math, and I have written software and made music and wrote short stories. But there's this vast amount of complexity in these topics that I haven't even touched, and then there are hundreds of *other* areas of human understanding that I never even attempted to study — 
 
